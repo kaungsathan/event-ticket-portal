@@ -14,12 +14,12 @@ const userRoutes = [
       {
         path: "new",
         name: "newUser",
-        component: () => import("@/modules/user/new-edit/NewUser.vue"),
+        component: () => import("@/modules/user/entry/NewUser.vue"),
       },
       {
         path: ":id/edit",
         name: "editUser",
-        component: () => import("@/modules/user/new-edit/EditUser.vue"),
+        component: () => import("@/modules/user/entry/EditUser.vue"),
       },
     ],
   },

@@ -33,8 +33,8 @@ export default {
     },
     bannerImage() {
       return this.$appState.darkTheme
-        ? "images/banner-primeblocks-dark.png"
-        : "images/banner-primeblocks.png";
+        ? require('@/assets/images/banner-primeblocks-dark.png')
+        : require('@/assets/images/banner-primeblocks.png')
     },
   },
   computed: {

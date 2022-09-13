@@ -12,8 +12,8 @@ export default {
   methods: {
     footerImage() {
       return this.$appState.darkTheme
-        ? "images/logo-white.svg"
-        : "images/logo-dark.svg";
+        ? require('@/assets/images/logo-white.svg')
+        : require('@/assets/images/logo-dark.svg');
     },
   },
   computed: {

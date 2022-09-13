@@ -26,48 +26,98 @@
     </button>
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li>
-        <button class="p-link layout-topbar-button">
-          <i class="pi pi-user"></i>
-          <span>Profile</span>
-        </button>
+        <Button
+          v-if="$appState.darkTheme"
+          icon="pi pi-sun"
+          class="p-button-rounded p-button-text"
+          @click="changeTheme($event, 'lara-light-indigo', false)"
+        />
+        <Button
+          v-else
+          icon="pi pi-moon"
+          class="p-button-rounded p-button-text"
+          @click="changeTheme($event, 'lara-dark-indigo', true)"
+        />
       </li>
-      <!-- <li>
-        <SplitButton icon="pi pi-user" :model="items" class="mb-2"></SplitButton>
-      </li> -->
+      <li>
+        <Menu ref="languageMenu" :model="languageMenuItems" :popup="true">
+        </Menu>
+        <Button
+          type="button"
+          :label="$t(store.getCurrentLanguage)"
+          icon="pi pi-globe"
+          @click="toggleLanguageMenu"
+          style="width: auto"
+          class="p-button-text"
+        />
+      </li>
+      <li>
+        <Menu ref="menu" :model="profileMenuItems" :popup="true" />
+        <Button
+          type="button"
+          label="Profile"
+          icon="pi pi-user"
+          @click="toggleMenu"
+          style="width: auto"
+          class="p-button-text"
+        />
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+import { useLocaleStore } from "@/store/localeStore";
+import EventBus from "@/libs/AppEventBus";
+
 export default {
-  data() {
+  setup() {
+    const store = useLocaleStore();
+    const profileMenuItems = ref([
+      {
+        label: "User Profile",
+        icon: "pi pi-user",
+      },
+      {
+        label: "Setting",
+        icon: "pi pi-cog",
+      },
+      {
+        separator: true,
+      },
+      {
+        label: "Logout",
+        icon: "pi pi-sign-out",
+      },
+    ]);
+    const languageMenuItems = ref([
+      {
+        label: "Myanmar",
+        image: require("@/assets/flags/mm.png"),
+        code: "mm",
+        command: (event) => {
+          changeLocale(event.item.code);
+        },
+      },
+      {
+        label: "English",
+        image: require("@/assets/flags/en.png"),
+        code: "en",
+        command: (event) => {
+          changeLocale(event.item.code);
+        },
+      },
+    ]);
+
+    const changeLocale = (locale) => {
+      store.setLanguage(locale);
+    };
+
     return {
-      items: [
-        {
-          label: "Profile",
-          icon: "pi pi-refresh",
-          command: () => {
-            
-          },
-        },
-        {
-          label: "Edit Profile",
-          icon: "pi pi-times",
-          command: () => {
-            
-          },
-        },
-        {
-          separator: true,
-        },
-        {
-          label: "Logout",
-          icon: "pi pi-times",
-          command: () => {
-            
-          },
-        },
-      ],
+      store,
+      profileMenuItems,
+      languageMenuItems,
     };
   },
   methods: {
@@ -79,8 +129,21 @@ export default {
     },
     topbarImage() {
       return this.$appState.darkTheme
-        ? "images/logo-white.svg"
-        : "images/logo-dark.svg";
+        ? require("@/assets/images/logo-white.svg")
+        : require("@/assets/images/logo-dark.svg");
+    },
+    toggleMenu(event) {
+      this.$refs.menu.toggle(event);
+    },
+    toggleLanguageMenu(event) {
+      this.$refs.languageMenu.toggle(event);
+    },
+    onContextRightClick(event) {
+      this.$refs.contextMenu.show(event);
+    },
+    changeTheme(event, theme, dark) {
+      EventBus.emit("theme-change", { theme: theme, dark: dark });
+      event.preventDefault();
     },
   },
   computed: {
