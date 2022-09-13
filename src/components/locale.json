@@ -1,0 +1,8 @@
+{
+    "en": {
+        "hello": "Hello i18n in SFC!"
+    },
+    "mm": {
+        "hello": "မင်္ဂလာပါ i18n in SFC!"
+    }
+}
