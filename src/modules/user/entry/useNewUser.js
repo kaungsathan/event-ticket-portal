@@ -7,7 +7,7 @@ import { useRouter } from "vue-router";
 export default function useNewUser() {
   const store = useUserStore();
   const router = useRouter();
-  const isLoading = ref(false)
+  const isLoading = ref(false);
   const state = reactive({
     name: "",
     email: "",

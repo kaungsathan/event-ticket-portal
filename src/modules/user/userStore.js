@@ -32,7 +32,7 @@ export const useUserStore = defineStore({
   actions: {
     async fetchAll(params) {
       const response = await userService.getAll(params);
-      this.listResponse = response
+      this.listResponse = response;
     },
     async fetchOne(params) {
       const response = await userService.getOne(params);

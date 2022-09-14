@@ -8,11 +8,10 @@
       class="p-link layout-menu-button layout-topbar-button"
       @click="onMenuToggle"
     >
-      <i class="pi pi-bars"></i>
+      <i class="pi pi-bars" />
     </button>
 
     <button
-      class="p-link layout-topbar-menu-button layout-topbar-button"
       v-styleclass="{
         selector: '@next',
         enterClass: 'hidden',
@@ -21,8 +20,9 @@
         leaveActiveClass: 'fadeout',
         hideOnOutsideClick: true,
       }"
+      class="p-link layout-topbar-menu-button layout-topbar-button"
     >
-      <i class="pi pi-ellipsis-v"></i>
+      <i class="pi pi-ellipsis-v" />
     </button>
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li>
@@ -40,15 +40,16 @@
         />
       </li>
       <li>
-        <Menu ref="languageMenu" :model="languageMenuItems" :popup="true">
-        </Menu>
+        <Menu ref="languageMenu" :model="languageMenuItems" :popup="true" />
         <Button
           type="button"
-          @click="toggleLanguageMenu"
           class="p-button-text mr-2 mb-2"
+          @click="toggleLanguageMenu"
         >
           <img alt="logo" :src="getFlagUrl()" style="width: 1.5rem" />
-          <span class="ml-2 p-button-label">{{ $t(localeStore.getCurrentLanguage) }}</span>
+          <span class="ml-2 p-button-label">{{
+            $t(localeStore.getCurrentLanguage)
+          }}</span>
         </Button>
       </li>
       <li>
@@ -57,9 +58,9 @@
           type="button"
           label="Profile"
           icon="pi pi-user"
-          @click="toggleMenu"
           style="width: auto"
           class="p-button-text"
+          @click="toggleMenu"
         />
       </li>
     </ul>
@@ -141,11 +142,18 @@ export default {
       getFlagUrl,
     };
   },
+  computed: {
+    darkTheme() {
+      return this.$appState.darkTheme;
+    },
+  },
   methods: {
     onMenuToggle(event) {
+      // eslint-disable-next-line vue/require-explicit-emits
       this.$emit("menu-toggle", event);
     },
     onTopbarMenuToggle(event) {
+      // eslint-disable-next-line vue/require-explicit-emits
       this.$emit("topbar-menu-toggle", event);
     },
     topbarImage() {
@@ -165,11 +173,6 @@ export default {
     changeTheme(event, theme, dark) {
       EventBus.emit("theme-change", { theme: theme, dark: dark });
       event.preventDefault();
-    },
-  },
-  computed: {
-    darkTheme() {
-      return this.$appState.darkTheme;
     },
   },
 };

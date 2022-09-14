@@ -1,40 +1,40 @@
 <template>
   <div id="layout-config" :class="containerClass">
     <a
+      id="layout-config-button"
       href="#"
       class="layout-config-button"
-      id="layout-config-button"
       @click="toggleConfigurator"
     >
-      <i class="pi pi-cog"></i>
+      <i class="pi pi-cog" />
     </a>
     <Button
       class="p-button-danger layout-config-close p-button-rounded p-button-text"
       icon="pi pi-times"
-      @click="hideConfigurator"
       :style="{ 'z-index': 1 }"
-    ></Button>
+      @click="hideConfigurator"
+    />
 
     <div class="layout-config-content">
       <h5 class="mt-0">Component Scale</h5>
       <div class="config-scale">
         <Button
           icon="pi pi-minus"
-          @click="decrementScale()"
           class="p-button-text"
           :disabled="scale === scales[0]"
+          @click="decrementScale()"
         />
         <i
-          class="pi pi-circle-on"
           v-for="s of scales"
-          :class="{ 'scale-active': s === scale }"
           :key="s"
+          class="pi pi-circle-on"
+          :class="{ 'scale-active': s === scale }"
         />
         <Button
           icon="pi pi-plus"
-          @click="incrementScale()"
           class="p-button-text"
           :disabled="scale === scales[scales.length - 1]"
+          @click="incrementScale()"
         />
       </div>
 
@@ -45,7 +45,7 @@
             id="input_outlined"
             name="inputstyle"
             value="outlined"
-            :modelValue="$primevue.config.inputStyle"
+            :model-value="$primevue.config.inputStyle"
             @change="changeInputStyle('outlined')"
           />
           <label for="input_outlined">Outlined</label>
@@ -55,7 +55,7 @@
             id="input_filled"
             name="inputstyle"
             value="filled"
-            :modelValue="$primevue.config.inputStyle"
+            :model-value="$primevue.config.inputStyle"
             @change="changeInputStyle('filled')"
           />
           <label for="input_filled">Filled</label>
@@ -64,7 +64,7 @@
 
       <h5>Ripple Effect</h5>
       <InputSwitch
-        :modelValue="rippleActive"
+        :model-value="rippleActive"
         @update:modelValue="changeRipple"
       />
 
@@ -73,9 +73,9 @@
         <div class="field-radiobutton">
           <RadioButton
             id="static"
+            v-model="d_layoutMode"
             name="layoutMode"
             value="static"
-            v-model="d_layoutMode"
             @change="changeLayout($event, 'static')"
           />
           <label for="static">Static</label>
@@ -83,9 +83,9 @@
         <div class="field-radiobutton">
           <RadioButton
             id="overlay"
+            v-model="d_layoutMode"
             name="layoutMode"
             value="overlay"
-            v-model="d_layoutMode"
             @change="changeLayout($event, 'overlay')"
           />
           <label for="overlay">Overlay</label>
@@ -576,6 +576,7 @@ export default {
       default: null,
     },
   },
+  emits: ["layout-change"],
   data() {
     return {
       active: false,
@@ -586,6 +587,17 @@ export default {
   },
   outsideClickListener: null,
   themeChangeListener: null,
+  computed: {
+    containerClass() {
+      return ["layout-config", { "layout-config-active": this.active }];
+    },
+    rippleActive() {
+      return this.$primevue.config.ripple;
+    },
+    inputStyle() {
+      return this.$appState.inputStyle;
+    },
+  },
   watch: {
     $route() {
       if (this.active) {
@@ -665,17 +677,6 @@ export default {
     changeTheme(event, theme, dark) {
       EventBus.emit("theme-change", { theme: theme, dark: dark });
       event.preventDefault();
-    },
-  },
-  computed: {
-    containerClass() {
-      return ["layout-config", { "layout-config-active": this.active }];
-    },
-    rippleActive() {
-      return this.$primevue.config.ripple;
-    },
-    inputStyle() {
-      return this.$appState.inputStyle;
     },
   },
 };

@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export const useLocaleStore = defineStore({
   id: "useLocaleStore",
   state: () => ({
-    currentLocale: Cookies.get('locale') || "en",
+    currentLocale: Cookies.get("locale") || "en",
   }),
 
   getters: {
@@ -16,7 +16,7 @@ export const useLocaleStore = defineStore({
   actions: {
     async setLanguage(locale) {
       this.currentLocale = locale;
-      Cookies.set('locale', locale)
+      Cookies.set("locale", locale);
     },
   },
 });

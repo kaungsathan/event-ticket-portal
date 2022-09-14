@@ -9,16 +9,16 @@
 <script>
 export default {
   name: "AppFooter",
-  methods: {
-    footerImage() {
-      return this.$appState.darkTheme
-        ? require('@/assets/images/logo-white.svg')
-        : require('@/assets/images/logo-dark.svg');
-    },
-  },
   computed: {
     darkTheme() {
       return this.$appState.darkTheme;
+    },
+  },
+  methods: {
+    footerImage() {
+      return this.$appState.darkTheme
+        ? require("@/assets/images/logo-white.svg")
+        : require("@/assets/images/logo-dark.svg");
     },
   },
 };

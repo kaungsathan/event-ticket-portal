@@ -30,8 +30,8 @@ export const useAuthStore = defineStore({
       }
     },
     logout() {
-      this.token = null
-      authService.logout()
+      this.token = null;
+      authService.logout();
     },
   },
 });

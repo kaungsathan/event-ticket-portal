@@ -38,7 +38,7 @@ export default function useEditUser() {
   });
 
   const fetchUser = async () => {
-    isLoading.value = true
+    isLoading.value = true;
 
     await store.fetchOne({
       id: route.params.id,
@@ -54,7 +54,7 @@ export default function useEditUser() {
       state.birthDate = response.birthDate;
     }
 
-    isLoading.value = false
+    isLoading.value = false;
   };
 
   const handleSubmit = (isFormValid) => {

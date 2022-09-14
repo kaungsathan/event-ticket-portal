@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h5 class="text-start">Edit User</h5>
-    <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+    <form class="p-fluid" @submit.prevent="handleSubmit(!v$.$invalid)">
       <div class="grid">
         <div class="field col-12 md:col-6 lg:col-4">
           <label
@@ -52,8 +52,8 @@
 
           <span v-if="v$.email.$error && submitted">
             <span
-              id="email-error"
               v-for="(error, index) of v$.email.$errors"
+              id="email-error"
               :key="index"
             >
               <small class="p-error">{{ error.$message }}</small>
@@ -142,7 +142,7 @@
         </div>
       </div>
     </form>
-    <BlockUI :blocked="isLoading" :fullScreen="true"> </BlockUI>
+    <BlockUI :blocked="isLoading" :full-screen="true" />
   </div>
 </template>
 
@@ -151,7 +151,7 @@ import { defineComponent } from "vue";
 import useEditUser from "./useEditUser";
 
 export default defineComponent({
-  name: "editUser",
+  name: "EditUser",
   setup() {
     const { isLoading, state, v$, handleSubmit, submitted } = useEditUser();
     return {
@@ -165,8 +165,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
 
 <i18n src="./../locale.json">
 </i18n>

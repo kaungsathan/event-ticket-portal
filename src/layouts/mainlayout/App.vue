@@ -12,12 +12,9 @@
       <AppFooter />
     </div>
 
-    <AppConfig :layoutMode="layoutMode" @layout-change="onLayoutChange" />
+    <AppConfig :layout-mode="layoutMode" @layout-change="onLayoutChange" />
     <transition name="layout-mask">
-      <div
-        class="layout-mask p-component-overlay"
-        v-if="mobileMenuActive"
-      ></div>
+      <div v-if="mobileMenuActive" class="layout-mask p-component-overlay" />
     </transition>
   </div>
 </template>
@@ -31,6 +28,12 @@ import AppFooter from "./AppFooter.vue";
 import menuList from "./menu";
 
 export default {
+  components: {
+    AppTopBar: AppTopBar,
+    AppMenu: AppMenu,
+    AppConfig: AppConfig,
+    AppFooter: AppFooter,
+  },
   emits: ["change-theme"],
   data() {
     return {
@@ -41,11 +44,39 @@ export default {
       menu: menuList,
     };
   },
+  computed: {
+    containerClass() {
+      return [
+        "layout-wrapper",
+        {
+          "layout-overlay": this.layoutMode === "overlay",
+          "layout-static": this.layoutMode === "static",
+          "layout-static-sidebar-inactive":
+            this.staticMenuInactive && this.layoutMode === "static",
+          "layout-overlay-sidebar-active":
+            this.overlayMenuActive && this.layoutMode === "overlay",
+          "layout-mobile-sidebar-active": this.mobileMenuActive,
+          "p-input-filled": this.$primevue.config.inputStyle === "filled",
+          "p-ripple-disabled": this.$primevue.config.ripple === false,
+        },
+      ];
+    },
+    logo() {
+      return this.$appState.darkTheme
+        ? "images/logo-white.svg"
+        : "images/logo.svg";
+    },
+  },
   watch: {
     $route() {
       this.menuActive = false;
       this.$toast.removeAllGroups();
     },
+  },
+  beforeUpdate() {
+    if (this.mobileMenuActive)
+      this.addClass(document.body, "body-overflow-hidden");
+    else this.removeClass(document.body, "body-overflow-hidden");
   },
   methods: {
     onWrapperClick() {
@@ -114,40 +145,6 @@ export default {
 
       return true;
     },
-  },
-  computed: {
-    containerClass() {
-      return [
-        "layout-wrapper",
-        {
-          "layout-overlay": this.layoutMode === "overlay",
-          "layout-static": this.layoutMode === "static",
-          "layout-static-sidebar-inactive":
-            this.staticMenuInactive && this.layoutMode === "static",
-          "layout-overlay-sidebar-active":
-            this.overlayMenuActive && this.layoutMode === "overlay",
-          "layout-mobile-sidebar-active": this.mobileMenuActive,
-          "p-input-filled": this.$primevue.config.inputStyle === "filled",
-          "p-ripple-disabled": this.$primevue.config.ripple === false,
-        },
-      ];
-    },
-    logo() {
-      return this.$appState.darkTheme
-        ? "images/logo-white.svg"
-        : "images/logo.svg";
-    },
-  },
-  beforeUpdate() {
-    if (this.mobileMenuActive)
-      this.addClass(document.body, "body-overflow-hidden");
-    else this.removeClass(document.body, "body-overflow-hidden");
-  },
-  components: {
-    AppTopBar: AppTopBar,
-    AppMenu: AppMenu,
-    AppConfig: AppConfig,
-    AppFooter: AppFooter,
   },
 };
 </script>

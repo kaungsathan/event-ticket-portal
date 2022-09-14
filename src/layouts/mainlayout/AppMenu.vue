@@ -17,8 +17,18 @@
 import AppSubmenu from "./AppSubmenu";
 
 export default {
+  components: {
+    AppSubmenu: AppSubmenu,
+  },
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     model: Array,
+  },
+  emits: ["menuitem-click"],
+  computed: {
+    darkTheme() {
+      return this.$appState.darkTheme;
+    },
   },
   methods: {
     onMenuItemClick(event) {
@@ -33,17 +43,9 @@ export default {
     },
     bannerImage() {
       return this.$appState.darkTheme
-        ? require('@/assets/images/banner-primeblocks-dark.png')
-        : require('@/assets/images/banner-primeblocks.png')
+        ? require("@/assets/images/banner-primeblocks-dark.png")
+        : require("@/assets/images/banner-primeblocks.png");
     },
-  },
-  computed: {
-    darkTheme() {
-      return this.$appState.darkTheme;
-    },
-  },
-  components: {
-    AppSubmenu: AppSubmenu,
   },
 };
 </script>

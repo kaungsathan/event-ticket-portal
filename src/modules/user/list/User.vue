@@ -4,11 +4,11 @@
       :value="customers"
       :paginator="true"
       :rows="10"
-      dataKey="id"
-      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-      :rowsPerPageOptions="[10, 25, 50]"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      responsiveLayout="scroll"
+      data-key="id"
+      paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+      :rows-per-page-options="[10, 25, 50]"
+      current-page-report-template="Showing {first} to {last} of {totalRecords} entries"
+      responsive-layout="scroll"
       :loading="loading"
     >
       <template #header>
@@ -30,12 +30,12 @@
       </template>
       <template #empty> No customers found. </template>
       <template #loading> Loading customers data. Please wait. </template>
-      <Column field="firstName" header="First Name"></Column>
-      <Column field="age" header="Age"></Column>
-      <Column field="phone" header="Phone Number"></Column>
-      <Column field="email" header="Email"></Column>
-      <Column field="gender" header="Gender"></Column>
-      <Column field="birthDate" header="Date of Birth"></Column>
+      <Column field="firstName" header="First Name" />
+      <Column field="age" header="Age" />
+      <Column field="phone" header="Phone Number" />
+      <Column field="email" header="Email" />
+      <Column field="gender" header="Gender" />
+      <Column field="birthDate" header="Date of Birth" />
       <Column header="Actions">
         <template #body="{ data }">
           <div class="flex">
@@ -44,14 +44,14 @@
                 type="button"
                 icon="pi pi-pencil"
                 class="mr-2 p-button-info"
-              ></Button>
+              />
             </router-link>
             <Button
               type="button"
               icon="pi pi-trash"
               class="p-button-danger"
               @click="showConfirmDialog(data.id)"
-            ></Button>
+            />
           </div>
         </template>
       </Column>
@@ -89,7 +89,7 @@ import { defineComponent } from "vue";
 import useUser from "./useUser";
 
 export default defineComponent({
-  name: "userList",
+  name: "UserList",
   setup() {
     const {
       showDeleteDialog,

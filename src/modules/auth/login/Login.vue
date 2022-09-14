@@ -1,13 +1,6 @@
 <template>
   <div
-    class="
-      surface-0
-      flex
-      align-items-center
-      justify-content-center
-      min-h-screen min-w-screen
-      overflow-hidden
-    "
+    class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
   >
     <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 80%">
       <div
@@ -66,8 +59,8 @@
 
               <span v-if="v$.email.$error && submitted">
                 <span
-                  id="email-error"
                   v-for="(error, index) of v$.email.$errors"
+                  id="email-error"
                   :key="index"
                 >
                   <small class="p-error">{{ error.$message }}</small>
@@ -92,14 +85,14 @@
               >
               <Password
                 id="password"
+                v-model="v$.password.$model"
                 placeholder="Password"
                 class="w-full"
-                inputClass="w-full"
-                inputStyle="padding:1rem"
-                v-model="v$.password.$model"
+                input-class="w-full"
+                input-style="padding:1rem"
                 :class="{ 'p-invalid': v$.password.$invalid && submitted }"
                 :feedback="false"
-              ></Password>
+              />
 
               <small
                 v-if="
@@ -113,13 +106,7 @@
               >
 
               <div
-                class="
-                  flex
-                  align-items-center
-                  justify-content-between
-                  mb-5
-                  mt-3
-                "
+                class="flex align-items-center justify-content-between mb-5 mt-3"
               >
                 <div class="flex align-items-center">
                   <Checkbox
@@ -127,17 +114,11 @@
                     v-model="checked"
                     :binary="true"
                     class="mr-2"
-                  ></Checkbox>
+                  />
                   <label for="rememberme1">Remember me</label>
                 </div>
                 <a
-                  class="
-                    font-medium
-                    no-underline
-                    ml-2
-                    text-right
-                    cursor-pointer
-                  "
+                  class="font-medium no-underline ml-2 text-right cursor-pointer"
                   style="color: var(--primary-color)"
                   >Forgot password?</a
                 >
@@ -146,13 +127,13 @@
                 type="submit"
                 label="Sign In"
                 class="w-full p-3 text-xl"
-              ></Button>
+              />
             </div>
           </form>
         </div>
       </div>
     </div>
-    <BlockUI :blocked="isLoading" :fullScreen="true"> </BlockUI>
+    <BlockUI :blocked="isLoading" :full-screen="true" />
   </div>
 </template>
 
@@ -161,16 +142,10 @@ import { defineComponent } from "vue";
 import useLogin from "./useLogin";
 
 export default defineComponent({
-  name: "login",
+  name: "Login",
   setup() {
-    const {
-      checked,
-      state,
-      v$,
-      handleSubmit,
-      submitted,
-      isLoading,
-    } = useLogin();
+    const { checked, state, v$, handleSubmit, submitted, isLoading } =
+      useLogin();
 
     return {
       checked,

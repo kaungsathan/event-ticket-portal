@@ -19,77 +19,79 @@
           <appsubmenu
             :items="visible(item) && item.items"
             @menuitem-click="$emit('menuitem-click', $event)"
-          ></appsubmenu>
+          />
         </template>
         <template v-else>
           <router-link
             v-if="item.to"
+            v-ripple
             :to="item.to"
             :class="[item.class, 'p-ripple', { 'p-disabled': item.disabled }]"
             :style="item.style"
-            @click="onMenuItemClick($event, item, i)"
             :target="item.target"
             :aria-label="item.label"
             exact
             role="menuitem"
-            v-ripple
+            @click="onMenuItemClick($event, item, i)"
           >
-            <i :class="item.icon"></i>
+            <i :class="item.icon" />
             <span>{{ item.label }}</span>
             <i
               v-if="item.items"
               class="pi pi-fw pi-angle-down menuitem-toggle-icon"
-            ></i>
-            <Badge v-if="item.badge" :value="item.badge"></Badge>
+            />
+            <Badge v-if="item.badge" :value="item.badge" />
           </router-link>
           <a
             v-if="!item.to"
+            v-ripple
             :href="item.url || '#'"
             :style="item.style"
             :class="[item.class, 'p-ripple', { 'p-disabled': item.disabled }]"
-            @click="onMenuItemClick($event, item, i)"
             :target="item.target"
             :aria-label="item.label"
             role="menuitem"
-            v-ripple
+            @click="onMenuItemClick($event, item, i)"
           >
-            <i :class="item.icon"></i>
+            <i :class="item.icon" />
             <span>{{ item.label }}</span>
             <i
               v-if="item.items"
               class="pi pi-fw pi-angle-down menuitem-toggle-icon"
-            ></i>
-            <Badge v-if="item.badge" :value="item.badge"></Badge>
+            />
+            <Badge v-if="item.badge" :value="item.badge" />
           </a>
           <transition name="layout-submenu-wrapper">
             <appsubmenu
               v-show="activeIndex === i"
               :items="visible(item) && item.items"
               @menuitem-click="$emit('menuitem-click', $event)"
-            ></appsubmenu>
+            />
           </transition>
         </template>
       </li>
       <li
-        class="p-menu-separator"
-        :style="item.style"
         v-if="visible(item) && item.separator"
         :key="'separator' + i"
+        class="p-menu-separator"
+        :style="item.style"
         role="separator"
-      ></li>
+      />
     </template>
   </ul>
 </template>
 <script>
 export default {
-  name: "appsubmenu",
+  name: "Appsubmenu",
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     items: Array,
     root: {
       type: Boolean,
       default: false,
     },
   },
+  emits: ["menuitem-click"],
   data() {
     return {
       activeIndex: null,

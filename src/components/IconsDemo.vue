@@ -35,8 +35,8 @@ npm install primeicons --save
 
 </code></pre>
 
-      <i class="pi pi-check" style="margin-right: 0.5rem"></i>
-      <i class="pi pi-times"></i>
+      <i class="pi pi-check" style="margin-right: 0.5rem" />
+      <i class="pi pi-times" />
 
       <h5>Size</h5>
       <p>Size of the icons can easily be changed using font-size property.</p>
@@ -46,14 +46,14 @@ npm install primeicons --save
 
 </code></pre>
 
-      <i class="pi pi-check"></i>
+      <i class="pi pi-check" />
 
       <pre v-code><code>
 &lt;i class="pi pi-check" style="font-size: 2rem"&gt;&lt;/i&gt;
 
 </code></pre>
 
-      <i class="pi pi-check" style="font-size: 2rem"></i>
+      <i class="pi pi-check" style="font-size: 2rem" />
 
       <h5>Spinning Animation</h5>
       <p>Special pi-spin class applies continuous rotation to an icon.</p>
@@ -62,7 +62,7 @@ npm install primeicons --save
 
 </code></pre>
 
-      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem" />
 
       <h5>Constants</h5>
       <p>
@@ -118,11 +118,11 @@ export default {
 
       <div class="grid icons-list text-center">
         <div
-          class="col-6 sm:col-4 lg:col-3 xl:col-2 pb-5"
           v-for="icon of filteredIcons"
           :key="icon.properties.name"
+          class="col-6 sm:col-4 lg:col-3 xl:col-2 pb-5"
         >
-          <i :class="'text-2xl mb-2 pi pi-' + icon.properties.name"></i>
+          <i :class="'text-2xl mb-2 pi pi-' + icon.properties.name" />
           <div>pi-{{ icon.properties.name }}</div>
         </div>
       </div>
@@ -137,6 +137,15 @@ export default {
       icons: null,
       filter: null,
     };
+  },
+  computed: {
+    filteredIcons() {
+      if (this.filter)
+        return this.icons.filter(
+          (icon) => icon.properties.name.indexOf(this.filter.toLowerCase()) > -1
+        );
+      else return this.icons;
+    },
   },
   mounted() {
     fetch("data/icons.json", { headers: { "Cache-Control": "no-cache" } })
@@ -154,15 +163,6 @@ export default {
 
         this.icons = data;
       });
-  },
-  computed: {
-    filteredIcons() {
-      if (this.filter)
-        return this.icons.filter(
-          (icon) => icon.properties.name.indexOf(this.filter.toLowerCase()) > -1
-        );
-      else return this.icons;
-    },
   },
 };
 </script>
