@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "core-js": "^3.6.5",
+    "js-cookie": "^3.0.1",
     "pinia": "^2.0.22",
     "primeflex": "^3.2.1",
     "primeicons": "5.0.0",

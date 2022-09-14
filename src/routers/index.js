@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import route from "./route";
 import userRoutes from "@/modules/user/userRoute";
+import authRoutes from "@/modules/auth/authRoute";
+import middlewarePipeline from "./middlewarePipeline";
+import { useAuthStore } from "@/modules/auth/authStore";
 
 const routes = [
   ...route,
+  ...authRoutes,
   ...userRoutes,
   {
     path: "/error-404",
@@ -12,7 +16,7 @@ const routes = [
   },
   {
     path: "/:catchAll(.*)*",
-    redirect: 'error-404',
+    redirect: "error-404",
   },
 ];
 
@@ -33,6 +37,26 @@ const router = createRouter({
       return { top: 0, left: 0 };
     }
   },
+});
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.middleware) {
+    return next();
+  }
+  const middleware = to.meta.middleware;
+  const store = useAuthStore();
+
+  const context = {
+    to,
+    from,
+    next,
+    store,
+  };
+
+  return middleware[0]({
+    ...context,
+    next: middlewarePipeline(context, middleware, 1),
+  });
 });
 
 export default router;

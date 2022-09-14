@@ -59,33 +59,13 @@
 </template>
 
 <script>
-import { ref, onMounted, defineComponent } from "vue";
-import { useUserStore } from "./../userStore";
+import { defineComponent } from "vue";
+import useUser from "./useUser";
 
 export default defineComponent({
   name: "userList",
   setup() {
-    const loading = ref(true);
-    const store = useUserStore();
-    const customers = ref();
-    const searchQuery = ref("");
-
-    onMounted(() => {
-      fetchUserList();
-    });
-
-    const fetchUserList = async () => {
-      //fetch API
-      await store.fetchAll();
-      //get response
-      const response = store.getAllResponse;
-      //assign value
-      if (response) {
-        customers.value = response.users;
-      }
-
-      loading.value = false;
-    };
+    const { customers, loading, store, searchQuery } = useUser();
 
     return {
       customers,

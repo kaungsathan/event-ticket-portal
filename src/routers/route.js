@@ -1,10 +1,12 @@
 import App from "@/layouts/mainlayout/App.vue";
+import isAuth from "@/middlewares/isAuth";
 
 const routes = [
   {
     path: "/",
     name: "app",
     component: App,
+    meta: { middleware: [isAuth] },
     children: [
       {
         path: "",
@@ -144,11 +146,6 @@ const routes = [
         component: () => import("@/components/IconsDemo.vue"),
       },
     ],
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("@/pages/Login.vue"),
   },
   {
     path: "/landing",

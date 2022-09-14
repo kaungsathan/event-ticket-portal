@@ -1,10 +1,12 @@
 import App from "@/layouts/mainlayout/App.vue";
+import isAuth from "@/middlewares/isAuth";
 
 const userRoutes = [
   {
     path: "/user",
     name: "user",
     component: App,
+    meta: { middleware: [isAuth] },
     children: [
       {
         path: "list",

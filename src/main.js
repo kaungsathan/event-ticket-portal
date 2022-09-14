@@ -95,6 +95,8 @@ import Tree from "primevue/tree";
 import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
 import TriStateCheckbox from "primevue/tristatecheckbox";
+import BlockUI from "primevue/blockui"
+import ProgressSpinner from "primevue/progressspinner"
 
 import CodeHighlight from "@/libs/AppCodeHighlight";
 import BlockViewer from "@/components/BlockViewer";
@@ -112,7 +114,7 @@ app.config.globalProperties.$appState = reactive({
   darkTheme: false,
 });
 
-app.use(PrimeVue, { ripple: true, inputStyle: "outlined" });
+app.use(PrimeVue, { ripple: false, inputStyle: "outlined" });
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(router);
@@ -204,6 +206,8 @@ app.component("Tree", Tree);
 app.component("TreeSelect", TreeSelect);
 app.component("TreeTable", TreeTable);
 app.component("TriStateCheckbox", TriStateCheckbox);
+app.component("BlockUI", BlockUI)
+app.component("ProgressSpinner",ProgressSpinner)
 
 app.component("BlockViewer", BlockViewer);
 

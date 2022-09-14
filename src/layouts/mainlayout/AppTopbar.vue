@@ -44,12 +44,12 @@
         </Menu>
         <Button
           type="button"
-          :label="$t(store.getCurrentLanguage)"
-          icon="pi pi-globe"
           @click="toggleLanguageMenu"
-          style="width: auto"
-          class="p-button-text"
-        />
+          class="p-button-text mr-2 mb-2"
+        >
+          <img alt="logo" :src="getFlagUrl()" style="width: 1.5rem" />
+          <span class="ml-2 p-button-label">{{ $t(localeStore.getCurrentLanguage) }}</span>
+        </Button>
       </li>
       <li>
         <Menu ref="menu" :model="profileMenuItems" :popup="true" />
@@ -69,11 +69,16 @@
 <script>
 import { ref } from "vue";
 import { useLocaleStore } from "@/store/localeStore";
+import { useAuthStore } from "@/modules/auth/authStore";
+
 import EventBus from "@/libs/AppEventBus";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
-    const store = useLocaleStore();
+    const localeStore = useLocaleStore();
+    const authStore = useAuthStore();
+    const router = useRouter();
     const profileMenuItems = ref([
       {
         label: "User Profile",
@@ -89,6 +94,9 @@ export default {
       {
         label: "Logout",
         icon: "pi pi-sign-out",
+        command: () => {
+          userLogout();
+        },
       },
     ]);
     const languageMenuItems = ref([
@@ -111,13 +119,26 @@ export default {
     ]);
 
     const changeLocale = (locale) => {
-      store.setLanguage(locale);
+      localeStore.setLanguage(locale);
+    };
+
+    const getFlagUrl = () => {
+      return localeStore.getCurrentLanguage === "mm"
+        ? require("@/assets/flags/mm.png")
+        : require("@/assets/flags/en.png");
+    };
+
+    const userLogout = () => {
+      authStore.logout();
+      router.replace({ name: "login" });
     };
 
     return {
-      store,
+      localeStore,
       profileMenuItems,
       languageMenuItems,
+
+      getFlagUrl,
     };
   },
   methods: {

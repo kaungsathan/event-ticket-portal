@@ -4,11 +4,11 @@ import { userService } from "./userService";
 export const useUserStore = defineStore({
   id: "useUserStore",
   state: () => ({
-    listResponse: undefined,
-    oneResponse: undefined,
-    updateResponse: undefined,
-    addResponse: undefined,
-    deleteResponse: undefined,
+    listResponse: null,
+    oneResponse: null,
+    updateResponse: null,
+    addResponse: null,
+    deleteResponse: null,
   }),
 
   getters: {
