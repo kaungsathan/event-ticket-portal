@@ -142,6 +142,7 @@
         </div>
       </div>
     </form>
+    <BlockUI :blocked="isLoading" :fullScreen="true"> </BlockUI>
   </div>
 </template>
 
@@ -152,9 +153,10 @@ import useNewUser from "./useNewUser";
 export default defineComponent({
   name: "newUser",
   setup() {
-    const { state, v$, handleSubmit, submitted } = useNewUser();
+    const { isLoading, state, v$, handleSubmit, submitted } = useNewUser();
 
     return {
+      isLoading,
       state,
       v$,
       handleSubmit,

@@ -23,11 +23,11 @@ api.interceptors.response.use(
       if (err.response.status === 403) {
         console.log("Session Error");
       }
-      alert(err.message)
+      alert(err.message);
     } else if (err.request) {
-      alert(err.message)
+      alert(err.message);
     } else {
-      alert(err.message)
+      alert(err.message);
     }
   }
 );

@@ -6,6 +6,8 @@ export default function useUser() {
   const store = useUserStore();
   const customers = ref();
   const searchQuery = ref("");
+  const showDeleteDialog = ref(false);
+  const selectedId = ref("");
 
   onMounted(() => {
     fetchUserList();
@@ -24,10 +26,32 @@ export default function useUser() {
     loading.value = false;
   };
 
+  const showConfirmDialog = (id) => {
+    selectedId.value = id;
+    showDeleteDialog.value = true;
+  };
+
+  const deleteUser = async () => {
+    showDeleteDialog.value = false;
+    loading.value = true;
+    await store.delete({ id: selectedId.value });
+
+    const response = store.getDeleteResponse;
+
+    if (response) {
+      fetchUserList();
+    }
+
+    loading.value = false;
+  };
+
   return {
+    showDeleteDialog,
+    showConfirmDialog,
     customers,
     loading,
     store,
     searchQuery,
+    deleteUser,
   };
 }

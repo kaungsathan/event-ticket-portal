@@ -142,6 +142,7 @@
         </div>
       </div>
     </form>
+    <BlockUI :blocked="isLoading" :fullScreen="true"> </BlockUI>
   </div>
 </template>
 
@@ -152,8 +153,9 @@ import useEditUser from "./useEditUser";
 export default defineComponent({
   name: "editUser",
   setup() {
-    const { state, v$, handleSubmit, submitted } = useEditUser();
+    const { isLoading, state, v$, handleSubmit, submitted } = useEditUser();
     return {
+      isLoading,
       state,
       v$,
       handleSubmit,

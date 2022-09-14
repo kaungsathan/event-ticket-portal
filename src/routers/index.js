@@ -40,6 +40,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0);
+
   if (!to.meta.middleware) {
     return next();
   }

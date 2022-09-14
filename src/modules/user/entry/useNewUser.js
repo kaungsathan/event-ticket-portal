@@ -1,8 +1,13 @@
 import { reactive, ref, onMounted } from "vue";
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { useUserStore } from "./../userStore";
+import { useRouter } from "vue-router";
 
 export default function useNewUser() {
+  const store = useUserStore();
+  const router = useRouter();
+  const isLoading = ref(false)
   const state = reactive({
     name: "",
     email: "",
@@ -34,22 +39,31 @@ export default function useNewUser() {
       return;
     }
 
-    updateUser();
+    addUser();
   };
-  const updateUser = () => {
-    resetForm();
-  };
+  const addUser = async () => {
+    isLoading.value = true;
 
-  const resetForm = () => {
-    state.name = "";
-    state.email = "";
-    state.age = "";
-    state.phoneNumber = "";
-    state.gender = "";
-    state.birthDate = "";
+    await store.add({
+      name: state.name,
+      email: state.email,
+      age: state.age,
+      phoneNumber: state.phoneNumber,
+      gender: state.gender,
+      birthDate: state.birthDate,
+    });
+
+    const response = store.addResponse;
+
+    if (response) {
+      router.push({ name: "userList" });
+    }
+
+    isLoading.value = false;
   };
 
   return {
+    isLoading,
     state,
     v$,
     handleSubmit,

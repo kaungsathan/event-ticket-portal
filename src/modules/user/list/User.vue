@@ -50,11 +50,37 @@
               type="button"
               icon="pi pi-trash"
               class="p-button-danger"
+              @click="showConfirmDialog(data.id)"
             ></Button>
           </div>
         </template>
       </Column>
     </DataTable>
+    <Dialog
+      v-model:visible="showDeleteDialog"
+      :style="{ width: '450px' }"
+      header="Confirm"
+      :modal="true"
+    >
+      <div class="confirmation-content">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+        <span>Are you sure you want to delete this user?</span>
+      </div>
+      <template #footer>
+        <Button
+          label="No"
+          icon="pi pi-times"
+          class="p-button-text"
+          @click="showDeleteDialog = false"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          class="p-button-text"
+          @click="deleteUser"
+        />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -65,13 +91,24 @@ import useUser from "./useUser";
 export default defineComponent({
   name: "userList",
   setup() {
-    const { customers, loading, store, searchQuery } = useUser();
-
-    return {
+    const {
+      showDeleteDialog,
+      showConfirmDialog,
       customers,
       loading,
       store,
       searchQuery,
+      deleteUser,
+    } = useUser();
+
+    return {
+      showDeleteDialog,
+      showConfirmDialog,
+      customers,
+      loading,
+      store,
+      searchQuery,
+      deleteUser,
     };
   },
 });
