@@ -1,4 +1,4 @@
-import App from "@/layouts/mainlayout/App.vue"
+import App from "@/layouts/default/App.vue"
 // import isAuth from "@/middlewares/isAuth"
 
 const routes = [
