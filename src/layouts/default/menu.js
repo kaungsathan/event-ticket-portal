@@ -168,18 +168,18 @@ const menuList = [
         label: "Documentation",
         icon: "pi pi-fw pi-question",
         command: () => {
-          window.location = "#/documentation";
+          window.location = "#/documentation"
         },
       },
       {
         label: "View Source",
         icon: "pi pi-fw pi-search",
         command: () => {
-          window.location = "https://github.com/primefaces/sakai-vue";
+          window.location = "https://github.com/primefaces/sakai-vue"
         },
       },
     ],
   },
-];
+]
 
-export default menuList;
+export default menuList

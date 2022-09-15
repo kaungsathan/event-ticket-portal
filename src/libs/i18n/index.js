@@ -1,5 +1,5 @@
-import { createI18n } from "vue-i18n";
-import Cookies from "js-cookie";
+import { createI18n } from "vue-i18n"
+import Cookies from "js-cookie"
 /**
  * Load locale messages
  *
@@ -7,24 +7,20 @@ import Cookies from "js-cookie";
  * See: https://github.com/intlify/vue-i18n-loader#rocket-i18n-resource-pre-compilation
  */
 function loadLocaleMessages() {
-  const locales = require.context(
-    "./locales",
-    true,
-    /[A-Za-z0-9-_,\s]+\.json$/i
-  );
-  const messages = {};
+  const locales = require.context("./locales", true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  const messages = {}
   locales.keys().forEach((key) => {
-    const matched = key.match(/([A-Za-z0-9-_]+)\./i);
+    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
     if (matched && matched.length > 1) {
-      const locale = matched[1];
-      messages[locale] = locales(key).default;
+      const locale = matched[1]
+      messages[locale] = locales(key).default
     }
-  });
-  return messages;
+  })
+  return messages
 }
 
 export default createI18n({
   locale: Cookies.get("locale") || "en",
-  fallbackLocale: Cookies.get("locale") || "en",
+  fallbackLocale: "en",
   messages: loadLocaleMessages(),
-});
+})

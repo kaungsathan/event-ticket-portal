@@ -1,12 +1,12 @@
-import App from "@/layouts/mainlayout/App.vue";
-import isAuth from "@/middlewares/isAuth";
+import App from "@/layouts/mainlayout/App.vue"
+// import isAuth from "@/middlewares/isAuth"
 
 const routes = [
   {
     path: "/",
     name: "app",
     component: App,
-    meta: { middleware: [isAuth] },
+    // meta: { middleware: [isAuth] },
     children: [
       {
         path: "",
@@ -167,6 +167,6 @@ const routes = [
     name: "access",
     component: () => import("@/pages/Access.vue"),
   },
-];
+]
 
-export default routes;
+export default routes

@@ -35,8 +35,8 @@ export default {
         summary: "Success",
         detail: "File Uploaded",
         life: 3000,
-      });
+      })
     },
   },
-};
+}
 </script>

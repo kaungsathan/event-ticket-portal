@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
-import route from "./route";
-import userRoutes from "@/modules/user/userRoute";
-import authRoutes from "@/modules/auth/authRoute";
-import middlewarePipeline from "./middlewarePipeline";
-import { useAuthStore } from "@/modules/auth/authStore";
+import { createRouter, createWebHistory } from "vue-router"
+import route from "./route"
+import userRoutes from "@/modules/user/userRoute"
+import authRoutes from "@/modules/auth/authRoute"
+// import middlewarePipeline from "./middlewarePipeline"
+import { useAuthStore } from "@/modules/auth/authStore"
+import { canNavigate } from "@/libs/acl/routeProtection"
 
 const routes = [
   ...route,
@@ -13,12 +14,26 @@ const routes = [
     path: "/error-404",
     name: "error404",
     component: () => import("@/pages/NotFound.vue"),
+    meta: {
+      layout: "full",
+    },
+  },
+  {
+    path: "/not-authorized",
+    name: "not-authorized",
+    component: () => import("@/pages/Access.vue"),
+    meta: {
+      layout: "full",
+    },
   },
   {
     path: "/:catchAll(.*)*",
     redirect: "error-404",
+    meta: {
+      layout: "full",
+    },
   },
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,33 +47,44 @@ const router = createRouter({
   // route and using back/forward buttons.
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition;
+      return savedPosition
     } else {
-      return { top: 0, left: 0 };
+      return { top: 0, left: 0 }
     }
   },
-});
+})
 
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0)
 
-  if (!to.meta.middleware) {
-    return next();
+  const authStore = useAuthStore()
+  const isLoggedIn = authStore.isAuth
+  if (!canNavigate(to)) {
+    // Redirect to login if not logged in
+    if (!isLoggedIn) return next({ name: "login" })
+
+    // If logged in => not authorized
+    return next({ name: "not-authorized" })
   }
-  const middleware = to.meta.middleware;
-  const store = useAuthStore();
+  return next()
 
-  const context = {
-    to,
-    from,
-    next,
-    store,
-  };
+  // if (!to.meta.middleware) {
+  //   return next()
+  // }
+  // const middleware = to.meta.middleware
+  // const store = useAuthStore()
 
-  return middleware[0]({
-    ...context,
-    next: middlewarePipeline(context, middleware, 1),
-  });
-});
+  // const context = {
+  //   to,
+  //   from,
+  //   next,
+  //   store,
+  // }
 
-export default router;
+  // return middleware[0]({
+  //   ...context,
+  //   next: middlewarePipeline(context, middleware, 1),
+  // })
+})
+
+export default router

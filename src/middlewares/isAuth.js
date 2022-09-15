@@ -1,7 +1,7 @@
 export default function isAuth({ next, store }) {
   if (!store.isAuth) {
-    store.logout();
-    return next({ name: "login" });
+    store.logout()
+    return next({ name: "login" })
   }
-  return next();
+  return next()
 }

@@ -1,4 +1,4 @@
-import isGuest from "@/middlewares/isGuest";
+import isGuest from "@/middlewares/isGuest"
 
 const authRoutes = [
   {
@@ -7,6 +7,6 @@ const authRoutes = [
     component: () => import("./login/Login"),
     meta: { middleware: [isGuest] },
   },
-];
+]
 
-export default authRoutes;
+export default authRoutes

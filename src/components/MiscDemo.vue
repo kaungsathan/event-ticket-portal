@@ -26,31 +26,13 @@
         </div>
 
         <h5>Positioned Badge</h5>
-        <i
-          v-badge="2"
-          class="pi pi-bell mr-4 p-text-secondary"
-          style="font-size: 2rem"
-        />
-        <i
-          v-badge.danger="'10+'"
-          class="pi pi-calendar mr-4 p-text-secondary"
-          style="font-size: 2rem"
-        />
-        <i
-          v-badge.danger
-          class="pi pi-envelope p-text-secondary"
-          style="font-size: 2rem"
-        />
+        <i v-badge="2" class="pi pi-bell mr-4 p-text-secondary" style="font-size: 2rem" />
+        <i v-badge.danger="'10+'" class="pi pi-calendar mr-4 p-text-secondary" style="font-size: 2rem" />
+        <i v-badge.danger class="pi pi-envelope p-text-secondary" style="font-size: 2rem" />
 
         <h5>Inline Button Badge</h5>
         <Button label="Emails" badge="8" class="mr-2" />
-        <Button
-          label="Messages"
-          icon="pi pi-users"
-          class="p-button-warning"
-          badge="8"
-          badge-class="p-badge-danger"
-        />
+        <Button label="Messages" icon="pi pi-users" class="p-button-warning" badge="8" badge-class="p-badge-danger" />
 
         <h5>Sizes</h5>
         <div class="badges">
@@ -64,36 +46,16 @@
         <h4>Avatar</h4>
         <h5>Avatar Group</h5>
         <AvatarGroup class="mb-3">
-          <Avatar
-            image="images/avatar/amyelsner.png"
-            size="large"
-            shape="circle"
-          />
-          <Avatar
-            image="images/avatar/asiyajavayant.png"
-            size="large"
-            shape="circle"
-          />
-          <Avatar
-            image="images/avatar/onyamalimba.png"
-            size="large"
-            shape="circle"
-          />
-          <Avatar
-            image="images/avatar/ionibowcher.png"
-            size="large"
-            shape="circle"
-          />
-          <Avatar
-            image="images/avatar/xuxuefeng.png"
-            size="large"
-            shape="circle"
-          />
+          <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
+          <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
+          <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
+          <Avatar image="images/avatar/ionibowcher.png" size="large" shape="circle" />
+          <Avatar image="images/avatar/xuxuefeng.png" size="large" shape="circle" />
           <Avatar
             label="+2"
             shape="circle"
             size="large"
-            :style="{ 'background-color': '#9c27b0', color: '#ffffff' }"
+            :style="{ 'background-color': '#9c27b0', 'color': '#ffffff' }"
           />
         </AvatarGroup>
 
@@ -103,45 +65,29 @@
           label="V"
           class="mr-2"
           size="large"
-          :style="{ 'background-color': '#2196F3', color: '#ffffff' }"
+          :style="{ 'background-color': '#2196F3', 'color': '#ffffff' }"
           shape="circle"
         />
-        <Avatar
-          label="U"
-          class="mr-2"
-          :style="{ 'background-color': '#9c27b0', color: '#ffffff' }"
-          shape="circle"
-        />
+        <Avatar label="U" class="mr-2" :style="{ 'background-color': '#9c27b0', 'color': '#ffffff' }" shape="circle" />
 
         <h5>Icon - Badge</h5>
-        <Avatar
-          v-badge.success="4"
-          icon="pi pi-user"
-          class="mr-2"
-          size="xlarge"
-        />
+        <Avatar v-badge.success="4" icon="pi pi-user" class="mr-2" size="xlarge" />
       </div>
 
       <div class="card">
         <h4>ScrollTop</h4>
         <ScrollPanel :style="{ width: '250px', height: '200px' }">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et
-            leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est
-            lorem. Amet consectetur adipiscing elit ut. Nam libero justo laoreet
-            sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor
-            magna. Est ultricies integer quis auctor elit sed vulputate.
-            Consequat ac felis donec et. Tellus orci ac auctor augue mauris.
-            Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a.
-            Tincidunt arcu non sodales neque sodales. Metus aliquam eleifend mi
-            in nulla posuere sollicitudin aliquam ultrices. Sodales ut etiam sit
-            amet nisl purus. Cursus sit amet dictum sit amet. Tristique senectus
-            et netus et malesuada fames ac turpis egestas. Et tortor consequat
-            id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget
-            mauris. Eget egestas purus viverra accumsan in nisl nisi. Suscipit
-            adipiscing bibendum est ultricies integer. Mattis aliquam faucibus
-            purus in massa tempor nec.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est lorem. Amet
+            consectetur adipiscing elit ut. Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis
+            hendrerit dolor magna. Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et.
+            Tellus orci ac auctor augue mauris. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a.
+            Tincidunt arcu non sodales neque sodales. Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam
+            ultrices. Sodales ut etiam sit amet nisl purus. Cursus sit amet dictum sit amet. Tristique senectus et netus
+            et malesuada fames ac turpis egestas. Et tortor consequat id porta nibh venenatis cras sed. Diam maecenas
+            ultricies mi eget mauris. Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est
+            ultricies integer. Mattis aliquam faucibus purus in massa tempor nec.
           </p>
           <ScrollTop target="parent" :threshold="100" icon="pi pi-arrow-up" />
         </ScrollPanel>
@@ -166,24 +112,9 @@
 
         <h5>Icons</h5>
         <Tag class="mr-2" icon="pi pi-user" value="Primary" />
-        <Tag
-          class="mr-2"
-          icon="pi pi-check"
-          severity="success"
-          value="Success"
-        />
-        <Tag
-          class="mr-2"
-          icon="pi pi-info-circle"
-          severity="info"
-          value="Info"
-        />
-        <Tag
-          class="mr-2"
-          con="pi pi-exclamation-triangle"
-          severity="warning"
-          value="Warning"
-        />
+        <Tag class="mr-2" icon="pi pi-check" severity="success" value="Success" />
+        <Tag class="mr-2" icon="pi pi-info-circle" severity="info" value="Info" />
+        <Tag class="mr-2" con="pi pi-exclamation-triangle" severity="warning" value="Warning" />
         <Tag icon="pi pi-times" severity="danger" value="Danger" />
       </div>
 
@@ -202,31 +133,14 @@
           <Chip label="Apple" icon="pi pi-apple" class="mr-2 mb-2" />
           <Chip label="Facebook" icon="pi pi-facebook" class="mr-2 mb-2" />
           <Chip label="Google" icon="pi pi-google" class="mr-2 mb-2" />
-          <Chip
-            label="Microsoft"
-            icon="pi pi-microsoft"
-            :removable="true"
-            class="mb-2"
-          />
+          <Chip label="Microsoft" icon="pi pi-microsoft" :removable="true" class="mb-2" />
         </div>
 
         <h5>Image</h5>
         <div class="flex align-items-center flex-column sm:flex-row">
-          <Chip
-            label="Amy Elsner"
-            image="images/avatar/amyelsner.png"
-            class="mr-2 mb-2"
-          />
-          <Chip
-            label="Asiya Javayant"
-            image="images/avatar/asiyajavayant.png"
-            class="mr-2 mb-2"
-          />
-          <Chip
-            label="Onyama Limba"
-            image="images/avatar/onyamalimba.png"
-            class="mr-2 mb-2"
-          />
+          <Chip label="Amy Elsner" image="images/avatar/amyelsner.png" class="mr-2 mb-2" />
+          <Chip label="Asiya Javayant" image="images/avatar/asiyajavayant.png" class="mr-2 mb-2" />
+          <Chip label="Onyama Limba" image="images/avatar/onyamalimba.png" class="mr-2 mb-2" />
         </div>
       </div>
 
@@ -257,29 +171,29 @@ export default {
   data() {
     return {
       value: 0,
-    };
+    }
   },
   interval: null,
   mounted() {
-    this.startProgress();
+    this.startProgress()
   },
   beforeUnmount() {
-    this.endProgress();
+    this.endProgress()
   },
   methods: {
     startProgress() {
       this.interval = setInterval(() => {
-        let newValue = this.value + Math.floor(Math.random() * 10) + 1;
+        let newValue = this.value + Math.floor(Math.random() * 10) + 1
         if (newValue >= 100) {
-          newValue = 100;
+          newValue = 100
         }
-        this.value = newValue;
-      }, 2000);
+        this.value = newValue
+      }, 2000)
     },
     endProgress() {
-      clearInterval(this.interval);
-      this.interval = null;
+      clearInterval(this.interval)
+      this.interval = null
     },
   },
-};
+}
 </script>

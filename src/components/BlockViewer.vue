@@ -29,11 +29,7 @@
       </div>
     </div>
     <div class="block-content">
-      <div
-        v-if="blockView == BlockView.PREVIEW"
-        :class="containerClass"
-        :style="previewStyle"
-      >
+      <div v-if="blockView == BlockView.PREVIEW" :class="containerClass" :style="previewStyle">
         <slot />
       </div>
       <div v-if="blockView === BlockView.CODE">
@@ -71,19 +67,19 @@ export default {
         CODE: 1,
       },
       blockView: 0,
-    };
+    }
   },
   methods: {
     activateView(event, blockView) {
-      this.blockView = blockView;
-      event.preventDefault();
+      this.blockView = blockView
+      event.preventDefault()
     },
     async copyCode(event) {
-      await navigator.clipboard.writeText(this.code);
-      event.preventDefault();
+      await navigator.clipboard.writeText(this.code)
+      event.preventDefault()
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

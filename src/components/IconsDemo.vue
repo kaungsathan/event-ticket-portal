@@ -4,18 +4,13 @@
       <h3>Icons</h3>
       <p>
         PrimeVue components internally use
-        <a href="https://github.com/primefaces/primeicons" class="font-medium"
-          >PrimeIcons</a
-        >
+        <a href="https://github.com/primefaces/primeicons" class="font-medium">PrimeIcons</a>
         library, the official icons suite from
         <a href="https://www.primetek.com.tr" class="font-medium">PrimeTek</a>.
       </p>
 
       <h5>Download</h5>
-      <p>
-        PrimeIcons is available at npm, run the following command to download it
-        to your project.
-      </p>
+      <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
 
       <pre v-code><code>
 npm install primeicons --save
@@ -24,9 +19,8 @@ npm install primeicons --save
 
       <h5>Getting Started</h5>
       <p>
-        PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such
-        as <strong>pi pi-check</strong>. A standalone icon can be displayed
-        using an element like <i>i</i> or <i>span</i>
+        PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>. A
+        standalone icon can be displayed using an element like <i>i</i> or <i>span</i>
       </p>
 
       <pre v-code><code>
@@ -66,8 +60,7 @@ npm install primeicons --save
 
       <h5>Constants</h5>
       <p>
-        PrimeIcons constants API is provided to easily choose an icon with
-        typescript e.g. when defining a menu model.
+        PrimeIcons constants API is provided to easily choose an icon with typescript e.g. when defining a menu model.
       </p>
       <pre v-code><code>
 &lt;Menu :model="items" /&gt;
@@ -100,28 +93,15 @@ export default {
 
       <h5>List of Icons</h5>
       <p>
-        Here is the current list of PrimeIcons, more icons are added
-        periodically. You may also
-        <a
-          href="https://github.com/primefaces/primeicons/issues"
-          class="font-medium"
-          >request new icons</a
-        >
+        Here is the current list of PrimeIcons, more icons are added periodically. You may also
+        <a href="https://github.com/primefaces/primeicons/issues" class="font-medium">request new icons</a>
         at the issue tracker.
       </p>
 
-      <InputText
-        v-model="filter"
-        class="w-full p-3 mt-3 mb-5"
-        placeholder="Search an icon"
-      />
+      <InputText v-model="filter" class="w-full p-3 mt-3 mb-5" placeholder="Search an icon" />
 
       <div class="grid icons-list text-center">
-        <div
-          v-for="icon of filteredIcons"
-          :key="icon.properties.name"
-          class="col-6 sm:col-4 lg:col-3 xl:col-2 pb-5"
-        >
+        <div v-for="icon of filteredIcons" :key="icon.properties.name" class="col-6 sm:col-4 lg:col-3 xl:col-2 pb-5">
           <i :class="'text-2xl mb-2 pi pi-' + icon.properties.name" />
           <div>pi-{{ icon.properties.name }}</div>
         </div>
@@ -136,35 +116,32 @@ export default {
     return {
       icons: null,
       filter: null,
-    };
+    }
   },
   computed: {
     filteredIcons() {
-      if (this.filter)
-        return this.icons.filter(
-          (icon) => icon.properties.name.indexOf(this.filter.toLowerCase()) > -1
-        );
-      else return this.icons;
+      if (this.filter) return this.icons.filter((icon) => icon.properties.name.indexOf(this.filter.toLowerCase()) > -1)
+      else return this.icons
     },
   },
   mounted() {
     fetch("data/icons.json", { headers: { "Cache-Control": "no-cache" } })
       .then((res) => res.json())
       .then((d) => {
-        let icons = d.icons;
+        let icons = d.icons
         let data = icons.filter((value) => {
-          return value.icon.tags.indexOf("deprecate") === -1;
-        });
+          return value.icon.tags.indexOf("deprecate") === -1
+        })
         data.sort((icon1, icon2) => {
-          if (icon1.properties.name < icon2.properties.name) return -1;
-          else if (icon1.properties.name < icon2.properties.name) return 1;
-          else return 0;
-        });
+          if (icon1.properties.name < icon2.properties.name) return -1
+          else if (icon1.properties.name < icon2.properties.name) return 1
+          else return 0
+        })
 
-        this.icons = data;
-      });
+        this.icons = data
+      })
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

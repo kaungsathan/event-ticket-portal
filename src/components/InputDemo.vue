@@ -45,12 +45,7 @@
         </span>
 
         <h5>Textarea</h5>
-        <Textarea
-          placeholder="Your Message"
-          :auto-resize="true"
-          rows="3"
-          cols="30"
-        />
+        <Textarea placeholder="Your Message" :auto-resize="true" rows="3" cols="30" />
 
         <h5>AutoComplete</h5>
         <AutoComplete
@@ -65,11 +60,7 @@
         />
 
         <h5>Calendar</h5>
-        <Calendar
-          v-model="calendarValue"
-          :show-icon="true"
-          :show-button-bar="true"
-        />
+        <Calendar v-model="calendarValue" :show-icon="true" :show-button-bar="true" />
 
         <h5>Spinner</h5>
         <InputNumber v-model="inputNumberValue" show-buttons mode="decimal" />
@@ -95,13 +86,7 @@
           </div>
           <div class="col-12">
             <h5>Knob</h5>
-            <Knob
-              v-model="knobValue"
-              :step="10"
-              :min="-50"
-              :max="50"
-              value-template="{value}%"
-            />
+            <Knob v-model="knobValue" :step="10" :min="-50" :max="50" value-template="{value}%" />
           </div>
         </div>
       </div>
@@ -113,34 +98,19 @@
         <div class="grid">
           <div class="col-12 md:col-4">
             <div class="field-radiobutton mb-0">
-              <RadioButton
-                id="option1"
-                v-model="radioValue"
-                name="option"
-                value="Chicago"
-              />
+              <RadioButton id="option1" v-model="radioValue" name="option" value="Chicago" />
               <label for="option1">Chicago</label>
             </div>
           </div>
           <div class="col-12 md:col-4">
             <div class="field-radiobutton mb-0">
-              <RadioButton
-                id="option2"
-                v-model="radioValue"
-                name="option"
-                value="Los Angeles"
-              />
+              <RadioButton id="option2" v-model="radioValue" name="option" value="Los Angeles" />
               <label for="option2">Los Angeles</label>
             </div>
           </div>
           <div class="col-12 md:col-4">
             <div class="field-radiobutton mb-0">
-              <RadioButton
-                id="option3"
-                v-model="radioValue"
-                name="option"
-                value="New York"
-              />
+              <RadioButton id="option3" v-model="radioValue" name="option" value="New York" />
               <label for="option3">New York</label>
             </div>
           </div>
@@ -150,34 +120,19 @@
         <div class="grid">
           <div class="col-12 md:col-4">
             <div class="field-checkbox mb-0">
-              <Checkbox
-                id="checkOption1"
-                v-model="checkboxValue"
-                name="option"
-                value="Chicago"
-              />
+              <Checkbox id="checkOption1" v-model="checkboxValue" name="option" value="Chicago" />
               <label for="checkOption1">Chicago</label>
             </div>
           </div>
           <div class="col-12 md:col-4">
             <div class="field-checkbox mb-0">
-              <Checkbox
-                id="checkOption2"
-                v-model="checkboxValue"
-                name="option"
-                value="Los Angeles"
-              />
+              <Checkbox id="checkOption2" v-model="checkboxValue" name="option" value="Los Angeles" />
               <label for="checkOption2">Los Angeles</label>
             </div>
           </div>
           <div class="col-12 md:col-4">
             <div class="field-checkbox mb-0">
-              <Checkbox
-                id="checkOption3"
-                v-model="checkboxValue"
-                name="option"
-                value="New York"
-              />
+              <Checkbox id="checkOption3" v-model="checkboxValue" name="option" value="New York" />
               <label for="checkOption3">New York</label>
             </div>
           </div>
@@ -189,20 +144,10 @@
 
       <div class="card">
         <h5>Listbox</h5>
-        <Listbox
-          v-model="listboxValue"
-          :options="listboxValues"
-          option-label="name"
-          :filter="true"
-        />
+        <Listbox v-model="listboxValue" :options="listboxValues" option-label="name" :filter="true" />
 
         <h5>Dropdown</h5>
-        <Dropdown
-          v-model="dropdownValue"
-          :options="dropdownValues"
-          option-label="name"
-          placeholder="Select"
-        />
+        <Dropdown v-model="dropdownValue" :options="dropdownValues" option-label="name" placeholder="Select" />
 
         <h5>MultiSelect</h5>
         <MultiSelect
@@ -218,10 +163,7 @@
               :key="option.code"
               class="inline-flex align-items-center py-1 px-2 bg-primary text-primary border-round mr-2"
             >
-              <span
-                :class="'mr-2 flag flag-' + option.code.toLowerCase()"
-                style="width: 18px; height: 12px"
-              />
+              <span :class="'mr-2 flag flag-' + option.code.toLowerCase()" style="width: 18px; height: 12px" />
               <div>{{ option.name }}</div>
             </div>
             <template v-if="!slotProps.value || slotProps.value.length === 0">
@@ -240,28 +182,15 @@
         </MultiSelect>
 
         <h5>TreeSelect</h5>
-        <TreeSelect
-          v-model="selectedNode"
-          :options="treeSelectNodes"
-          placeholder="Select Item"
-        />
+        <TreeSelect v-model="selectedNode" :options="treeSelectNodes" placeholder="Select Item" />
       </div>
 
       <div class="card">
         <h5>ToggleButton</h5>
-        <ToggleButton
-          v-model="toggleValue"
-          on-label="Yes"
-          off-label="No"
-          :style="{ width: '10em' }"
-        />
+        <ToggleButton v-model="toggleValue" on-label="Yes" off-label="No" :style="{ width: '10em' }" />
 
         <h5>SelectButton</h5>
-        <SelectButton
-          v-model="selectButtonValue1"
-          :options="selectButtonValues1"
-          option-label="name"
-        />
+        <SelectButton v-model="selectButtonValue1" :options="selectButtonValues1" option-label="name" />
 
         <h5>SelectButton - Multiple</h5>
         <SelectButton
@@ -288,9 +217,7 @@
 
           <div class="col-12 md:col-6">
             <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"
-                ><i class="pi pi-shopping-cart"
-              /></span>
+              <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart" /></span>
               <span class="p-inputgroup-addon"><i class="pi pi-globe" /></span>
               <InputText placeholder="Price" />
               <span class="p-inputgroup-addon">$</span>
@@ -319,8 +246,8 @@
   </div>
 </template>
 <script>
-import CountryService from "../service/CountryService";
-import NodeService from "../service/NodeService";
+import CountryService from "../service/CountryService"
+import NodeService from "../service/NodeService"
 export default {
   data() {
     return {
@@ -383,34 +310,30 @@ export default {
       knobValue: 20,
       treeSelectNodes: null,
       selectedNode: null,
-    };
+    }
   },
   countryService: null,
   nodeService: null,
   created() {
-    this.countryService = new CountryService();
-    this.nodeService = new NodeService();
+    this.countryService = new CountryService()
+    this.nodeService = new NodeService()
   },
   mounted() {
-    this.countryService.getCountries().then((data) => (this.autoValue = data));
-    this.nodeService
-      .getTreeNodes()
-      .then((data) => (this.treeSelectNodes = data));
+    this.countryService.getCountries().then((data) => (this.autoValue = data))
+    this.nodeService.getTreeNodes().then((data) => (this.treeSelectNodes = data))
   },
   methods: {
     searchCountry(event) {
       setTimeout(() => {
         if (!event.query.trim().length) {
-          this.autoFilteredValue = [...this.autoValue];
+          this.autoFilteredValue = [...this.autoValue]
         } else {
           this.autoFilteredValue = this.autoValue.filter((country) => {
-            return country.name
-              .toLowerCase()
-              .startsWith(event.query.toLowerCase());
-          });
+            return country.name.toLowerCase().startsWith(event.query.toLowerCase())
+          })
         }
-      }, 250);
+      }, 250)
     },
   },
-};
+}
 </script>

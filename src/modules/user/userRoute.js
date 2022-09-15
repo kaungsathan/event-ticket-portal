@@ -1,30 +1,36 @@
-import App from "@/layouts/mainlayout/App.vue";
-import isAuth from "@/middlewares/isAuth";
+// import App from "@/layouts/mainlayout/App.vue"
 
 const userRoutes = [
   {
-    path: "/user",
-    name: "user",
-    component: App,
-    meta: { middleware: [isAuth] },
-    children: [
-      {
-        path: "list",
-        name: "userList",
-        component: () => import("@/modules/user/list/User.vue"),
-      },
-      {
-        path: "new",
-        name: "newUser",
-        component: () => import("@/modules/user/entry/NewUser.vue"),
-      },
-      {
-        path: ":id/edit",
-        name: "editUser",
-        component: () => import("@/modules/user/entry/EditUser.vue"),
-      },
-    ],
+    path: "/user/list",
+    name: "userList",
+    component: () => import("@/modules/user/list/User.vue"),
+    meta: {
+      resource: "user",
+      action: "read",
+      layout: "default",
+    },
   },
-];
+  {
+    path: "/user/new",
+    name: "newUser",
+    component: () => import("@/modules/user/entry/NewUser.vue"),
+    meta: {
+      resource: "user",
+      action: "create",
+      layout: "default",
+    },
+  },
+  {
+    path: "/user/:id/edit",
+    name: "editUser",
+    component: () => import("@/modules/user/entry/EditUser.vue"),
+    meta: {
+      resource: "user",
+      action: "edit",
+      layout: "default",
+    },
+  },
+]
 
-export default userRoutes;
+export default userRoutes

@@ -16,10 +16,7 @@
           <div class="layout-menuitem-root-text" :aria-label="item.label">
             {{ item.label }}
           </div>
-          <appsubmenu
-            :items="visible(item) && item.items"
-            @menuitem-click="$emit('menuitem-click', $event)"
-          />
+          <appsubmenu :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)" />
         </template>
         <template v-else>
           <router-link
@@ -36,10 +33,7 @@
           >
             <i :class="item.icon" />
             <span>{{ item.label }}</span>
-            <i
-              v-if="item.items"
-              class="pi pi-fw pi-angle-down menuitem-toggle-icon"
-            />
+            <i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon" />
             <Badge v-if="item.badge" :value="item.badge" />
           </router-link>
           <a
@@ -55,10 +49,7 @@
           >
             <i :class="item.icon" />
             <span>{{ item.label }}</span>
-            <i
-              v-if="item.items"
-              class="pi pi-fw pi-angle-down menuitem-toggle-icon"
-            />
+            <i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon" />
             <Badge v-if="item.badge" :value="item.badge" />
           </a>
           <transition name="layout-submenu-wrapper">
@@ -95,36 +86,34 @@ export default {
   data() {
     return {
       activeIndex: null,
-    };
+    }
   },
   methods: {
     onMenuItemClick(event, item, index) {
       if (item.disabled) {
-        event.preventDefault();
-        return;
+        event.preventDefault()
+        return
       }
 
       if (!item.to && !item.url) {
-        event.preventDefault();
+        event.preventDefault()
       }
 
       //execute command
       if (item.command) {
-        item.command({ originalEvent: event, item: item });
+        item.command({ originalEvent: event, item: item })
       }
 
-      this.activeIndex = index === this.activeIndex ? null : index;
+      this.activeIndex = index === this.activeIndex ? null : index
 
       this.$emit("menuitem-click", {
         originalEvent: event,
         item: item,
-      });
+      })
     },
     visible(item) {
-      return typeof item.visible === "function"
-        ? item.visible()
-        : item.visible !== false;
+      return typeof item.visible === "function" ? item.visible() : item.visible !== false
     },
   },
-};
+}
 </script>

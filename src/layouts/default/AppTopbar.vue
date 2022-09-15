@@ -4,10 +4,7 @@
       <img alt="Logo" :src="topbarImage()" />
       <span>ONENEX</span>
     </router-link>
-    <button
-      class="p-link layout-menu-button layout-topbar-button"
-      @click="onMenuToggle"
-    >
+    <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">
       <i class="pi pi-bars" />
     </button>
 
@@ -41,15 +38,9 @@
       </li>
       <li>
         <Menu ref="languageMenu" :model="languageMenuItems" :popup="true" />
-        <Button
-          type="button"
-          class="p-button-text mr-2 mb-2"
-          @click="toggleLanguageMenu"
-        >
+        <Button type="button" class="p-button-text mr-2 mb-2" @click="toggleLanguageMenu">
           <img alt="logo" :src="getFlagUrl()" style="width: 1.5rem" />
-          <span class="ml-2 p-button-label">{{
-            $t(localeStore.getCurrentLanguage)
-          }}</span>
+          <span class="ml-2 p-button-label">{{ $t(localeStore.getCurrentLanguage) }}</span>
         </Button>
       </li>
       <li>
@@ -68,18 +59,19 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useLocaleStore } from "@/store/localeStore";
-import { useAuthStore } from "@/modules/auth/authStore";
+import { ref, onMounted, defineComponent } from "vue"
+import { useLocaleStore } from "@/store/localeStore"
+import { useAuthStore } from "@/modules/auth/authStore"
 
-import EventBus from "@/libs/AppEventBus";
-import { useRouter } from "vue-router";
+import EventBus from "@/libs/AppEventBus"
+// import Cookies from "js-cookie";
+import { useRouter } from "vue-router"
 
-export default {
+export default defineComponent({
   setup() {
-    const localeStore = useLocaleStore();
-    const authStore = useAuthStore();
-    const router = useRouter();
+    const localeStore = useLocaleStore()
+    const authStore = useAuthStore()
+    const router = useRouter()
     const profileMenuItems = ref([
       {
         label: "User Profile",
@@ -96,84 +88,89 @@ export default {
         label: "Logout",
         icon: "pi pi-sign-out",
         command: () => {
-          userLogout();
+          userLogout()
         },
       },
-    ]);
-    const languageMenuItems = ref([
-      {
-        label: "Myanmar",
-        image: require("@/assets/flags/mm.png"),
-        code: "mm",
-        command: (event) => {
-          changeLocale(event.item.code);
-        },
-      },
-      {
-        label: "English",
-        image: require("@/assets/flags/en.png"),
-        code: "en",
-        command: (event) => {
-          changeLocale(event.item.code);
-        },
-      },
-    ]);
+    ])
 
-    const changeLocale = (locale) => {
-      localeStore.setLanguage(locale);
-    };
+    onMounted(() => {})
 
     const getFlagUrl = () => {
       return localeStore.getCurrentLanguage === "mm"
         ? require("@/assets/flags/mm.png")
-        : require("@/assets/flags/en.png");
-    };
+        : require("@/assets/flags/en.png")
+    }
 
     const userLogout = () => {
-      authStore.logout();
-      router.replace({ name: "login" });
-    };
+      authStore.logout()
+      router.replace({ name: "login" })
+    }
 
     return {
       localeStore,
       profileMenuItems,
-      languageMenuItems,
 
       getFlagUrl,
-    };
+    }
+  },
+  data() {
+    return {
+      languageMenuItems: [
+        {
+          label: "Myanmar",
+          image: require("@/assets/flags/mm.png"),
+          code: "mm",
+          command: (event) => {
+            this.changeLocale(event.item.code)
+          },
+        },
+        {
+          label: "English",
+          image: require("@/assets/flags/en.png"),
+          code: "en",
+          command: (event) => {
+            this.changeLocale(event.item.code)
+          },
+        },
+      ],
+    }
   },
   computed: {
     darkTheme() {
-      return this.$appState.darkTheme;
+      return this.$appState.darkTheme
     },
   },
   methods: {
     onMenuToggle(event) {
       // eslint-disable-next-line vue/require-explicit-emits
-      this.$emit("menu-toggle", event);
+      this.$emit("menu-toggle", event)
     },
     onTopbarMenuToggle(event) {
       // eslint-disable-next-line vue/require-explicit-emits
-      this.$emit("topbar-menu-toggle", event);
+      this.$emit("topbar-menu-toggle", event)
     },
     topbarImage() {
       return this.$appState.darkTheme
         ? require("@/assets/images/logo-white.svg")
-        : require("@/assets/images/logo-dark.svg");
+        : require("@/assets/images/logo-dark.svg")
     },
     toggleMenu(event) {
-      this.$refs.menu.toggle(event);
+      this.$refs.menu.toggle(event)
     },
     toggleLanguageMenu(event) {
-      this.$refs.languageMenu.toggle(event);
+      this.$refs.languageMenu.toggle(event)
     },
     onContextRightClick(event) {
-      this.$refs.contextMenu.show(event);
+      this.$refs.contextMenu.show(event)
     },
     changeTheme(event, theme, dark) {
-      EventBus.emit("theme-change", { theme: theme, dark: dark });
-      event.preventDefault();
+      EventBus.emit("theme-change", { theme: theme, dark: dark })
+      event.preventDefault()
+    },
+    changeLocale(locale) {
+      this.localeStore.setLanguage(locale)
+      this.$i18n.locale = locale
     },
   },
-};
+})
 </script>

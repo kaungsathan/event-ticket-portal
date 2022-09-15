@@ -8,22 +8,12 @@
 
       <div class="card flex flex-column align-items-center">
         <h5 class="align-self-start">Pie Chart</h5>
-        <Chart
-          type="pie"
-          :data="pieData"
-          :options="pieOptions"
-          style="width: 50%"
-        />
+        <Chart type="pie" :data="pieData" :options="pieOptions" style="width: 50%" />
       </div>
 
       <div class="card flex flex-column align-items-center">
         <h5 class="align-self-start">Polar Area Chart</h5>
-        <Chart
-          type="polarArea"
-          :data="polarData"
-          :options="polarOptions"
-          style="width: 50%"
-        />
+        <Chart type="polarArea" :data="polarData" :options="polarOptions" style="width: 50%" />
       </div>
     </div>
     <div class="col-12 lg:col-6">
@@ -34,44 +24,26 @@
 
       <div class="card flex flex-column align-items-center">
         <h5 class="align-self-start">Doughnut Chart</h5>
-        <Chart
-          type="doughnut"
-          :data="pieData"
-          :options="pieOptions"
-          style="width: 50%"
-        />
+        <Chart type="doughnut" :data="pieData" :options="pieOptions" style="width: 50%" />
       </div>
 
       <div class="card flex flex-column align-items-center">
         <h5 class="align-self-start">Radar Chart</h5>
-        <Chart
-          type="radar"
-          :data="radarData"
-          :options="radarOptions"
-          style="width: 50%"
-        />
+        <Chart type="radar" :data="radarData" :options="radarOptions" style="width: 50%" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import EventBus from "@/libs/AppEventBus";
+import EventBus from "@/libs/AppEventBus"
 
 export default {
   themeChangeListener: null,
   data() {
     return {
       lineData: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
           {
             label: "First Dataset",
@@ -105,28 +77,14 @@ export default {
         datasets: [
           {
             data: [11, 16, 7, 3, 14],
-            backgroundColor: [
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB",
-            ],
+            backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB"],
             label: "My dataset",
           },
         ],
         labels: ["Red", "Green", "Yellow", "Grey", "Blue"],
       },
       barData: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
           {
             label: "My First dataset",
@@ -141,15 +99,7 @@ export default {
         ],
       },
       radarData: {
-        labels: [
-          "Eating",
-          "Drinking",
-          "Sleeping",
-          "Designing",
-          "Coding",
-          "Cycling",
-          "Running",
-        ],
+        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
         datasets: [
           {
             label: "My First dataset",
@@ -178,27 +128,27 @@ export default {
       polarOptions: null,
       barOptions: null,
       radarOptions: null,
-    };
+    }
   },
   mounted() {
     this.themeChangeListener = (event) => {
-      if (event.dark) this.applyDarkTheme();
-      else this.applyLightTheme();
-    };
-    EventBus.on("change-theme", this.themeChangeListener);
+      if (event.dark) this.applyDarkTheme()
+      else this.applyLightTheme()
+    }
+    EventBus.on("change-theme", this.themeChangeListener)
 
     if (this.isDarkTheme()) {
-      this.applyDarkTheme();
+      this.applyDarkTheme()
     } else {
-      this.applyLightTheme();
+      this.applyLightTheme()
     }
   },
   beforeUnmount() {
-    EventBus.off("change-theme", this.themeChangeListener);
+    EventBus.off("change-theme", this.themeChangeListener)
   },
   methods: {
     isDarkTheme() {
-      return this.$appState.darkTheme === true;
+      return this.$appState.darkTheme === true
     },
     applyLightTheme() {
       this.lineOptions = {
@@ -227,7 +177,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.barOptions = {
         plugins: {
@@ -255,7 +205,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.pieOptions = {
         plugins: {
@@ -265,7 +215,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.polarOptions = {
         plugins: {
@@ -282,7 +232,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.radarOptions = {
         plugins: {
@@ -299,7 +249,7 @@ export default {
             },
           },
         },
-      };
+      }
     },
     applyDarkTheme() {
       this.lineOptions = {
@@ -328,7 +278,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.barOptions = {
         plugins: {
@@ -356,7 +306,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.pieOptions = {
         plugins: {
@@ -366,7 +316,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.polarOptions = {
         plugins: {
@@ -383,7 +333,7 @@ export default {
             },
           },
         },
-      };
+      }
 
       this.radarOptions = {
         plugins: {
@@ -400,8 +350,8 @@ export default {
             },
           },
         },
-      };
+      }
     },
   },
-};
+}
 </script>

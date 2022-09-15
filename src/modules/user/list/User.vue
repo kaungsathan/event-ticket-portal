@@ -13,7 +13,7 @@
     >
       <template #header>
         <div class="flex flex-wrap justify-content-between align-items-center">
-          <h5 class="m-0">Customers</h5>
+          <h5 class="m-0">{{ $t("customer") }}</h5>
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
             <div class="mt-3 md:mt-0">
@@ -21,7 +21,7 @@
                 <i class="pi pi-search" />
                 <InputText v-model="searchQuery" placeholder="Keyword Search" />
               </span>
-              <router-link :to="{ name: 'newUser' }">
+              <router-link v-if="$can('create', 'user')" :to="{ name: 'newUser' }">
                 <Button label="Add New" class="p-button-success ml-2" />
               </router-link>
             </div>
@@ -39,14 +39,11 @@
       <Column header="Actions">
         <template #body="{ data }">
           <div class="flex">
-            <router-link :to="{ name: 'editUser', params: { id: data.id } }">
-              <Button
-                type="button"
-                icon="pi pi-pencil"
-                class="mr-2 p-button-info"
-              />
+            <router-link v-if="$can('edit', 'user')" :to="{ name: 'editUser', params: { id: data.id } }">
+              <Button type="button" icon="pi pi-pencil" class="mr-2 p-button-info" />
             </router-link>
             <Button
+              v-if="$can('delete', 'user')"
               type="button"
               icon="pi pi-trash"
               class="p-button-danger"
@@ -56,50 +53,27 @@
         </template>
       </Column>
     </DataTable>
-    <Dialog
-      v-model:visible="showDeleteDialog"
-      :style="{ width: '450px' }"
-      header="Confirm"
-      :modal="true"
-    >
+    <Dialog v-model:visible="showDeleteDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
         <span>Are you sure you want to delete this user?</span>
       </div>
       <template #footer>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="showDeleteDialog = false"
-        />
-        <Button
-          label="Yes"
-          icon="pi pi-check"
-          class="p-button-text"
-          @click="deleteUser"
-        />
+        <Button label="No" icon="pi pi-times" class="p-button-text" @click="showDeleteDialog = false" />
+        <Button label="Yes" icon="pi pi-check" class="p-button-text" @click="deleteUser" />
       </template>
     </Dialog>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useUser from "./useUser";
+import { defineComponent } from "vue"
+import useUser from "./useUser"
 
 export default defineComponent({
   name: "UserList",
   setup() {
-    const {
-      showDeleteDialog,
-      showConfirmDialog,
-      customers,
-      loading,
-      store,
-      searchQuery,
-      deleteUser,
-    } = useUser();
+    const { showDeleteDialog, showConfirmDialog, customers, loading, store, searchQuery, deleteUser } = useUser()
 
     return {
       showDeleteDialog,
@@ -109,9 +83,9 @@ export default defineComponent({
       store,
       searchQuery,
       deleteUser,
-    };
+    }
   },
-});
+})
 </script>
 
 <style lang="scss" scoped>

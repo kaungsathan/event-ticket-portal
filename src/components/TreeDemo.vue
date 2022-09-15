@@ -3,21 +3,13 @@
     <div class="col-12">
       <div class="card">
         <h5>Tree</h5>
-        <Tree
-          v-model:selectionKeys="selectedTreeValue"
-          :value="treeValue"
-          selection-mode="checkbox"
-        />
+        <Tree v-model:selectionKeys="selectedTreeValue" :value="treeValue" selection-mode="checkbox" />
       </div>
     </div>
     <div class="col-12">
       <div class="card">
         <h5>TreeTable</h5>
-        <TreeTable
-          v-model:selectionKeys="selectedTreeTableValue"
-          :value="treeTableValue"
-          selection-mode="checkbox"
-        >
+        <TreeTable v-model:selectionKeys="selectedTreeTableValue" :value="treeTableValue" selection-mode="checkbox">
           <template #header> FileSystem </template>
           <Column field="name" header="Name" :expander="true" />
           <Column field="size" header="Size" />
@@ -29,7 +21,7 @@
 </template>
 
 <script>
-import NodeService from "../service/NodeService";
+import NodeService from "../service/NodeService"
 
 export default {
   data() {
@@ -38,17 +30,15 @@ export default {
       selectedTreeValue: null,
       treeTableValue: null,
       selectedTreeTableValue: null,
-    };
+    }
   },
   nodeService: null,
   created() {
-    this.nodeService = new NodeService();
+    this.nodeService = new NodeService()
   },
   mounted() {
-    this.nodeService.getTreeNodes().then((data) => (this.treeValue = data));
-    this.nodeService
-      .getTreeTableNodes()
-      .then((data) => (this.treeTableValue = data));
+    this.nodeService.getTreeNodes().then((data) => (this.treeValue = data))
+    this.nodeService.getTreeTableNodes().then((data) => (this.treeTableValue = data))
   },
-};
+}
 </script>
