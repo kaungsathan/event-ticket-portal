@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router"
 import route from "./route"
 import userRoutes from "@/modules/user/userRoute"
 import authRoutes from "@/modules/auth/authRoute"
-// import middlewarePipeline from "./middlewarePipeline"
 import { useAuthStore } from "@/modules/auth/authStore"
 import { canNavigate } from "@/libs/acl/routeProtection"
 
@@ -66,25 +65,11 @@ router.beforeEach((to, from, next) => {
     // If logged in => not authorized
     return next({ name: "not-authorized" })
   }
+  // Redirect if logged in
+  if (to.meta.redirectIfLoggedIn && isLoggedIn) {
+    return next({ name: "dashboard" })
+  }
   return next()
-
-  // if (!to.meta.middleware) {
-  //   return next()
-  // }
-  // const middleware = to.meta.middleware
-  // const store = useAuthStore()
-
-  // const context = {
-  //   to,
-  //   from,
-  //   next,
-  //   store,
-  // }
-
-  // return middleware[0]({
-  //   ...context,
-  //   next: middlewarePipeline(context, middleware, 1),
-  // })
 })
 
 export default router

@@ -72,6 +72,7 @@
   </ul>
 </template>
 <script>
+import ability from "@/libs/acl/ability"
 export default {
   name: "Appsubmenu",
   props: {
@@ -112,7 +113,11 @@ export default {
       })
     },
     visible(item) {
-      return typeof item.visible === "function" ? item.visible() : item.visible !== false
+      if (item.resource) {
+        return ability.can(item.action || "read", item.resource)
+      }
+      return true
+      // return typeof item.visible === "function" ? item.visible() : item.visible !== false
     },
   },
 }

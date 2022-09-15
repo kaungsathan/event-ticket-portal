@@ -1,5 +1,3 @@
-// import App from "@/layouts/mainlayout/App.vue"
-
 const userRoutes = [
   {
     path: "/user/list",
