@@ -40,7 +40,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
     "husky": "^8.0.1",
-    "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
     "sass": "^1.54.9",
     "sass-loader": "^13.0.2",
@@ -48,7 +47,7 @@
   },
   "lint-staged": {
     "*.{js,vue}": [
-      "eslint --cache --fix",
+      "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
       "prettier --write --ignore-unknown"
     ]
   }
