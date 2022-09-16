@@ -1,3 +1,3 @@
 module.exports = {
-  "*.{js,jsx,vue}": "vue-cli-service lint",
+  "*.{js,vue}": ["eslint --cache --fix", "prettier --write --ignore-unknown"],
 };
