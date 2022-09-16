@@ -73,7 +73,6 @@ import { useLocaleStore } from "@/store/localeStore";
 import { useAuthStore } from "@/modules/auth/authStore";
 
 import EventBus from "@/libs/AppEventBus";
-// import Cookies from "js-cookie";
 import { useRouter } from "vue-router";
 
 export default defineComponent({

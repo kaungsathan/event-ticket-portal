@@ -160,6 +160,9 @@ export default defineComponent({
 });
 </script>
 
+<i18n src="./../locale.json">
+</i18n>
+
 <style scoped>
 .pi-eye {
   transform: scale(1.6);

@@ -7,11 +7,11 @@
 <script>
 import EventBus from "@/libs/AppEventBus";
 import LayoutDefault from "@/layouts/default/App.vue";
-// import LayoutFull from "@/layouts/full/App.vue"
+import LayoutFull from "@/layouts/full/App.vue";
 
 export default {
   themeChangeListener: null,
-  components: { LayoutDefault },
+  components: { LayoutDefault, LayoutFull },
   computed: {
     layout() {
       if (this.$route.meta.layout === "default") return "layout-default";

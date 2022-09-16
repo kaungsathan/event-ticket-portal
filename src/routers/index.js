@@ -1,14 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
-import route from "./route";
+// import route from "./route";
 import userRoutes from "@/modules/user/userRoute";
 import authRoutes from "@/modules/auth/authRoute";
 import { useAuthStore } from "@/modules/auth/authStore";
 import { canNavigate } from "@/libs/acl/routeProtection";
 
 const routes = [
-  ...route,
+  // ...route,
   ...authRoutes,
   ...userRoutes,
+  {
+    path: "",
+    name: "dashboard",
+    component: () => import("@/components/Dashboard.vue"),
+    meta: {
+      layout: "default",
+    },
+  },
   {
     path: "/error-404",
     name: "error404",

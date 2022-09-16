@@ -166,7 +166,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
-
 <i18n src="./../locale.json">
 </i18n>
+
+<style lang="scss" scoped></style>

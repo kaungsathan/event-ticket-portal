@@ -86,11 +86,7 @@ import ProgressSpinner from "primevue/progressspinner";
 import CodeHighlight from "@/libs/AppCodeHighlight";
 import BlockViewer from "@/components/BlockViewer";
 
-import AppWrapper from "@/AppWrapper.vue";
-
-import { createApp } from "vue";
-
-export const app = createApp(AppWrapper);
+import { app } from "./main-app";
 
 app.directive("tooltip", Tooltip);
 app.directive("ripple", Ripple);

@@ -121,6 +121,9 @@ export default defineComponent({
 });
 </script>
 
+<i18n src="./../locale.json">
+</i18n>
+
 <style lang="scss" scoped>
 @import "@/assets/demo/badges.scss";
 img {
@@ -173,5 +176,3 @@ img {
   }
 }
 </style>
-<i18n src="./../locale.json">
-</i18n>
