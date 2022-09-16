@@ -11,15 +11,15 @@ export default {
   name: "AppFooter",
   computed: {
     darkTheme() {
-      return this.$appState.darkTheme
+      return this.$appState.darkTheme;
     },
   },
   methods: {
     footerImage() {
       return this.$appState.darkTheme
         ? require("@/assets/images/logo-white.svg")
-        : require("@/assets/images/logo-dark.svg")
+        : require("@/assets/images/logo-dark.svg");
     },
   },
-}
+};
 </script>

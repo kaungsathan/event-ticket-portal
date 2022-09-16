@@ -58,7 +58,13 @@
         <h5>Overlay Menu</h5>
 
         <Menu ref="menu" :model="overlayMenuItems" :popup="true" />
-        <Button type="button" label="Options" icon="pi pi-angle-down" style="width: auto" @click="toggleMenu" />
+        <Button
+          type="button"
+          label="Options"
+          icon="pi pi-angle-down"
+          style="width: auto"
+          @click="toggleMenu"
+        />
       </div>
 
       <div class="card" @contextmenu="onContextRightClick">
@@ -350,11 +356,19 @@ export default {
             [
               {
                 label: "Woman",
-                items: [{ label: "Woman Item" }, { label: "Woman Item" }, { label: "Woman Item" }],
+                items: [
+                  { label: "Woman Item" },
+                  { label: "Woman Item" },
+                  { label: "Woman Item" },
+                ],
               },
               {
                 label: "Men",
-                items: [{ label: "Men Item" }, { label: "Men Item" }, { label: "Men Item" }],
+                items: [
+                  { label: "Men Item" },
+                  { label: "Men Item" },
+                  { label: "Men Item" },
+                ],
               },
             ],
             [
@@ -364,7 +378,11 @@ export default {
               },
               {
                 label: "Luggage",
-                items: [{ label: "Luggage Item" }, { label: "Luggage Item" }, { label: "Luggage Item" }],
+                items: [
+                  { label: "Luggage Item" },
+                  { label: "Luggage Item" },
+                  { label: "Luggage Item" },
+                ],
               },
             ],
           ],
@@ -380,7 +398,11 @@ export default {
               },
               {
                 label: "Camcorder",
-                items: [{ label: "Camcorder Item" }, { label: "Camcorder Item" }, { label: "Camcorder Item" }],
+                items: [
+                  { label: "Camcorder Item" },
+                  { label: "Camcorder Item" },
+                  { label: "Camcorder Item" },
+                ],
               },
             ],
             [
@@ -390,7 +412,11 @@ export default {
               },
               {
                 label: "Audio",
-                items: [{ label: "Audio Item" }, { label: "Audio Item" }, { label: "Audio Item" }],
+                items: [
+                  { label: "Audio Item" },
+                  { label: "Audio Item" },
+                  { label: "Audio Item" },
+                ],
               },
             ],
             [
@@ -408,11 +434,18 @@ export default {
             [
               {
                 label: "Living Room",
-                items: [{ label: "Living Room Item" }, { label: "Living Room Item" }],
+                items: [
+                  { label: "Living Room Item" },
+                  { label: "Living Room Item" },
+                ],
               },
               {
                 label: "Kitchen",
-                items: [{ label: "Kitchen Item" }, { label: "Kitchen Item" }, { label: "Kitchen Item" }],
+                items: [
+                  { label: "Kitchen Item" },
+                  { label: "Kitchen Item" },
+                  { label: "Kitchen Item" },
+                ],
               },
             ],
             [
@@ -422,7 +455,11 @@ export default {
               },
               {
                 label: "Outdoor",
-                items: [{ label: "Outdoor Item" }, { label: "Outdoor Item" }, { label: "Outdoor Item" }],
+                items: [
+                  { label: "Outdoor Item" },
+                  { label: "Outdoor Item" },
+                  { label: "Outdoor Item" },
+                ],
               },
             ],
           ],
@@ -434,11 +471,18 @@ export default {
             [
               {
                 label: "Basketball",
-                items: [{ label: "Basketball Item" }, { label: "Basketball Item" }],
+                items: [
+                  { label: "Basketball Item" },
+                  { label: "Basketball Item" },
+                ],
               },
               {
                 label: "Football",
-                items: [{ label: "Football Item" }, { label: "Football Item" }, { label: "Football Item" }],
+                items: [
+                  { label: "Football Item" },
+                  { label: "Football Item" },
+                  { label: "Football Item" },
+                ],
               },
             ],
             [
@@ -522,15 +566,15 @@ export default {
           ],
         },
       ],
-    }
+    };
   },
   methods: {
     toggleMenu(event) {
-      this.$refs.menu.toggle(event)
+      this.$refs.menu.toggle(event);
     },
     onContextRightClick(event) {
-      this.$refs.contextMenu.show(event)
+      this.$refs.contextMenu.show(event);
     },
   },
-}
+};
 </script>

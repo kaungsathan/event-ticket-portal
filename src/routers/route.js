@@ -1,4 +1,4 @@
-import App from "@/layouts/default/App.vue"
+import App from "@/layouts/default/App.vue";
 // import isAuth from "@/middlewares/isAuth"
 
 const routes = [
@@ -167,6 +167,6 @@ const routes = [
     name: "access",
     component: () => import("@/pages/Access.vue"),
   },
-]
+];
 
-export default routes
+export default routes;

@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from "vue-router"
-import route from "./route"
-import userRoutes from "@/modules/user/userRoute"
-import authRoutes from "@/modules/auth/authRoute"
-import { useAuthStore } from "@/modules/auth/authStore"
-import { canNavigate } from "@/libs/acl/routeProtection"
+import { createRouter, createWebHistory } from "vue-router";
+import route from "./route";
+import userRoutes from "@/modules/user/userRoute";
+import authRoutes from "@/modules/auth/authRoute";
+import { useAuthStore } from "@/modules/auth/authStore";
+import { canNavigate } from "@/libs/acl/routeProtection";
 
 const routes = [
   ...route,
@@ -32,7 +32,7 @@ const routes = [
       layout: "full",
     },
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,30 +46,30 @@ const router = createRouter({
   // route and using back/forward buttons.
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { top: 0, left: 0 }
+      return { top: 0, left: 0 };
     }
   },
-})
+});
 
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
 
-  const authStore = useAuthStore()
-  const isLoggedIn = authStore.isAuth
+  const authStore = useAuthStore();
+  const isLoggedIn = authStore.isAuth;
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
-    if (!isLoggedIn) return next({ name: "login" })
+    if (!isLoggedIn) return next({ name: "login" });
 
     // If logged in => not authorized
-    return next({ name: "not-authorized" })
+    return next({ name: "not-authorized" });
   }
   // Redirect if logged in
   if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-    return next({ name: "dashboard" })
+    return next({ name: "dashboard" });
   }
-  return next()
-})
+  return next();
+});
 
-export default router
+export default router;

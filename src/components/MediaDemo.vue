@@ -14,20 +14,40 @@
             <div class="product-item">
               <div class="product-item-content">
                 <div class="mb-3">
-                  <img :src="'images/product/' + product.data.image" :alt="product.data.name" class="product-image" />
+                  <img
+                    :src="'images/product/' + product.data.image"
+                    :alt="product.data.name"
+                    class="product-image"
+                  />
                 </div>
                 <div>
                   <h4 class="mb-1">
                     {{ product.data.name }}
                   </h4>
                   <h6 class="mt-0 mb-3">${{ product.data.price }}</h6>
-                  <span :class="'product-badge status-' + product.data.inventoryStatus.toLowerCase()">{{
-                    product.data.inventoryStatus
-                  }}</span>
+                  <span
+                    :class="
+                      'product-badge status-' +
+                      product.data.inventoryStatus.toLowerCase()
+                    "
+                    >{{ product.data.inventoryStatus }}</span
+                  >
                   <div class="car-buttons mt-5">
-                    <Button type="button" class="p-button p-button-rounded mr-2" icon="pi pi-search" />
-                    <Button type="button" class="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill" />
-                    <Button type="button" class="p-button-help p-button-rounded" icon="pi pi-cog" />
+                    <Button
+                      type="button"
+                      class="p-button p-button-rounded mr-2"
+                      icon="pi pi-search"
+                    />
+                    <Button
+                      type="button"
+                      class="p-button-success p-button-rounded mr-2"
+                      icon="pi pi-star-fill"
+                    />
+                    <Button
+                      type="button"
+                      class="p-button-help p-button-rounded"
+                      icon="pi pi-cog"
+                    />
                   </div>
                 </div>
               </div>
@@ -48,7 +68,11 @@
           container-style="max-width: 800px; margin: auto"
         >
           <template #item="slotProps">
-            <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+            <img
+              :src="slotProps.item.itemImageSrc"
+              :alt="slotProps.item.alt"
+              style="width: 100%; display: block"
+            />
           </template>
           <template #thumbnail="slotProps">
             <img
@@ -65,7 +89,12 @@
       <div class="card">
         <h5>Image</h5>
         <div class="flex justify-content-center">
-          <Image src="images/galleria/galleria11.jpg" alt="Image" width="250" preview />
+          <Image
+            src="images/galleria/galleria11.jpg"
+            alt="Image"
+            width="250"
+            preview
+          />
         </div>
       </div>
     </div>
@@ -73,8 +102,8 @@
 </template>
 
 <script>
-import ProductService from "../service/ProductService"
-import PhotoService from "../service/PhotoService"
+import ProductService from "../service/ProductService";
+import PhotoService from "../service/PhotoService";
 export default {
   data() {
     return {
@@ -115,21 +144,21 @@ export default {
           numScroll: 1,
         },
       ],
-    }
+    };
   },
   created() {
-    this.productService = new ProductService()
-    this.photoService = new PhotoService()
+    this.productService = new ProductService();
+    this.photoService = new PhotoService();
   },
   mounted() {
     this.productService.getProductsSmall().then((products) => {
-      this.products = products
-    })
+      this.products = products;
+    });
     this.photoService.getImages().then((images) => {
-      this.images = images
-    })
+      this.images = images;
+    });
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

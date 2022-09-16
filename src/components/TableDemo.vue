@@ -15,7 +15,13 @@
           :loading="loading1"
           :filters="filters1"
           responsive-layout="scroll"
-          :global-filter-fields="['name', 'country.name', 'representative.name', 'balance', 'status']"
+          :global-filter-fields="[
+            'name',
+            'country.name',
+            'representative.name',
+            'balance',
+            'status',
+          ]"
         >
           <template #header>
             <div class="flex justify-content-between flex-column sm:flex-row">
@@ -28,7 +34,11 @@
               />
               <span class="p-input-icon-left mb-2">
                 <i class="pi pi-search" />
-                <InputText v-model="filters1['global'].value" placeholder="Keyword Search" style="width: 100%" />
+                <InputText
+                  v-model="filters1['global'].value"
+                  placeholder="Keyword Search"
+                  style="width: 100%"
+                />
               </span>
             </div>
           </template>
@@ -39,10 +49,19 @@
               {{ data.name }}
             </template>
             <template #filter="{ filterModel }">
-              <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by name" />
+              <InputText
+                v-model="filterModel.value"
+                type="text"
+                class="p-column-filter"
+                placeholder="Search by name"
+              />
             </template>
           </Column>
-          <Column header="Country" filter-field="country.name" style="min-width: 12rem">
+          <Column
+            header="Country"
+            filter-field="country.name"
+            style="min-width: 12rem"
+          >
             <template #body="{ data }">
               <img
                 src="../assets/demo/flags/flag_placeholder.png"
@@ -50,7 +69,11 @@
                 :class="'flag flag-' + data.country.code"
                 width="30"
               />
-              <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.country.name }}</span>
+              <span
+                style="margin-left: 0.5em; vertical-align: middle"
+                class="image-text"
+                >{{ data.country.name }}</span
+              >
             </template>
             <template #filter="{ filterModel }">
               <InputText
@@ -61,10 +84,20 @@
               />
             </template>
             <template #filterclear="{ filterCallback }">
-              <Button type="button" icon="pi pi-times" class="p-button-secondary" @click="filterCallback()" />
+              <Button
+                type="button"
+                icon="pi pi-times"
+                class="p-button-secondary"
+                @click="filterCallback()"
+              />
             </template>
             <template #filterapply="{ filterCallback }">
-              <Button type="button" icon="pi pi-check" class="p-button-success" @click="filterCallback()" />
+              <Button
+                type="button"
+                icon="pi pi-check"
+                class="p-button-success"
+                @click="filterCallback()"
+              />
             </template>
           </Column>
           <Column
@@ -81,9 +114,11 @@
                 width="32"
                 style="vertical-align: middle"
               />
-              <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{
-                data.representative.name
-              }}</span>
+              <span
+                style="margin-left: 0.5em; vertical-align: middle"
+                class="image-text"
+                >{{ data.representative.name }}</span
+              >
             </template>
             <template #filter="{ filterModel }">
               <div class="mb-3 text-bold">Agent Picker</div>
@@ -102,33 +137,61 @@
                       width="32"
                       style="vertical-align: middle"
                     />
-                    <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{
-                      slotProps.option.name
-                    }}</span>
+                    <span
+                      style="margin-left: 0.5em; vertical-align: middle"
+                      class="image-text"
+                      >{{ slotProps.option.name }}</span
+                    >
                   </div>
                 </template>
               </MultiSelect>
             </template>
           </Column>
-          <Column header="Date" filter-field="date" data-type="date" style="min-width: 10rem">
+          <Column
+            header="Date"
+            filter-field="date"
+            data-type="date"
+            style="min-width: 10rem"
+          >
             <template #body="{ data }">
               {{ formatDate(data.date) }}
             </template>
             <template #filter="{ filterModel }">
-              <Calendar v-model="filterModel.value" date-format="mm/dd/yy" placeholder="mm/dd/yyyy" />
+              <Calendar
+                v-model="filterModel.value"
+                date-format="mm/dd/yy"
+                placeholder="mm/dd/yyyy"
+              />
             </template>
           </Column>
-          <Column header="Balance" filter-field="balance" data-type="numeric" style="min-width: 10rem">
+          <Column
+            header="Balance"
+            filter-field="balance"
+            data-type="numeric"
+            style="min-width: 10rem"
+          >
             <template #body="{ data }">
               {{ formatCurrency(data.balance) }}
             </template>
             <template #filter="{ filterModel }">
-              <InputNumber v-model="filterModel.value" mode="currency" currency="USD" locale="en-US" />
+              <InputNumber
+                v-model="filterModel.value"
+                mode="currency"
+                currency="USD"
+                locale="en-US"
+              />
             </template>
           </Column>
-          <Column field="status" header="Status" :filter-menu-style="{ width: '14rem' }" style="min-width: 12rem">
+          <Column
+            field="status"
+            header="Status"
+            :filter-menu-style="{ width: '14rem' }"
+            style="min-width: 12rem"
+          >
             <template #body="{ data }">
-              <span :class="'customer-badge status-' + data.status">{{ data.status }}</span>
+              <span :class="'customer-badge status-' + data.status">{{
+                data.status
+              }}</span>
             </template>
             <template #filter="{ filterModel }">
               <Dropdown
@@ -139,26 +202,41 @@
                 :show-clear="true"
               >
                 <template #value="slotProps">
-                  <span v-if="slotProps.value" :class="'customer-badge status-' + slotProps.value">{{
-                    slotProps.value
-                  }}</span>
+                  <span
+                    v-if="slotProps.value"
+                    :class="'customer-badge status-' + slotProps.value"
+                    >{{ slotProps.value }}</span
+                  >
                   <span v-else>{{ slotProps.placeholder }}</span>
                 </template>
                 <template #option="slotProps">
-                  <span :class="'customer-badge status-' + slotProps.option">{{ slotProps.option }}</span>
+                  <span :class="'customer-badge status-' + slotProps.option">{{
+                    slotProps.option
+                  }}</span>
                 </template>
               </Dropdown>
             </template>
           </Column>
-          <Column field="activity" header="Activity" :show-filter-match-modes="false" style="min-width: 12rem">
+          <Column
+            field="activity"
+            header="Activity"
+            :show-filter-match-modes="false"
+            style="min-width: 12rem"
+          >
             <template #body="{ data }">
-              <ProgressBar :value="data.activity" :show-value="false" style="height: 0.5rem" />
+              <ProgressBar
+                :value="data.activity"
+                :show-value="false"
+                style="height: 0.5rem"
+              />
             </template>
             <template #filter="{ filterModel }">
               <Slider v-model="filterModel.value" range class="m-3" />
               <div class="flex align-items-center justify-content-between px-2">
                 <span>{{ filterModel.value ? filterModel.value[0] : 0 }}</span>
-                <span>{{ filterModel.value ? filterModel.value[1] : 100 }}</span>
+                <span>{{
+                  filterModel.value ? filterModel.value[1] : 100
+                }}</span>
               </div>
             </template>
           </Column>
@@ -206,28 +284,60 @@
           scroll-direction="both"
           class="mt-3"
         >
-          <Column field="name" header="Name" :style="{ width: '150px' }" frozen />
-          <Column field="id" header="Id" :style="{ width: '100px' }" :frozen="idFrozen" />
+          <Column
+            field="name"
+            header="Name"
+            :style="{ width: '150px' }"
+            frozen
+          />
+          <Column
+            field="id"
+            header="Id"
+            :style="{ width: '100px' }"
+            :frozen="idFrozen"
+          />
           <Column field="name" header="Name" :style="{ width: '200px' }" />
-          <Column field="country.name" header="Country" :style="{ width: '200px' }">
+          <Column
+            field="country.name"
+            header="Country"
+            :style="{ width: '200px' }"
+          >
             <template #body="{ data }">
               <img
                 src="../assets/demo/flags/flag_placeholder.png"
                 :class="'flag flag-' + data.country.code"
                 width="30"
               />
-              <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{ data.country.name }}</span>
+              <span
+                style="margin-left: 0.5em; vertical-align: middle"
+                class="image-text"
+                >{{ data.country.name }}</span
+              >
             </template>
           </Column>
           <Column field="date" header="Date" :style="{ width: '200px' }" />
-          <Column field="company" header="Company" :style="{ width: '200px' }" />
+          <Column
+            field="company"
+            header="Company"
+            :style="{ width: '200px' }"
+          />
           <Column field="status" header="Status" :style="{ width: '200px' }">
             <template #body="{ data }">
-              <span :class="'customer-badge status-' + data.status">{{ data.status }}</span>
+              <span :class="'customer-badge status-' + data.status">{{
+                data.status
+              }}</span>
             </template>
           </Column>
-          <Column field="activity" header="Activity" :style="{ width: '200px' }" />
-          <Column field="representative.name" header="Representative" :style="{ width: '200px' }">
+          <Column
+            field="activity"
+            header="Activity"
+            :style="{ width: '200px' }"
+          />
+          <Column
+            field="representative.name"
+            header="Representative"
+            :style="{ width: '200px' }"
+          >
             <template #body="{ data }">
               <img
                 :alt="data.representative.name"
@@ -235,12 +345,20 @@
                 width="32"
                 style="vertical-align: middle"
               />
-              <span style="margin-left: 0.5em; vertical-align: middle" class="image-text">{{
-                data.representative.name
-              }}</span>
+              <span
+                style="margin-left: 0.5em; vertical-align: middle"
+                class="image-text"
+                >{{ data.representative.name }}</span
+              >
             </template>
           </Column>
-          <Column field="balance" header="Balance" :style="{ width: '150px' }" frozen align-frozen="right">
+          <Column
+            field="balance"
+            header="Balance"
+            :style="{ width: '150px' }"
+            frozen
+            align-frozen="right"
+          >
             <template #body="{ data }">
               <span class="text-bold">{{ formatCurrency(data.balance) }}</span>
             </template>
@@ -252,11 +370,26 @@
     <div class="col-12">
       <div class="card">
         <h5>Row Expand</h5>
-        <DataTable v-model:expandedRows="expandedRows" :value="products" data-key="id" responsive-layout="scroll">
+        <DataTable
+          v-model:expandedRows="expandedRows"
+          :value="products"
+          data-key="id"
+          responsive-layout="scroll"
+        >
           <template #header>
             <div>
-              <Button icon="pi pi-plus" label="Expand All" class="mr-2 mb-2" @click="expandAll" />
-              <Button icon="pi pi-minus" label="Collapse All" class="mb-2" @click="collapseAll" />
+              <Button
+                icon="pi pi-plus"
+                label="Expand All"
+                class="mr-2 mb-2"
+                @click="expandAll"
+              />
+              <Button
+                icon="pi pi-minus"
+                label="Collapse All"
+                class="mb-2"
+                @click="collapseAll"
+              />
             </div>
           </template>
           <Column :expander="true" header-style="width: 3rem" />
@@ -287,7 +420,11 @@
           </Column>
           <Column field="rating" header="Reviews" :sortable="true">
             <template #body="slotProps">
-              <Rating :model-value="slotProps.data.rating" :readonly="true" :cancel="false" />
+              <Rating
+                :model-value="slotProps.data.rating"
+                :readonly="true"
+                :cancel="false"
+              />
             </template>
           </Column>
           <Column field="inventoryStatus" header="Status" :sortable="true">
@@ -295,7 +432,9 @@
               <span
                 :class="
                   'product-badge status-' +
-                  (slotProps.data.inventoryStatus ? slotProps.data.inventoryStatus.toLowerCase() : '')
+                  (slotProps.data.inventoryStatus
+                    ? slotProps.data.inventoryStatus.toLowerCase()
+                    : '')
                 "
                 >{{ slotProps.data.inventoryStatus }}</span
               >
@@ -304,7 +443,10 @@
           <template #expansion="slotProps">
             <div class="p-3">
               <h5>Orders for {{ slotProps.data.name }}</h5>
-              <DataTable :value="slotProps.data.orders" responsive-layout="scroll">
+              <DataTable
+                :value="slotProps.data.orders"
+                responsive-layout="scroll"
+              >
                 <Column field="id" header="Id" :sortable="true">
                   <template #body="props">
                     {{ props.data.id }}
@@ -327,9 +469,15 @@
                 </Column>
                 <Column field="status" header="Status" :sortable="true">
                   <template #body="props">
-                    <span :class="'order-badge order-' + (props.data.status ? props.data.status.toLowerCase() : '')">{{
-                      props.data.status
-                    }}</span>
+                    <span
+                      :class="
+                        'order-badge order-' +
+                        (props.data.status
+                          ? props.data.status.toLowerCase()
+                          : '')
+                      "
+                      >{{ props.data.status }}</span
+                    >
                   </template>
                 </Column>
                 <Column header-style="width:4rem">
@@ -366,13 +514,17 @@
                 :class="'flag flag-' + slotProps.data.country.code"
                 width="30"
               />
-              <span class="image-text ml-2">{{ slotProps.data.country.name }}</span>
+              <span class="image-text ml-2">{{
+                slotProps.data.country.name
+              }}</span>
             </template>
           </Column>
           <Column field="company" header="Company" style="min-width: 200px" />
           <Column field="status" header="Status" style="min-width: 200px">
             <template #body="slotProps">
-              <span :class="'customer-badge status-' + slotProps.data.status">{{ slotProps.data.status }}</span>
+              <span :class="'customer-badge status-' + slotProps.data.status">{{
+                slotProps.data.status
+              }}</span>
             </template>
           </Column>
           <Column field="date" header="Date" style="min-width: 200px" />
@@ -383,7 +535,9 @@
               width="32"
               style="vertical-align: middle"
             />
-            <span class="image-text font-bold ml-2">{{ slotProps.data.representative.name }}</span>
+            <span class="image-text font-bold ml-2">{{
+              slotProps.data.representative.name
+            }}</span>
           </template>
           <template #groupfooter="slotProps">
             <td style="text-align: right" class="text-bold pr-6">
@@ -398,9 +552,9 @@
 </template>
 
 <script>
-import { FilterMatchMode, FilterOperator } from "primevue/api"
-import CustomerService from "../service/CustomerService"
-import ProductService from "../service/ProductService"
+import { FilterMatchMode, FilterOperator } from "primevue/api";
+import CustomerService from "../service/CustomerService";
+import ProductService from "../service/ProductService";
 export default {
   data() {
     return {
@@ -414,7 +568,14 @@ export default {
       idFrozen: false,
       products: null,
       expandedRows: [],
-      statuses: ["unqualified", "qualified", "new", "negotiation", "renewal", "proposal"],
+      statuses: [
+        "unqualified",
+        "qualified",
+        "new",
+        "negotiation",
+        "renewal",
+        "proposal",
+      ],
       representatives: [
         { name: "Amy Elsner", image: "amyelsner.png" },
         { name: "Anna Fali", image: "annafali.png" },
@@ -427,91 +588,103 @@ export default {
         { name: "Stephen Shaw", image: "stephenshaw.png" },
         { name: "XuXue Feng", image: "xuxuefeng.png" },
       ],
-    }
+    };
   },
   customerService: null,
   productService: null,
   created() {
-    this.customerService = new CustomerService()
-    this.productService = new ProductService()
-    this.initFilters1()
+    this.customerService = new CustomerService();
+    this.productService = new ProductService();
+    this.initFilters1();
   },
   mounted() {
-    this.productService.getProductsWithOrdersSmall().then((data) => (this.products = data))
+    this.productService
+      .getProductsWithOrdersSmall()
+      .then((data) => (this.products = data));
     this.customerService.getCustomersLarge().then((data) => {
-      this.customer1 = data
-      this.loading1 = false
-      this.customer1.forEach((customer) => (customer.date = new Date(customer.date)))
-    })
-    this.customerService.getCustomersLarge().then((data) => (this.customer2 = data))
-    this.customerService.getCustomersMedium().then((data) => (this.customer3 = data))
-    this.loading2 = false
+      this.customer1 = data;
+      this.loading1 = false;
+      this.customer1.forEach(
+        (customer) => (customer.date = new Date(customer.date))
+      );
+    });
+    this.customerService
+      .getCustomersLarge()
+      .then((data) => (this.customer2 = data));
+    this.customerService
+      .getCustomersMedium()
+      .then((data) => (this.customer3 = data));
+    this.loading2 = false;
   },
   methods: {
     initFilters1() {
       this.filters1 = {
-        "global": { value: null, matchMode: FilterMatchMode.CONTAINS },
-        "name": {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: {
           operator: FilterOperator.AND,
-          constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+          constraints: [
+            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+          ],
         },
         "country.name": {
           operator: FilterOperator.AND,
-          constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+          constraints: [
+            { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+          ],
         },
-        "representative": { value: null, matchMode: FilterMatchMode.IN },
-        "date": {
+        representative: { value: null, matchMode: FilterMatchMode.IN },
+        date: {
           operator: FilterOperator.AND,
           constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
         },
-        "balance": {
+        balance: {
           operator: FilterOperator.AND,
           constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
         },
-        "status": {
+        status: {
           operator: FilterOperator.OR,
           constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
         },
-        "activity": { value: null, matchMode: FilterMatchMode.BETWEEN },
-        "verified": { value: null, matchMode: FilterMatchMode.EQUALS },
-      }
+        activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
+        verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+      };
     },
     clearFilter1() {
-      this.initFilters1()
+      this.initFilters1();
     },
     expandAll() {
-      this.expandedRows = this.products.filter((p) => p.id)
+      this.expandedRows = this.products.filter((p) => p.id);
     },
     collapseAll() {
-      this.expandedRows = null
+      this.expandedRows = null;
     },
     formatCurrency(value) {
       return value.toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
-      })
+      });
     },
     formatDate(value) {
       return value.toLocaleDateString("en-US", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
-      })
+      });
     },
     calculateCustomerTotal(name) {
-      let total = 0
+      let total = 0;
       if (this.customer3) {
         for (let customer of this.customer3) {
           if (customer.representative.name === name) {
-            total++
+            total++;
           }
         }
       }
 
-      return total
+      return total;
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

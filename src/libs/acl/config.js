@@ -23,6 +23,6 @@ export const initialAbility = [
     action: "read",
     subject: "locale",
   },
-]
+];
 
-export const _ = undefined
+export const _ = undefined;

@@ -5,7 +5,11 @@
         <h4>Timeline</h4>
 
         <h5>Custom Timeline</h5>
-        <Timeline :value="customEvents" align="alternate" class="customized-timeline">
+        <Timeline
+          :value="customEvents"
+          align="alternate"
+          class="customized-timeline"
+        >
           <template #marker="slotProps">
             <span
               class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-2"
@@ -31,9 +35,10 @@
                   class="shadow-2 mb-3"
                 />
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-                  numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis
-                  esse, cupiditate neque quas!
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Inventore sed consequuntur error repudiandae numquam deserunt
+                  quisquam repellat libero asperiores earum nam nobis, culpa
+                  ratione quam perferendis esse, cupiditate neque quas!
                 </p>
                 <Button label="Read more" class="p-button-text" />
               </template>
@@ -41,7 +46,11 @@
           </template>
         </Timeline>
         <h5 style="margin-top: 5em">Horizontal - Alternate Align</h5>
-        <Timeline :value="horizontalEvents" layout="horizontal" align="alternate">
+        <Timeline
+          :value="horizontalEvents"
+          layout="horizontal"
+          align="alternate"
+        >
           <template #content="slotProps">
             {{ slotProps.item }}
           </template>
@@ -84,9 +93,9 @@ export default {
         },
       ],
       horizontalEvents: ["2020", "2021", "2022", "2023"],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

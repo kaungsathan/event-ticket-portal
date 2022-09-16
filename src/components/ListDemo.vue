@@ -29,7 +29,9 @@
           </template>
           <template #list="slotProps">
             <div class="col-12">
-              <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+              <div
+                class="flex flex-column md:flex-row align-items-center p-3 w-full"
+              >
                 <img
                   :src="'images/product/' + slotProps.data.image"
                   :alt="slotProps.data.name"
@@ -42,16 +44,24 @@
                   <div class="mb-3">
                     {{ slotProps.data.description }}
                   </div>
-                  <Rating :model-value="slotProps.data.rating" :readonly="true" :cancel="false" class="mb-2" />
+                  <Rating
+                    :model-value="slotProps.data.rating"
+                    :readonly="true"
+                    :cancel="false"
+                    class="mb-2"
+                  />
                   <div class="flex align-items-center">
                     <i class="pi pi-tag mr-2" />
-                    <span class="font-semibold">{{ slotProps.data.category }}</span>
+                    <span class="font-semibold">{{
+                      slotProps.data.category
+                    }}</span>
                   </div>
                 </div>
                 <div
                   class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0"
                 >
-                  <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end"
+                  <span
+                    class="text-2xl font-semibold mb-2 align-self-center md:align-self-end"
                     >${{ slotProps.data.price }}</span
                   >
                   <Button
@@ -60,9 +70,13 @@
                     :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"
                     class="mb-2"
                   />
-                  <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{
-                    slotProps.data.inventoryStatus
-                  }}</span>
+                  <span
+                    :class="
+                      'product-badge status-' +
+                      slotProps.data.inventoryStatus.toLowerCase()
+                    "
+                    >{{ slotProps.data.inventoryStatus }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -74,11 +88,17 @@
                 <div class="flex align-items-center justify-content-between">
                   <div class="flex align-items-center">
                     <i class="pi pi-tag mr-2" />
-                    <span class="font-semibold">{{ slotProps.data.category }}</span>
+                    <span class="font-semibold">{{
+                      slotProps.data.category
+                    }}</span>
                   </div>
-                  <span :class="'product-badge status-' + slotProps.data.inventoryStatus.toLowerCase()">{{
-                    slotProps.data.inventoryStatus
-                  }}</span>
+                  <span
+                    :class="
+                      'product-badge status-' +
+                      slotProps.data.inventoryStatus.toLowerCase()
+                    "
+                    >{{ slotProps.data.inventoryStatus }}</span
+                  >
                 </div>
                 <div class="text-center">
                   <img
@@ -92,11 +112,20 @@
                   <div class="mb-3">
                     {{ slotProps.data.description }}
                   </div>
-                  <Rating :model-value="slotProps.data.rating" :readonly="true" :cancel="false" />
+                  <Rating
+                    :model-value="slotProps.data.rating"
+                    :readonly="true"
+                    :cancel="false"
+                  />
                 </div>
                 <div class="flex align-items-center justify-content-between">
-                  <span class="text-2xl font-semibold">${{ slotProps.data.price }}</span>
-                  <Button icon="pi pi-shopping-cart" :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'" />
+                  <span class="text-2xl font-semibold"
+                    >${{ slotProps.data.price }}</span
+                  >
+                  <Button
+                    icon="pi pi-shopping-cart"
+                    :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'"
+                  />
                 </div>
               </div>
             </div>
@@ -108,7 +137,11 @@
     <div class="col-12 lg:col-8">
       <div class="card">
         <h5>PickList</h5>
-        <PickList v-model="picklistValue" list-style="height:250px" data-key="code">
+        <PickList
+          v-model="picklistValue"
+          list-style="height:250px"
+          data-key="code"
+        >
           <template #sourceheader> From </template>
           <template #targetheader> To </template>
           <template #item="slotProps">
@@ -121,7 +154,12 @@
     <div class="col-12 lg:col-4">
       <div class="card">
         <h5>OrderList</h5>
-        <OrderList v-model="orderlistValue" list-style="height:250px" data-key="code" :rows="10">
+        <OrderList
+          v-model="orderlistValue"
+          list-style="height:250px"
+          data-key="code"
+          :rows="10"
+        >
           <template #header> Cities </template>
           <template #item="slotProps">
             <div>{{ slotProps.item.name }}</div>
@@ -133,7 +171,7 @@
 </template>
 
 <script>
-import ProductService from "../service/ProductService"
+import ProductService from "../service/ProductService";
 
 export default {
   data() {
@@ -168,32 +206,34 @@ export default {
         { label: "Price High to Low", value: "!price" },
         { label: "Price Low to High", value: "price" },
       ],
-    }
+    };
   },
   productService: null,
   created() {
-    this.productService = new ProductService()
+    this.productService = new ProductService();
   },
   mounted() {
-    this.productService.getProducts().then((data) => (this.dataviewValue = data))
+    this.productService
+      .getProducts()
+      .then((data) => (this.dataviewValue = data));
   },
   methods: {
     onSortChange(event) {
-      const value = event.value.value
-      const sortValue = event.value
+      const value = event.value.value;
+      const sortValue = event.value;
 
       if (value.indexOf("!") === 0) {
-        this.sortOrder = -1
-        this.sortField = value.substring(1, value.length)
-        this.sortKey = sortValue
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+        this.sortKey = sortValue;
       } else {
-        this.sortOrder = 1
-        this.sortField = value
-        this.sortKey = sortValue
+        this.sortOrder = 1;
+        this.sortField = value;
+        this.sortKey = sortValue;
       }
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

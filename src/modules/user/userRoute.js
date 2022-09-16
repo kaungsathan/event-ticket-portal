@@ -29,6 +29,6 @@ const userRoutes = [
       layout: "default",
     },
   },
-]
+];
 
-export default userRoutes
+export default userRoutes;

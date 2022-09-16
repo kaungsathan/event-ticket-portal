@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AppSubmenu from "./AppSubmenu"
+import AppSubmenu from "./AppSubmenu";
 
 export default {
   components: {
@@ -27,25 +27,25 @@ export default {
   emits: ["menuitem-click"],
   computed: {
     darkTheme() {
-      return this.$appState.darkTheme
+      return this.$appState.darkTheme;
     },
   },
   methods: {
     onMenuItemClick(event) {
-      this.$emit("menuitem-click", event)
+      this.$emit("menuitem-click", event);
     },
     onKeyDown(event) {
-      const nodeElement = event.target
+      const nodeElement = event.target;
       if (event.code === "Enter" || event.code === "Space") {
-        nodeElement.click()
-        event.preventDefault()
+        nodeElement.click();
+        event.preventDefault();
       }
     },
     bannerImage() {
       return this.$appState.darkTheme
         ? require("@/assets/images/banner-primeblocks-dark.png")
-        : require("@/assets/images/banner-primeblocks.png")
+        : require("@/assets/images/banner-primeblocks.png");
     },
   },
-}
+};
 </script>

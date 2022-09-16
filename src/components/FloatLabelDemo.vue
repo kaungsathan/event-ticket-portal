@@ -57,13 +57,24 @@
       </div>
       <div class="field col-12 md:col-4">
         <span class="p-float-label">
-          <Dropdown id="dropdown" v-model="value8" :options="cities" option-label="name" />
+          <Dropdown
+            id="dropdown"
+            v-model="value8"
+            :options="cities"
+            option-label="name"
+          />
           <label for="dropdown">Dropdown</label>
         </span>
       </div>
       <div class="field col-12 md:col-4">
         <span class="p-float-label">
-          <MultiSelect id="multiselect" v-model="value9" :options="cities" option-label="name" :filter="false" />
+          <MultiSelect
+            id="multiselect"
+            v-model="value9"
+            :options="cities"
+            option-label="name"
+            :filter="false"
+          />
           <label for="multiselect">MultiSelect</label>
         </span>
       </div>
@@ -78,7 +89,7 @@
 </template>
 
 <script>
-import CountryService from "../service/CountryService"
+import CountryService from "../service/CountryService";
 export default {
   data() {
     return {
@@ -101,30 +112,30 @@ export default {
       value8: null,
       value9: null,
       value10: null,
-    }
+    };
   },
   created() {
-    this.countryService = new CountryService()
+    this.countryService = new CountryService();
   },
   mounted() {
     this.countryService.getCountries().then((countries) => {
-      this.countries = countries
-    })
+      this.countries = countries;
+    });
   },
   methods: {
     searchCountry(event) {
       // in a real application, make a request to a remote url with the query and
       // return filtered results, for demo we filter at client side
-      const filtered = []
-      const query = event.query
+      const filtered = [];
+      const query = event.query;
       for (let i = 0; i < this.countries.length; i++) {
-        const country = this.countries[i]
+        const country = this.countries[i];
         if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-          filtered.push(country)
+          filtered.push(country);
         }
       }
-      this.filteredCountries = filtered
+      this.filteredCountries = filtered;
     },
   },
-}
+};
 </script>
