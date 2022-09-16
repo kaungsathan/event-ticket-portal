@@ -7,8 +7,8 @@
         :class="[
           {
             'layout-menuitem-category': root,
-            'active-menuitem': activeIndex === i && !item.to && !item.disabled,
-          },
+            'active-menuitem': activeIndex === i && !item.to && !item.disabled
+          }
         ]"
         role="none"
       >
@@ -81,53 +81,55 @@
   </ul>
 </template>
 <script>
-import ability from "@/libs/acl/ability";
+import Badge from "primevue/badge"
+import ability from "@/libs/acl/ability"
 export default {
   name: "Appsubmenu",
+  components: { Badge },
   props: {
     // eslint-disable-next-line vue/require-default-prop
     items: Array,
     root: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   emits: ["menuitem-click"],
   data() {
     return {
-      activeIndex: null,
-    };
+      activeIndex: null
+    }
   },
   methods: {
     onMenuItemClick(event, item, index) {
       if (item.disabled) {
-        event.preventDefault();
-        return;
+        event.preventDefault()
+        return
       }
 
       if (!item.to && !item.url) {
-        event.preventDefault();
+        event.preventDefault()
       }
 
       //execute command
       if (item.command) {
-        item.command({ originalEvent: event, item: item });
+        item.command({ originalEvent: event, item: item })
       }
 
-      this.activeIndex = index === this.activeIndex ? null : index;
+      this.activeIndex = index === this.activeIndex ? null : index
 
       this.$emit("menuitem-click", {
         originalEvent: event,
-        item: item,
-      });
+        item: item
+      })
     },
     visible(item) {
       if (item.resource) {
-        return ability.can(item.action || "read", item.resource);
+        return ability.can(item.action || "read", item.resource)
       }
-      return true;
+      return true
       // return typeof item.visible === "function" ? item.visible() : item.visible !== false
-    },
-  },
-};
+    }
+  }
+}
 </script>

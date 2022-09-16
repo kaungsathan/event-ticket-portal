@@ -92,11 +92,18 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useUser from "./useUser";
+import Button from "primevue/button"
+import Dialog from "primevue/dialog"
+import Column from "primevue/column"
+import DataTable from "primevue/datatable"
+import InputText from "primevue/inputtext"
+
+import { defineComponent } from "vue"
+import useUser from "./useUser"
 
 export default defineComponent({
   name: "UserList",
+  components: { Button, Dialog, Column, DataTable, InputText },
   setup() {
     const {
       showDeleteDialog,
@@ -105,8 +112,8 @@ export default defineComponent({
       loading,
       store,
       searchQuery,
-      deleteUser,
-    } = useUser();
+      deleteUser
+    } = useUser()
 
     return {
       showDeleteDialog,
@@ -115,10 +122,10 @@ export default defineComponent({
       loading,
       store,
       searchQuery,
-      deleteUser,
-    };
-  },
-});
+      deleteUser
+    }
+  }
+})
 </script>
 
 <i18n src="./../locale.json">

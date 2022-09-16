@@ -3,8 +3,8 @@ const authRoutes = [
     path: "/login",
     name: "login",
     component: () => import("./login/Login"),
-    meta: { redirectIfLoggedIn: true },
-  },
-];
+    meta: { redirectIfLoggedIn: true }
+  }
+]
 
-export default authRoutes;
+export default authRoutes

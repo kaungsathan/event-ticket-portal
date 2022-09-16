@@ -7,9 +7,9 @@ const menuList = [
         icon: "pi pi-fw pi-user",
         to: "/user/list",
         action: "read",
-        resource: "user",
-      },
-    ],
+        resource: "user"
+      }
+    ]
   },
   {
     label: "Home",
@@ -19,10 +19,10 @@ const menuList = [
         icon: "pi pi-fw pi-home",
         to: "/",
         action: "read",
-        resource: "home",
-      },
-    ],
-  },
-];
+        resource: "home"
+      }
+    ]
+  }
+]
 
-export default menuList;
+export default menuList

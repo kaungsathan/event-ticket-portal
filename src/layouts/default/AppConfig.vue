@@ -567,117 +567,122 @@
 </template>
 
 <script>
-import EventBus from "../../libs/AppEventBus";
+import Button from "primevue/button"
+import RadioButton from "primevue/radiobutton"
+import InputSwitch from "primevue/inputswitch"
+
+import EventBus from "../../libs/AppEventBus"
 
 export default {
   props: {
     layoutMode: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   emits: ["layout-change"],
+  components: { Button, RadioButton, InputSwitch },
   data() {
     return {
       active: false,
       d_layoutMode: this.layoutMode,
       scale: 14,
-      scales: [12, 13, 14, 15, 16],
-    };
+      scales: [12, 13, 14, 15, 16]
+    }
   },
   outsideClickListener: null,
   themeChangeListener: null,
   computed: {
     containerClass() {
-      return ["layout-config", { "layout-config-active": this.active }];
+      return ["layout-config", { "layout-config-active": this.active }]
     },
     rippleActive() {
-      return this.$primevue.config.ripple;
+      return this.$primevue.config.ripple
     },
     inputStyle() {
-      return this.$appState.inputStyle;
-    },
+      return this.$appState.inputStyle
+    }
   },
   watch: {
     $route() {
       if (this.active) {
-        this.active = false;
-        this.unbindOutsideClickListener();
+        this.active = false
+        this.unbindOutsideClickListener()
       }
     },
     layoutMode(newValue) {
-      this.d_layoutMode = newValue;
-    },
+      this.d_layoutMode = newValue
+    }
   },
   beforeUnmount() {
-    EventBus.off("theme-change", this.themeChangeListener);
+    EventBus.off("theme-change", this.themeChangeListener)
   },
   mounted() {
     this.themeChangeListener = () => {
-      this.applyScale();
-    };
+      this.applyScale()
+    }
 
-    EventBus.on("theme-change", this.themeChangeListener);
+    EventBus.on("theme-change", this.themeChangeListener)
   },
   methods: {
     toggleConfigurator(event) {
-      this.active = !this.active;
-      event.preventDefault();
+      this.active = !this.active
+      event.preventDefault()
 
-      if (this.active) this.bindOutsideClickListener();
-      else this.unbindOutsideClickListener();
+      if (this.active) this.bindOutsideClickListener()
+      else this.unbindOutsideClickListener()
     },
     hideConfigurator(event) {
-      this.active = false;
-      this.unbindOutsideClickListener();
-      event.preventDefault();
+      this.active = false
+      this.unbindOutsideClickListener()
+      event.preventDefault()
     },
     changeInputStyle(value) {
-      this.$primevue.config.inputStyle = value;
+      this.$primevue.config.inputStyle = value
     },
     changeRipple(value) {
-      this.$primevue.config.ripple = value;
+      this.$primevue.config.ripple = value
     },
     changeLayout(event, layoutMode) {
-      this.$emit("layout-change", layoutMode);
-      event.preventDefault();
+      this.$emit("layout-change", layoutMode)
+      event.preventDefault()
     },
     bindOutsideClickListener() {
       if (!this.outsideClickListener) {
         this.outsideClickListener = (event) => {
           if (this.active && this.isOutsideClicked(event)) {
-            this.active = false;
+            this.active = false
           }
-        };
-        document.addEventListener("click", this.outsideClickListener);
+        }
+        document.addEventListener("click", this.outsideClickListener)
       }
     },
     unbindOutsideClickListener() {
       if (this.outsideClickListener) {
-        document.removeEventListener("click", this.outsideClickListener);
-        this.outsideClickListener = null;
+        document.removeEventListener("click", this.outsideClickListener)
+        this.outsideClickListener = null
       }
     },
     isOutsideClicked(event) {
       return !(
         this.$el.isSameNode(event.target) || this.$el.contains(event.target)
-      );
+      )
     },
     decrementScale() {
-      this.scale--;
-      this.applyScale();
+      this.scale--
+      this.applyScale()
     },
     incrementScale() {
-      this.scale++;
-      this.applyScale();
+      this.scale++
+      this.applyScale()
     },
     applyScale() {
-      document.documentElement.style.fontSize = this.scale + "px";
+      document.documentElement.style.fontSize = this.scale + "px"
     },
     changeTheme(event, theme, dark) {
-      EventBus.emit("theme-change", { theme: theme, dark: dark });
-      event.preventDefault();
-    },
-  },
-};
+      EventBus.emit("theme-change", { theme: theme, dark: dark })
+      event.preventDefault()
+    }
+  }
+}
 </script>

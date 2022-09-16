@@ -1,37 +1,37 @@
-import { defineStore } from "pinia";
-import Cookies from "js-cookie";
-import { authService } from "./authService";
+import { defineStore } from "pinia"
+import Cookies from "js-cookie"
+import { authService } from "./authService"
 
 export const useAuthStore = defineStore({
   id: "useAuthStore",
   state: () => ({
     token: Cookies.get("userToken") || null,
-    loginResponse: null,
+    loginResponse: null
   }),
 
   getters: {
     getToken(state) {
-      return state.token;
+      return state.token
     },
     getLoginResponse(state) {
-      return state.loginResponse;
+      return state.loginResponse
     },
     isAuth(state) {
-      return state.token ? true : false;
-    },
+      return state.token ? true : false
+    }
   },
 
   actions: {
     async login(params) {
-      const response = await authService.login(params);
-      this.loginResponse = response;
+      const response = await authService.login(params)
+      this.loginResponse = response
       if (response) {
-        this.token = "token";
+        this.token = "token"
       }
     },
     logout() {
-      this.token = null;
-      authService.logout();
-    },
-  },
-});
+      this.token = null
+      authService.logout()
+    }
+  }
+})

@@ -1,4 +1,4 @@
-import { app } from "./main-app";
-import router from "@/routers";
+import { app } from "./main-app"
+import router from "@/routers"
 
-app.use(router);
+app.use(router)

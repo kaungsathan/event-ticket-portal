@@ -138,14 +138,21 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useLogin from "./useLogin";
+import BlockUI from "primevue/blockui"
+import Button from "primevue/button"
+import Checkbox from "primevue/checkbox"
+import Password from "primevue/password"
+import InputText from "primevue/inputtext"
+
+import { defineComponent } from "vue"
+import useLogin from "./useLogin"
 
 export default defineComponent({
   name: "Login",
+  components: { BlockUI, Button, Checkbox, Password, InputText },
   setup() {
     const { checked, state, v$, handleSubmit, submitted, isLoading } =
-      useLogin();
+      useLogin()
 
     return {
       checked,
@@ -154,10 +161,10 @@ export default defineComponent({
       v$,
       handleSubmit,
       submitted,
-      isLoading,
-    };
-  },
-});
+      isLoading
+    }
+  }
+})
 </script>
 
 <i18n src="./../locale.json">

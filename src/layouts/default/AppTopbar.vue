@@ -18,7 +18,7 @@
         enterActiveClass: 'scalein',
         leaveToClass: 'hidden',
         leaveActiveClass: 'fadeout',
-        hideOnOutsideClick: true,
+        hideOnOutsideClick: true
       }"
       class="p-link layout-topbar-menu-button layout-topbar-button"
     >
@@ -68,58 +68,62 @@
 </template>
 
 <script>
-import { ref, onMounted, defineComponent } from "vue";
-import { useLocaleStore } from "@/store/localeStore";
-import { useAuthStore } from "@/modules/auth/authStore";
+import Button from "primevue/button"
+import Menu from "primevue/menu"
 
-import EventBus from "@/libs/AppEventBus";
-import { useRouter } from "vue-router";
+import { ref, onMounted, defineComponent } from "vue"
+import { useLocaleStore } from "@/store/localeStore"
+import { useAuthStore } from "@/modules/auth/authStore"
+
+import EventBus from "@/libs/AppEventBus"
+import { useRouter } from "vue-router"
 
 export default defineComponent({
+  components: { Button, Menu },
   setup() {
-    const localeStore = useLocaleStore();
-    const authStore = useAuthStore();
-    const router = useRouter();
+    const localeStore = useLocaleStore()
+    const authStore = useAuthStore()
+    const router = useRouter()
     const profileMenuItems = ref([
       {
         label: "User Profile",
-        icon: "pi pi-user",
+        icon: "pi pi-user"
       },
       {
         label: "Setting",
-        icon: "pi pi-cog",
+        icon: "pi pi-cog"
       },
       {
-        separator: true,
+        separator: true
       },
       {
         label: "Logout",
         icon: "pi pi-sign-out",
         command: () => {
-          userLogout();
-        },
-      },
-    ]);
+          userLogout()
+        }
+      }
+    ])
 
-    onMounted(() => {});
+    onMounted(() => {})
 
     const getFlagUrl = () => {
       return localeStore.getCurrentLanguage === "mm"
         ? require("@/assets/flags/mm.png")
-        : require("@/assets/flags/en.png");
-    };
+        : require("@/assets/flags/en.png")
+    }
 
     const userLogout = () => {
-      authStore.logout();
-      router.replace({ name: "login" });
-    };
+      authStore.logout()
+      router.replace({ name: "login" })
+    }
 
     return {
       localeStore,
       profileMenuItems,
 
-      getFlagUrl,
-    };
+      getFlagUrl
+    }
   },
   data() {
     return {
@@ -129,56 +133,56 @@ export default defineComponent({
           image: require("@/assets/flags/mm.png"),
           code: "mm",
           command: (event) => {
-            this.changeLocale(event.item.code);
-          },
+            this.changeLocale(event.item.code)
+          }
         },
         {
           label: "English",
           image: require("@/assets/flags/en.png"),
           code: "en",
           command: (event) => {
-            this.changeLocale(event.item.code);
-          },
-        },
-      ],
-    };
+            this.changeLocale(event.item.code)
+          }
+        }
+      ]
+    }
   },
   computed: {
     darkTheme() {
-      return this.$appState.darkTheme;
-    },
+      return this.$appState.darkTheme
+    }
   },
   methods: {
     onMenuToggle(event) {
       // eslint-disable-next-line vue/require-explicit-emits
-      this.$emit("menu-toggle", event);
+      this.$emit("menu-toggle", event)
     },
     onTopbarMenuToggle(event) {
       // eslint-disable-next-line vue/require-explicit-emits
-      this.$emit("topbar-menu-toggle", event);
+      this.$emit("topbar-menu-toggle", event)
     },
     topbarImage() {
       return this.$appState.darkTheme
         ? require("@/assets/images/logo-white.svg")
-        : require("@/assets/images/logo-dark.svg");
+        : require("@/assets/images/logo-dark.svg")
     },
     toggleMenu(event) {
-      this.$refs.menu.toggle(event);
+      this.$refs.menu.toggle(event)
     },
     toggleLanguageMenu(event) {
-      this.$refs.languageMenu.toggle(event);
+      this.$refs.languageMenu.toggle(event)
     },
     onContextRightClick(event) {
-      this.$refs.contextMenu.show(event);
+      this.$refs.contextMenu.show(event)
     },
     changeTheme(event, theme, dark) {
-      EventBus.emit("theme-change", { theme: theme, dark: dark });
-      event.preventDefault();
+      EventBus.emit("theme-change", { theme: theme, dark: dark })
+      event.preventDefault()
     },
     changeLocale(locale) {
-      this.localeStore.setLanguage(locale);
-      this.$i18n.locale = locale;
-    },
-  },
-});
+      this.localeStore.setLanguage(locale)
+      this.$i18n.locale = locale
+    }
+  }
+})
 </script>

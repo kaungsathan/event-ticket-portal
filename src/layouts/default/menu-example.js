@@ -7,9 +7,9 @@ const menuList = [
         icon: "pi pi-fw pi-user",
         to: "/user/list",
         action: "read",
-        resource: "user",
-      },
-    ],
+        resource: "user"
+      }
+    ]
   },
   {
     label: "Home",
@@ -19,16 +19,16 @@ const menuList = [
         icon: "pi pi-fw pi-home",
         to: "/",
         action: "read",
-        resource: "home",
+        resource: "home"
       },
       {
         label: "Locale",
         icon: "pi pi-fw pi-globe",
         to: "/locale",
         action: "read",
-        resource: "locale",
-      },
-    ],
+        resource: "locale"
+      }
+    ]
   },
   {
     label: "UI Components",
@@ -37,18 +37,18 @@ const menuList = [
       {
         label: "Form Layout",
         icon: "pi pi-fw pi-id-card",
-        to: "/formlayout",
+        to: "/formlayout"
       },
       { label: "Input", icon: "pi pi-fw pi-check-square", to: "/input" },
       {
         label: "Float Label",
         icon: "pi pi-fw pi-bookmark",
-        to: "/floatlabel",
+        to: "/floatlabel"
       },
       {
         label: "Invalid State",
         icon: "pi pi-fw pi-exclamation-circle",
-        to: "/invalidstate",
+        to: "/invalidstate"
       },
       { label: "Button", icon: "pi pi-fw pi-mobile", to: "/button" },
       { label: "Table", icon: "pi pi-fw pi-table", to: "/table" },
@@ -61,8 +61,8 @@ const menuList = [
       { label: "Message", icon: "pi pi-fw pi-comment", to: "/messages" },
       { label: "File", icon: "pi pi-fw pi-file", to: "/file" },
       { label: "Chart", icon: "pi pi-fw pi-chart-bar", to: "/chart" },
-      { label: "Misc", icon: "pi pi-fw pi-circle-off", to: "/misc" },
-    ],
+      { label: "Misc", icon: "pi pi-fw pi-circle-off", to: "/misc" }
+    ]
   },
   {
     label: "PrimeBlocks",
@@ -71,15 +71,15 @@ const menuList = [
         label: "Free Blocks",
         icon: "pi pi-fw pi-eye",
         to: "/blocks",
-        badge: "NEW",
+        badge: "NEW"
       },
       {
         label: "All Blocks",
         icon: "pi pi-fw pi-globe",
         url: "https://www.primefaces.org/primeblocks-vue",
-        target: "_blank",
-      },
-    ],
+        target: "_blank"
+      }
+    ]
   },
   {
     label: "Utilities",
@@ -89,9 +89,9 @@ const menuList = [
         label: "PrimeFlex",
         icon: "pi pi-fw pi-desktop",
         url: "https://www.primefaces.org/primeflex/",
-        target: "_blank",
-      },
-    ],
+        target: "_blank"
+      }
+    ]
   },
   {
     label: "Pages",
@@ -101,7 +101,7 @@ const menuList = [
       {
         label: "Timeline",
         icon: "pi pi-fw pi-calendar",
-        to: "/timeline",
+        to: "/timeline"
       },
       { label: "Landing", icon: "pi pi-fw pi-globe", to: "/landing" },
       { label: "Login", icon: "pi pi-fw pi-sign-in", to: "/login" },
@@ -109,11 +109,11 @@ const menuList = [
       {
         label: "Not Found",
         icon: "pi pi-fw pi-exclamation-circle",
-        to: "/notfound",
+        to: "/notfound"
       },
       { label: "Access Denied", icon: "pi pi-fw pi-lock", to: "/access" },
-      { label: "Empty", icon: "pi pi-fw pi-circle-off", to: "/empty" },
-    ],
+      { label: "Empty", icon: "pi pi-fw pi-circle-off", to: "/empty" }
+    ]
   },
   {
     label: "Menu Hierarchy",
@@ -129,18 +129,18 @@ const menuList = [
             items: [
               { label: "Submenu 1.1.1", icon: "pi pi-fw pi-bookmark" },
               { label: "Submenu 1.1.2", icon: "pi pi-fw pi-bookmark" },
-              { label: "Submenu 1.1.3", icon: "pi pi-fw pi-bookmark" },
-            ],
+              { label: "Submenu 1.1.3", icon: "pi pi-fw pi-bookmark" }
+            ]
           },
           {
             label: "Submenu 1.2",
             icon: "pi pi-fw pi-bookmark",
             items: [
               { label: "Submenu 1.2.1", icon: "pi pi-fw pi-bookmark" },
-              { label: "Submenu 1.2.2", icon: "pi pi-fw pi-bookmark" },
-            ],
-          },
-        ],
+              { label: "Submenu 1.2.2", icon: "pi pi-fw pi-bookmark" }
+            ]
+          }
+        ]
       },
       {
         label: "Submenu 2",
@@ -152,20 +152,20 @@ const menuList = [
             items: [
               { label: "Submenu 2.1.1", icon: "pi pi-fw pi-bookmark" },
               { label: "Submenu 2.1.2", icon: "pi pi-fw pi-bookmark" },
-              { label: "Submenu 2.1.3", icon: "pi pi-fw pi-bookmark" },
-            ],
+              { label: "Submenu 2.1.3", icon: "pi pi-fw pi-bookmark" }
+            ]
           },
           {
             label: "Submenu 2.2",
             icon: "pi pi-fw pi-bookmark",
             items: [
               { label: "Submenu 2.2.1", icon: "pi pi-fw pi-bookmark" },
-              { label: "Submenu 2.2.2", icon: "pi pi-fw pi-bookmark" },
-            ],
-          },
-        ],
-      },
-    ],
+              { label: "Submenu 2.2.2", icon: "pi pi-fw pi-bookmark" }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     label: "Get Started",
@@ -174,18 +174,18 @@ const menuList = [
         label: "Documentation",
         icon: "pi pi-fw pi-question",
         command: () => {
-          window.location = "#/documentation";
-        },
+          window.location = "#/documentation"
+        }
       },
       {
         label: "View Source",
         icon: "pi pi-fw pi-search",
         command: () => {
-          window.location = "https://github.com/primefaces/sakai-vue";
-        },
-      },
-    ],
-  },
-];
+          window.location = "https://github.com/primefaces/sakai-vue"
+        }
+      }
+    ]
+  }
+]
 
-export default menuList;
+export default menuList

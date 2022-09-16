@@ -1,21 +1,21 @@
-import { reactive, ref, onMounted } from "vue";
-import { email, required } from "@vuelidate/validators";
-import { useVuelidate } from "@vuelidate/core";
-import { useUserStore } from "../userStore";
-import { useRouter } from "vue-router";
+import { reactive, ref, onMounted } from "vue"
+import { email, required } from "@vuelidate/validators"
+import { useVuelidate } from "@vuelidate/core"
+import { useUserStore } from "../userStore"
+import { useRouter } from "vue-router"
 
 export default function useNewUser() {
-  const store = useUserStore();
-  const router = useRouter();
-  const isLoading = ref(false);
+  const store = useUserStore()
+  const router = useRouter()
+  const isLoading = ref(false)
   const state = reactive({
     name: "",
     email: "",
     age: "",
     phoneNumber: "",
     gender: "",
-    birthDate: "",
-  });
+    birthDate: ""
+  })
 
   const rules = {
     name: { required },
@@ -23,26 +23,26 @@ export default function useNewUser() {
     age: { required },
     phoneNumber: { required },
     gender: { required },
-    birthDate: { required },
-  };
+    birthDate: { required }
+  }
 
-  const submitted = ref(false);
+  const submitted = ref(false)
 
-  const v$ = useVuelidate(rules, state);
+  const v$ = useVuelidate(rules, state)
 
-  onMounted(() => {});
+  onMounted(() => {})
 
   const handleSubmit = (isFormValid) => {
-    submitted.value = true;
+    submitted.value = true
 
     if (!isFormValid) {
-      return;
+      return
     }
 
-    addUser();
-  };
+    addUser()
+  }
   const addUser = async () => {
-    isLoading.value = true;
+    isLoading.value = true
 
     await store.add({
       name: state.name,
@@ -50,23 +50,23 @@ export default function useNewUser() {
       age: state.age,
       phoneNumber: state.phoneNumber,
       gender: state.gender,
-      birthDate: state.birthDate,
-    });
+      birthDate: state.birthDate
+    })
 
-    const response = store.addResponse;
+    const response = store.addResponse
 
     if (response) {
-      router.push({ name: "userList" });
+      router.push({ name: "userList" })
     }
 
-    isLoading.value = false;
-  };
+    isLoading.value = false
+  }
 
   return {
     isLoading,
     state,
     v$,
     handleSubmit,
-    submitted,
-  };
+    submitted
+  }
 }

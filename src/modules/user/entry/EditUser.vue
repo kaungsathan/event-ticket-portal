@@ -147,22 +147,27 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useEditUser from "./useEditUser";
+import BlockUI from "primevue/blockui"
+import Button from "primevue/button"
+import InputText from "primevue/inputtext"
+
+import { defineComponent } from "vue"
+import useEditUser from "./useEditUser"
 
 export default defineComponent({
   name: "EditUser",
+  components: { BlockUI, Button, InputText },
   setup() {
-    const { isLoading, state, v$, handleSubmit, submitted } = useEditUser();
+    const { isLoading, state, v$, handleSubmit, submitted } = useEditUser()
     return {
       isLoading,
       state,
       v$,
       handleSubmit,
-      submitted,
-    };
-  },
-});
+      submitted
+    }
+  }
+})
 </script>
 
 <i18n src="./../locale.json">

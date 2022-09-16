@@ -1,5 +1,5 @@
-import { createPinia } from "pinia";
-import { app } from "./main-app";
+import { createPinia } from "pinia"
+import { app } from "./main-app"
 
-const pinia = createPinia();
-app.use(pinia);
+const pinia = createPinia()
+app.use(pinia)

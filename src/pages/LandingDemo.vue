@@ -19,7 +19,7 @@
           selector: '@next',
           enterClass: 'hidden',
           leaveToClass: 'hidden',
-          hideOnOutsideClick: true,
+          hideOnOutsideClick: true
         }"
         class="cursor-pointer block lg:hidden text-700 p-ripple"
       >
@@ -762,18 +762,18 @@
 export default {
   computed: {
     logoColor() {
-      if (this.$appState.darkTheme) return "white";
-      return "dark";
-    },
+      if (this.$appState.darkTheme) return "white"
+      return "dark"
+    }
   },
   methods: {
     smoothScroll(id) {
       document.querySelector(id).scrollIntoView({
-        behavior: "smooth",
-      });
-    },
-  },
-};
+        behavior: "smooth"
+      })
+    }
+  }
+}
 </script>
 
 <style>

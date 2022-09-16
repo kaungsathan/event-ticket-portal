@@ -147,23 +147,28 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import useNewUser from "./useNewUser";
+import BlockUI from "primevue/blockui"
+import Button from "primevue/button"
+import InputText from "primevue/inputtext"
+
+import { defineComponent } from "vue"
+import useNewUser from "./useNewUser"
 
 export default defineComponent({
   name: "NewUser",
+  components: { BlockUI, Button, InputText },
   setup() {
-    const { isLoading, state, v$, handleSubmit, submitted } = useNewUser();
+    const { isLoading, state, v$, handleSubmit, submitted } = useNewUser()
 
     return {
       isLoading,
       state,
       v$,
       handleSubmit,
-      submitted,
-    };
-  },
-});
+      submitted
+    }
+  }
+})
 </script>
 
 <i18n src="./../locale.json">

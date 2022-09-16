@@ -1,4 +1,4 @@
-import { app } from "./main-app";
-import ConfirmationService from "primevue/confirmationservice";
+import { app } from "./main-app"
+import ConfirmationService from "primevue/confirmationservice"
 
-app.use(ConfirmationService);
+app.use(ConfirmationService)

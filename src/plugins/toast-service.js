@@ -1,4 +1,4 @@
-import { app } from "./main-app";
-import ToastService from "primevue/toastservice";
+import { app } from "./main-app"
+import ToastService from "primevue/toastservice"
 
-app.use(ToastService);
+app.use(ToastService)

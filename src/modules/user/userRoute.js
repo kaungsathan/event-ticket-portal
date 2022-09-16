@@ -6,8 +6,8 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "read",
-      layout: "default",
-    },
+      layout: "default"
+    }
   },
   {
     path: "/user/new",
@@ -16,8 +16,8 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "create",
-      layout: "default",
-    },
+      layout: "default"
+    }
   },
   {
     path: "/user/:id/edit",
@@ -26,9 +26,9 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "edit",
-      layout: "default",
-    },
-  },
-];
+      layout: "default"
+    }
+  }
+]
 
-export default userRoutes;
+export default userRoutes
