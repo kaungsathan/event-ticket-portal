@@ -1,4 +1,5 @@
 import axios from "axios"
+import EventBus from "@/libs/AppEventBus"
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_ROOT_API,
@@ -23,11 +24,26 @@ api.interceptors.response.use(
       if (err.response.status === 403) {
         console.log("Session Error")
       }
-      alert(err.message)
+      /**
+       * Can see EventBus in AppWrapper(Top Component)
+       */
+      EventBus.emit("show-toast", {
+        severity: "error",
+        summary: "",
+        detail: err.message
+      })
     } else if (err.request) {
-      alert(err.message)
+      EventBus.emit("show-toast", {
+        severity: "error",
+        summary: "",
+        detail: err.message
+      })
     } else {
-      alert(err.message)
+      EventBus.emit("show-toast", {
+        severity: "error",
+        summary: "",
+        detail: err.message
+      })
     }
   }
 )

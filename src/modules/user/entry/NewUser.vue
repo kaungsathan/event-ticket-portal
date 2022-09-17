@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h5 class="text-start">Add New User</h5>
+    <h5 class="text-start">User</h5>
     <form class="p-fluid" @submit.prevent="handleSubmit(!v$.$invalid)">
       <div class="grid">
         <div class="field col-12 md:col-6 lg:col-4">
@@ -136,10 +136,15 @@
           >
         </div>
       </div>
-      <div class="flex justify-content-end">
+      <div class="flex justify-content-start">
         <div>
-          <Button type="submit" label="Submit" class="mt-2" />
+          <Button type="submit" label="Save" class="mt-2" />
         </div>
+        <router-link v-if="$can('read', 'user')" :to="{ name: 'userList' }">
+          <div>
+            <Button label="Cancel" class="ml-2 mt-2 p-button-outlined" />
+          </div>
+        </router-link>
       </div>
     </form>
     <BlockUI :blocked="isLoading" :full-screen="true" />

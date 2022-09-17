@@ -1,17 +1,21 @@
 <template>
-  <component :is="layout">
-    <router-view />
-  </component>
+  <div>
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
+  <Toast position="bottom-right"></Toast>
 </template>
 
 <script>
 import EventBus from "@/libs/AppEventBus"
 import LayoutDefault from "@/layouts/default/App.vue"
 import LayoutFull from "@/layouts/full/App.vue"
+import Toast from "primevue/toast"
 
 export default {
   themeChangeListener: null,
-  components: { LayoutDefault, LayoutFull },
+  components: { LayoutDefault, LayoutFull, Toast },
   computed: {
     layout() {
       if (this.$route.meta.layout === "default") return "layout-default"
@@ -43,9 +47,22 @@ export default {
     }
 
     EventBus.on("theme-change", this.themeChangeListener)
+    EventBus.on("show-toast", this.showToast)
+  },
+  methods: {
+    showToast(event) {
+      console.log(event)
+      this.$toast.add({
+        severity: event.severity,
+        summary: event.summary,
+        detail: event.detail,
+        life: 3000
+      })
+    }
   },
   beforeUnmount() {
     EventBus.off("theme-change", this.themeChangeListener)
+    EventBus.off("show-toast", this.showToast)
   }
 }
 </script>

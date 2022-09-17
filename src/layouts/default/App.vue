@@ -12,7 +12,7 @@
       <AppFooter />
     </div>
 
-    <AppConfig :layout-mode="layoutMode" @layout-change="onLayoutChange" />
+    <!-- <AppConfig :layout-mode="layoutMode" @layout-change="onLayoutChange" /> -->
     <transition name="layout-mask">
       <div v-if="mobileMenuActive" class="layout-mask p-component-overlay" />
     </transition>
@@ -22,7 +22,7 @@
 <script>
 import AppTopBar from "./AppTopbar.vue"
 import AppMenu from "./AppMenu.vue"
-import AppConfig from "./AppConfig.vue"
+// import AppConfig from "./AppConfig.vue"
 import AppFooter from "./AppFooter.vue"
 
 import menuList from "./menu"
@@ -31,7 +31,7 @@ export default {
   components: {
     AppTopBar: AppTopBar,
     AppMenu: AppMenu,
-    AppConfig: AppConfig,
+    // AppConfig: AppConfig,
     AppFooter: AppFooter
   },
   emits: ["change-theme"],
