@@ -2,6 +2,30 @@
 
 Vue3 Modular Architecture Portal Starter Kit
 
+## Features
+
+[Vue3](https://vuejs.org/)<br>
+[Vue Composition API](https://vuejs.org/api/composition-api-setup.html)<br>
+[Vue Router](https://router.vuejs.org/) - The official router for Vue.js<br>
+[Pinia](https://pinia.vuejs.org/) - The Vue Store that you will enjoy using<br>
+[Axios](https://axios-http.com/) - Promise based HTTP client for the browser and node.js<br>
+[I18ns](https://vue-i18n.intlify.dev/) - Vue I18n is internationalization plugin for Vue.js<br>
+[CASL](https://casl.js.org/v6/en/) - Isomorphic Authorization JavaScript library<br>
+[Husky](https://typicode.github.io/husky/) - Modern native git hooks made easy<br>
+
+## UI
+[PrimeVue](http://www.primefaces.org/primevue/) with [Sakai Admin Template](https://github.com/primefaces/sakai-vue)
+<br>
+
+
+## Recommended IDE Setup
+[VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+
+## Recommended Node Version
+Node >= 16
+<br>
+
+
 ## Project setup
 
 ```
@@ -26,7 +50,7 @@ npm run build
 npm run lint
 ```
 
-### Format files
+### Formats files
 
 ```
 npm run format
@@ -36,11 +60,13 @@ npm run format
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### SASS Variables
+<br>
 
-In case you'd like to customize the layout variables, open **\_variables.scss** file under src/layout folder. The list is pretty short as majority of the variables are derived from the PrimeVue theme being used.
+## SASS Variables
 
-**src/assets/\_variables.scss**
+In case you'd like to customize the layout variables, open **\_variables.scss** file under src/assets/styles folder. The list is pretty short as majority of the variables are derived from the PrimeVue theme being used.
+
+**src/assets/styles/\_variables.scss**
 
 ```css
 $fontSize: 1rem;
