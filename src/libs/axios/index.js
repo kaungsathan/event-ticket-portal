@@ -1,5 +1,6 @@
 import axios from "axios"
 import EventBus from "@/libs/AppEventBus"
+import JSONbig from "json-bigint"
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_ROOT_API,
@@ -17,6 +18,7 @@ api.interceptors.request.use(function (config) {
 
 api.interceptors.response.use(
   (res) => {
+    res.data = JSONbig.parse(JSON.stringify(res.data))
     return res
   },
   (err) => {
