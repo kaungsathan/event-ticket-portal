@@ -9,6 +9,6 @@ import Cookies from "js-cookie"
 const userData = Cookies.get("userData")
   ? JSON.parse(Cookies.get("userData"))
   : null
-const existingAbility = userData ? userData.role.abilities : null
+const existingAbility = userData ? userData.allowed_permissions : initialAbility
 
-export default new Ability(existingAbility || initialAbility)
+export default new Ability(existingAbility)
