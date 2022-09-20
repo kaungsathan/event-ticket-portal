@@ -1,9 +1,9 @@
 const menuList = [
   {
-    label: "Modules",
+    label: "modules",
     items: [
       {
-        label: "User List",
+        label: "userList",
         icon: "pi pi-fw pi-user",
         to: "/user/list",
         action: "read",
@@ -12,14 +12,14 @@ const menuList = [
     ]
   },
   {
-    label: "Home",
+    label: "home",
     items: [
       {
-        label: "Dashboard",
+        label: "dashboard",
         icon: "pi pi-fw pi-home",
         to: "/",
         action: "read",
-        resource: "home"
+        resource: "dashboard"
       }
     ]
   }

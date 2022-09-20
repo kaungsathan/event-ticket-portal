@@ -1,28 +1,20 @@
 import api from "@/libs/axios"
-import Cookies from "js-cookie"
+// import Cookies from "js-cookie"
 
 const endpoints = {
-  login: "https://dummyjson.com"
+  login: "auth/login"
 }
 
 const authService = {
   login: async (params) => {
     try {
-      const result = await api.get(endpoints.login, { params: params })
-      if (result) {
-        Cookies.set("userToken", params.email)
-      }
-
-      // need to remove this line
-      Cookies.set("userToken", params.email)
+      const result = await api.post(endpoints.login, params)
       return result.data
     } catch {
       return null
     }
   },
-  logout: () => {
-    Cookies.remove("userToken")
-  }
+  logout: () => {}
 }
 
 export { authService }

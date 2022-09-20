@@ -14,7 +14,7 @@
       >
         <template v-if="root">
           <div class="layout-menuitem-root-text" :aria-label="item.label">
-            {{ item.label }}
+            {{ $t(item.label) }}
           </div>
           <appsubmenu
             :items="visible(item) && item.items"
@@ -35,7 +35,7 @@
             @click="onMenuItemClick($event, item, i)"
           >
             <i :class="item.icon" />
-            <span>{{ item.label }}</span>
+            <span>{{ $t(item.label) }}</span>
             <i
               v-if="item.items"
               class="pi pi-fw pi-angle-down menuitem-toggle-icon"
@@ -54,7 +54,7 @@
             @click="onMenuItemClick($event, item, i)"
           >
             <i :class="item.icon" />
-            <span>{{ item.label }}</span>
+            <span>{{ $t(item.label) }}</span>
             <i
               v-if="item.items"
               class="pi pi-fw pi-angle-down menuitem-toggle-icon"
@@ -125,7 +125,7 @@ export default {
     },
     visible(item) {
       if (item.resource) {
-        return ability.can(item.action || "read", item.resource)
+        return ability.can(item.action, item.resource)
       }
       return true
       // return typeof item.visible === "function" ? item.visible() : item.visible !== false

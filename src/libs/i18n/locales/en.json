@@ -1,5 +1,9 @@
 {
   "message": "hello i18n !!",
   "en": "English",
-  "mm": "မြန်မာ"
+  "mm": "မြန်မာ",
+  "userList": "User List",
+  "dashboard": "Dashboard",
+  "modules": "Modules",
+  "home": "Home"
 }

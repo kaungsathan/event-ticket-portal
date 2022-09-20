@@ -1,6 +1,6 @@
 import { reactive, ref } from "vue"
 import { useAuthStore } from "../authStore"
-import { email, required } from "@vuelidate/validators"
+import { required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
 import { useRouter } from "vue-router"
 
@@ -13,12 +13,12 @@ export default function useLogin() {
   const isLoading = ref(false)
 
   const state = reactive({
-    email: "",
+    identifier: "",
     password: ""
   })
 
   const rules = {
-    email: { required, email },
+    identifier: { required },
     password: { required }
   }
 
@@ -38,7 +38,7 @@ export default function useLogin() {
     isLoading.value = true
 
     await store.login({
-      email: state.email.trim(),
+      identifier: state.identifier.trim(),
       password: state.password.trim(),
       isRemember: checked.value
     })
@@ -50,8 +50,6 @@ export default function useLogin() {
       router.replace({ name: "dashboard" })
     } else {
       isLoading.value = false
-      //need to remove
-      router.replace({ name: "dashboard" })
     }
   }
 

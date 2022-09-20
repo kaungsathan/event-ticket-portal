@@ -58,6 +58,7 @@ router.beforeEach((to, from, next) => {
 
   const authStore = useAuthStore()
   const isLoggedIn = authStore.isAuth
+  console.log(canNavigate(to))
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
     if (!isLoggedIn) return next({ name: "login" })

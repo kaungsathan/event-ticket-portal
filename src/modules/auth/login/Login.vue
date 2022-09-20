@@ -27,12 +27,6 @@
           "
         >
           <div class="text-center mb-5">
-            <img
-              src="layout/images/avatar.png"
-              alt="Image"
-              height="50"
-              class="mb-3"
-            />
             <div class="text-900 text-3xl font-medium mb-3">
               Welcome, Isabel!
             </div>
@@ -42,24 +36,24 @@
           <form @submit.prevent="handleSubmit(!v$.$invalid)">
             <div class="w-full md:w-10 mx-auto">
               <label
-                for="email"
+                for="identifier"
                 class="block text-900 text-xl font-medium mb-2"
-                :class="{ 'p-error': v$.email.$invalid && submitted }"
-                >Email</label
+                :class="{ 'p-error': v$.identifier.$invalid && submitted }"
+                >Identifier</label
               >
               <InputText
-                id="email"
-                v-model="v$.email.$model"
-                :class="{ 'p-invalid': v$.email.$invalid && submitted }"
+                id="identifier"
+                v-model="v$.identifier.$model"
+                :class="{ 'p-invalid': v$.identifier.$invalid && submitted }"
                 type="text"
                 class="w-full"
-                placeholder="Email"
+                placeholder="identifier"
                 style="padding: 1rem"
               />
 
-              <span v-if="v$.email.$error && submitted">
+              <span v-if="v$.identifier.$error && submitted">
                 <span
-                  v-for="(error, index) of v$.email.$errors"
+                  v-for="(error, index) of v$.identifier.$errors"
                   id="email-error"
                   :key="index"
                 >
@@ -68,12 +62,12 @@
               </span>
               <small
                 v-else-if="
-                  (v$.email.$invalid && submitted) ||
-                  v$.email.$pending.$response
+                  (v$.identifier.$invalid && submitted) ||
+                  v$.identifier.$pending.$response
                 "
                 class="p-error"
                 >{{
-                  v$.email.required.$message.replace("Value", "Email")
+                  v$.identifier.required.$message.replace("Value", "Identifier")
                 }}</small
               >
 

@@ -10,7 +10,8 @@ export default function useUser() {
 
   const dt = ref() //dt data table
   const lazyParams = ref({
-    first: 0,
+    page: 1,
+    perPage: "10",
     sortField: null,
     sortOrder: null
   })
@@ -48,6 +49,9 @@ export default function useUser() {
     //fetch API
     await store.fetchAll({
       page: lazyParams.value.page,
+      per_page: "",
+      sort_field: "",
+      sort_order: "",
       search: searchQuery.value,
       role: selectedRole.value
     })
@@ -69,6 +73,7 @@ export default function useUser() {
 
   //Pagination
   const onPage = (event) => {
+    console.log(event)
     lazyParams.value = event
     fetchUserList()
   }
