@@ -5,7 +5,7 @@
     <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 80%">
       <div class="col-12 mt-5 xl:mt-0 text-center">
         <img
-          src="layout/images/logo-orange.svg"
+          :src="require('@/assets/images/logo-orange.svg')"
           alt="Sakai logo"
           class="mb-5"
           style="width: 81px; height: 60px"
@@ -49,7 +49,7 @@
               admins.</span
             >
             <img
-              src="layout/images/asset-access.svg"
+              :src="require('@/assets/images/asset-access.svg')"
               alt="Access denied"
               class="mt-5"
               width="80%"

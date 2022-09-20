@@ -1,31 +1,21 @@
 import { ref, onMounted, watch } from "vue"
-import { useUserStore } from "../userStore"
+import { useSubscriptionStore } from "../subscriptionStore"
 import { useConfirm } from "primevue/useconfirm"
 import { useDebounceFn } from "@/utils/debounce"
+import EventBus from "@/libs/AppEventBus"
 
 export default function useUser() {
   const loading = ref(true)
-  const store = useUserStore()
+  const store = useSubscriptionStore()
   const confirm = useConfirm()
 
   const dt = ref() //dt data table
-  const lazyParams = ref({
-    page: 1,
-    perPage: "10",
-    sortField: null,
-    sortOrder: null
-  })
-  const customers = ref()
+  const lazyParams = ref({})
+  const subscriptionList = ref()
   const totalRecords = ref(0)
-  const searchQuery = ref("")
-  const selectedRole = ref("")
+  const search = ref("")
   const menu = ref()
-  const roles = ref([
-    { name: "Admin", code: "admin" },
-    { name: "Manager", code: "manager" },
-    { name: "Staff", code: "staff" },
-    { name: "User", code: "user" }
-  ])
+
   const actionItems = ref([
     {
       label: "Import",
@@ -40,6 +30,7 @@ export default function useUser() {
   ])
 
   onMounted(() => {
+    resetPagination()
     fetchUserList()
   })
 
@@ -48,27 +39,30 @@ export default function useUser() {
 
     //fetch API
     await store.fetchAll({
-      page: lazyParams.value.page,
-      per_page: "",
-      sort_field: "",
-      sort_order: "",
-      search: searchQuery.value,
-      role: selectedRole.value
+      page: (lazyParams.value.page += 1), //default page is 0
+      per_page: lazyParams.value.rows,
+      "order[0][column]": lazyParams.value.sortField,
+      "order[0][order]": lazyParams.value.sortOrder === 1 ? "asc" : "desc",
+      search: search.value
     })
 
     //get response
     const response = store.getAllResponse
     //assign value
     if (response) {
-      customers.value = response.users
-
-      totalRecords.value = customers.value.length
+      subscriptionList.value = response.data.data
+      totalRecords.value = response.data.total
     }
     loading.value = false
   }
 
   const resetPagination = () => {
-    lazyParams.value.page = 0
+    lazyParams.value = {
+      page: 0,
+      rows: dt.value.rows,
+      sortField: null,
+      sortOrder: null
+    }
   }
 
   //Pagination
@@ -80,6 +74,7 @@ export default function useUser() {
   //Sorting
   const onSort = (event) => {
     lazyParams.value = event
+    lazyParams.value.page = 0 // when sorting, page doesn't exist
     fetchUserList()
   }
 
@@ -105,11 +100,16 @@ export default function useUser() {
 
   const deleteUser = async (id) => {
     loading.value = true
-    await store.delete({ id: id })
 
+    await store.delete({ id: id })
     const response = store.getDeleteResponse
 
     if (response) {
+      EventBus.emit("show-toast", {
+        severity: "success",
+        summary: "",
+        detail: "Delete Successfully"
+      })
       fetchUserList()
     }
 
@@ -121,27 +121,21 @@ export default function useUser() {
   }
 
   watch(
-    [searchQuery],
+    [search],
     useDebounceFn(() => {
       resetPagination()
       fetchUserList()
     }, 500)
   )
 
-  watch([selectedRole], () => {
-    fetchUserList()
-  })
-
   return {
     dt,
     lazyParams,
     totalRecords,
-    customers,
+    subscriptionList,
     loading,
     store,
-    searchQuery,
-    selectedRole,
-    roles,
+    search,
     actionItems,
     menu,
     toggleMenu,

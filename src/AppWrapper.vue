@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     showToast(event) {
-      console.log(event)
       this.$toast.add({
         severity: event.severity,
         summary: event.summary,

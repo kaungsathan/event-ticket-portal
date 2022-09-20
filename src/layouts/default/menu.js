@@ -8,6 +8,13 @@ const menuList = [
         to: "/user/list",
         action: "read",
         resource: "user"
+      },
+      {
+        label: "subscriptionList",
+        icon: "pi pi-fw pi-user",
+        to: "/subscription/list",
+        action: "index",
+        resource: "scsc-subscription"
       }
     ]
   },
