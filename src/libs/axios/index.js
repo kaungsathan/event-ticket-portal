@@ -2,6 +2,7 @@ import axios from "axios"
 import EventBus from "@/libs/AppEventBus"
 import JSONbig from "json-bigint"
 import { useAuthStore } from "@/modules/auth/authStore"
+import router from "@/routers"
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_ROOT_API,
@@ -25,8 +26,11 @@ api.interceptors.response.use(
   },
   (err) => {
     if (err.response) {
-      if (err.response.status === 403) {
-        console.log("Session Error")
+      console.log(err)
+      if (err.response.status === 401) {
+        const store = useAuthStore()
+        store.logout()
+        router.push({ name: "login" })
       }
       /**
        * Can see EventBus in AppWrapper(Top Component)
