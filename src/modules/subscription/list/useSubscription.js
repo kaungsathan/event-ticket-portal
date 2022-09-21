@@ -2,6 +2,7 @@ import { ref, onMounted, watch } from "vue"
 import { useSubscriptionStore } from "../subscriptionStore"
 import { useConfirm } from "primevue/useconfirm"
 import { useDebounceFn } from "@/utils/debounce"
+import { multisortConvert } from "@/utils/multisort"
 import EventBus from "@/libs/AppEventBus"
 
 export default function useUser() {
@@ -37,12 +38,18 @@ export default function useUser() {
   const fetchUserList = async () => {
     loading.value = true
 
+    // lazyParams.value.multiSortMeta.forEach((param) => {
+    //   order.push({
+    //     column: param.field,
+    //     order: param.order === 1 ? "asc" : "desc"
+    //   })
+    // })
+
     //fetch API
     await store.fetchAll({
       page: (lazyParams.value.page += 1), //default page is 0
       per_page: lazyParams.value.rows,
-      "order[0][column]": lazyParams.value.sortField,
-      "order[0][order]": lazyParams.value.sortOrder === 1 ? "asc" : "desc",
+      order: multisortConvert(lazyParams.value.multiSortMeta),
       search: search.value
     })
 
@@ -60,14 +67,14 @@ export default function useUser() {
     lazyParams.value = {
       page: 0,
       rows: dt.value.rows,
-      sortField: null,
-      sortOrder: null
+      multiSortMeta: []
     }
   }
 
   //Pagination
   const onPage = (event) => {
     lazyParams.value = event
+    lazyParams.value.multiSortMeta = []
     fetchUserList()
   }
 

@@ -8,6 +8,8 @@
       :value="subscriptionList"
       @page="onPage($event)"
       @sort="onSort($event)"
+      sortMode="multiple"
+      :multiSortMeta="lazyParams.multiSortMeta"
       :totalRecords="totalRecords"
       :rows="1"
       :rows-per-page-options="[1, 2, 3]"

@@ -1,4 +1,5 @@
 import api from "@/libs/axios"
+import qs from "qs"
 
 const endpoints = {
   subscription: "scsc/subscriptions"
@@ -7,7 +8,12 @@ const endpoints = {
 const subscriptionService = {
   getAll: async (params) => {
     try {
-      const result = await api.get(endpoints.subscription, { params: params })
+      const result = await api.get(endpoints.subscription, {
+        params: params,
+        paramsSerializer: (params) => {
+          return qs.stringify(params)
+        }
+      })
       return result.data
     } catch {
       return null
