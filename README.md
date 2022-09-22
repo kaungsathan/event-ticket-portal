@@ -80,7 +80,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Date Formatter
 
-```html
+```html,js
 <template>
   <div>
     <h5>{{ $moment().format("MMMM Do YYYY, h:mm:ss a") }}</h5>
@@ -89,9 +89,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   </div>
 </template>
 
-import { dateLong, dateShort } from "@/utils/formatter" setup() { const
-currentLong = dateLong(new Date()) const currentShort = dateShort(new Date())
-return { currentLong, currentShort } }
+import { dateLong, dateShort } from "@/utils/formatter" 
+
+setup() { 
+  const currentLong = dateLong(new Date()) 
+  const currentShort = dateShort(new Date())
+
+  return { 
+    currentLong, 
+    currentShort 
+  } 
+}
 ```
 
 ## SASS Variables
