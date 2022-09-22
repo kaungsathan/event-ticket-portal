@@ -14,19 +14,28 @@ Vue3 Modular Architecture Portal Starter Kit
 [Husky](https://typicode.github.io/husky/) - Modern native git hooks made easy<br>
 
 ## UI
+
 [PrimeVue](http://www.primefaces.org/primevue/) with [Sakai Admin Template](https://github.com/primefaces/sakai-vue)
 <br>
 
-
 ## Recommended IDE Setup
+
 [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
 ## Recommended Node Version
+
 Node >= 16
 <br>
 
-
 ## Project setup
+
+### Edit .env
+
+```
+VUE_APP_ENV=local
+VUE_APP_ROOT_API=https://yla-api.dev.onenex.dev/api/
+VUE_APP_I18N_FALLBACK_LOCALE=en
+```
 
 ```
 npm install
@@ -56,11 +65,34 @@ npm run lint
 npm run format
 ```
 
+### Login
+
+```
+username: superadmin
+password: password
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 <br>
+
+### Date Formatter
+
+```html
+<template>
+  <div>
+    <h5>{{ $moment().format("MMMM Do YYYY, h:mm:ss a") }}</h5>
+    <h5>{{ currentLong }}</h5>
+    <h5>{{ currentShort }}</h5>
+  </div>
+</template>
+
+import { dateLong, dateShort } from "@/utils/formatter" setup() { const
+currentLong = dateLong(new Date()) const currentShort = dateShort(new Date())
+return { currentLong, currentShort } }
+```
 
 ## SASS Variables
 
