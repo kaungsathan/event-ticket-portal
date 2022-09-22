@@ -5,16 +5,16 @@ const menuList = [
       {
         label: "userList",
         icon: "pi pi-fw pi-user",
-        to: "/user/list",
-        action: "read",
-        resource: "user"
+        to: "/user/list"
+        // action: "read",
+        // resource: "user"
       },
       {
         label: "subscriptionList",
         icon: "pi pi-fw pi-user",
-        to: "/subscription/list",
-        action: "index",
-        resource: "scsc-subscription"
+        to: "/subscription/list"
+        // action: "index",
+        // resource: "scsc-subscription"
       }
     ]
   },
@@ -24,9 +24,9 @@ const menuList = [
       {
         label: "dashboard",
         icon: "pi pi-fw pi-home",
-        to: "/",
-        action: "read",
-        resource: "dashboard"
+        to: "/"
+        // action: "read",
+        // resource: "dashboard"
       }
     ]
   }

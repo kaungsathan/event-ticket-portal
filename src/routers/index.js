@@ -3,8 +3,8 @@ import dashboardRoutes from "@/modules/dashboard/homeRoute"
 import userRoutes from "@/modules/user/userRoute"
 import authRoutes from "@/modules/auth/authRoute"
 import subscriptionRoutes from "@/modules/subscription/subscriptionRoute"
-import { useAuthStore } from "@/modules/auth/authStore"
-import { canNavigate } from "@/libs/acl/routeProtection"
+// import { useAuthStore } from "@/modules/auth/authStore"
+// import { canNavigate } from "@/libs/acl/routeProtection"
 
 const routes = [
   ...dashboardRoutes,
@@ -57,21 +57,20 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0)
+  // const authStore = useAuthStore()
+  // const isLoggedIn = authStore.isAuth
 
-  const authStore = useAuthStore()
-  const isLoggedIn = authStore.isAuth
+  // if (!canNavigate(to)) {
+  //   // Redirect to login if not logged in
+  //   if (!isLoggedIn) return next({ name: "login" })
 
-  if (!canNavigate(to)) {
-    // Redirect to login if not logged in
-    if (!isLoggedIn) return next({ name: "login" })
-
-    // If logged in => not authorized
-    return next({ name: "not-authorized" })
-  }
-  // Redirect if logged in
-  if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-    return next({ name: "dashboard" })
-  }
+  //   // If logged in => not authorized
+  //   return next({ name: "not-authorized" })
+  // }
+  // // Redirect if logged in
+  // if (to.meta.redirectIfLoggedIn && isLoggedIn) {
+  //   return next({ name: "dashboard" })
+  // }
   return next()
 })
 
