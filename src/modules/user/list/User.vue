@@ -24,9 +24,13 @@
         :value="customers"
         @page="onPage($event)"
         @sort="onSort($event)"
+        sortMode="multiple"
+        :multiSortMeta="lazyParams.multiSortMeta"
         :totalRecords="totalRecords"
         :rows="10"
-        :rows-per-page-options="[10, 25, 50]"
+        :rows-per-page-options="[10, 20, 50]"
+        :scrollable="true"
+        scrollHeight="450px"
         paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         current-page-report-template="Showing {first} to {last} of {totalRecords} entries"
         responsive-layout="scroll"
@@ -42,7 +46,7 @@
                 <span class="p-input-icon-left w-full md:w-auto">
                   <i class="pi pi-search" />
                   <InputText
-                    v-model="searchQuery"
+                    v-model="search"
                     placeholder="Keyword Search"
                     class="w-full md:w-auto"
                   />
@@ -65,16 +69,42 @@
               </div>
             </span>
           </div>
+          <div>
+            <MultiSelect
+              :modelValue="selectedColumns"
+              :options="columns"
+              optionLabel="header"
+              @update:modelValue="onToggle"
+              placeholder="Select Columns"
+              style="width: 20em"
+            />
+          </div>
         </template>
         <template #empty> No customers found. </template>
         <template #loading> Loading customers data. Please wait. </template>
-        <Column field="firstName" header="First Name" :sortable="true" />
-        <Column field="age" header="Age" />
-        <Column field="phone" header="Phone Number" />
-        <Column field="email" header="Email" />
-        <Column field="gender" header="Gender" />
-        <Column field="birthDate" header="Date of Birth" />
-        <Column header="Actions">
+        <Column
+          field="firstName"
+          header="First Name"
+          :sortable="true"
+          style="min-width: 150px"
+          frozen
+        />
+
+        <Column
+          v-for="(col, index) of selectedColumns"
+          :field="col.field"
+          :header="col.header"
+          :key="col.field + '_' + index"
+          :sortable="col.sortable"
+          :style="col.style"
+        ></Column>
+
+        <Column
+          header="Actions"
+          style="min-width: 200px"
+          alignFrozen="right"
+          frozen
+        >
           <template #body="{ data }">
             <div class="flex">
               <router-link
@@ -121,6 +151,7 @@ import DataTable from "primevue/datatable"
 import InputText from "primevue/inputtext"
 import Dropdown from "primevue/dropdown"
 import Menu from "primevue/menu"
+import MultiSelect from "primevue/multiselect"
 import ConfirmDialog from "primevue/confirmdialog"
 
 import { defineComponent } from "vue"
@@ -135,6 +166,7 @@ export default defineComponent({
     InputText,
     Dropdown,
     Menu,
+    MultiSelect,
     ConfirmDialog
   },
   setup() {
@@ -142,18 +174,20 @@ export default defineComponent({
       dt,
       lazyParams,
       totalRecords,
-      showDeleteDialog,
-      showConfirmDialog,
       customers,
       loading,
       store,
-      searchQuery,
-      selectedRole,
-      roles,
+      search,
       actionItems,
-      toggleMenu,
       menu,
+      roles,
+      selectedRole,
+      columns,
+      selectedColumns,
+      onToggle,
+      toggleMenu,
       deleteUser,
+      showConfirmDialog,
       onPage,
       onSort
     } = useUser()
@@ -162,18 +196,20 @@ export default defineComponent({
       dt,
       lazyParams,
       totalRecords,
-      showDeleteDialog,
-      showConfirmDialog,
       customers,
       loading,
       store,
-      searchQuery,
-      selectedRole,
-      roles,
+      search,
       actionItems,
-      toggleMenu,
       menu,
+      roles,
+      selectedRole,
+      columns,
+      selectedColumns,
+      onToggle,
+      toggleMenu,
       deleteUser,
+      showConfirmDialog,
       onPage,
       onSort
     }

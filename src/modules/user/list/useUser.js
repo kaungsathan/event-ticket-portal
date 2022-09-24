@@ -2,6 +2,8 @@ import { ref, onMounted, watch } from "vue"
 import { useUserStore } from "../userStore"
 import { useConfirm } from "primevue/useconfirm"
 import { useDebounceFn } from "@/utils/debounce"
+import { multisortConvert } from "@/utils/multisort"
+import EventBus from "@/libs/AppEventBus"
 
 export default function useUser() {
   const loading = ref(true)
@@ -9,23 +11,19 @@ export default function useUser() {
   const confirm = useConfirm()
 
   const dt = ref() //dt data table
-  const lazyParams = ref({
-    page: 1,
-    perPage: "10",
-    sortField: null,
-    sortOrder: null
-  })
+  const lazyParams = ref({})
   const customers = ref()
   const totalRecords = ref(0)
-  const searchQuery = ref("")
-  const selectedRole = ref("")
+  const search = ref("")
   const menu = ref()
+
   const roles = ref([
-    { name: "Admin", code: "admin" },
+    { name: "Admin", code: "amdin" },
     { name: "Manager", code: "manager" },
-    { name: "Staff", code: "staff" },
-    { name: "User", code: "user" }
+    { name: "User", code: "use" }
   ])
+
+  const selectedRole = ref("")
   const actionItems = ref([
     {
       label: "Import",
@@ -39,7 +37,67 @@ export default function useUser() {
     }
   ])
 
+  const columns = ref([
+    { field: "age", header: "Age", sortable: true, style: "min-width: 150px;" },
+    {
+      field: "phone",
+      header: "Phone Number",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "email",
+      header: "Email Address",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "gender",
+      header: "Gender",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "birthDate",
+      header: "Age",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "university",
+      header: "University",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "bloodGroup",
+      header: "Blood Group",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "weight",
+      header: "Weight",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "eyeColor",
+      header: "Eye Color",
+      sortable: true,
+      style: "min-width: 150px;"
+    },
+    {
+      field: "domain",
+      header: "Domain",
+      sortable: true,
+      style: "min-width: 150px;"
+    }
+  ])
+  const selectedColumns = ref(columns.value)
+
   onMounted(() => {
+    resetPagination()
     fetchUserList()
   })
 
@@ -48,12 +106,10 @@ export default function useUser() {
 
     //fetch API
     await store.fetchAll({
-      page: lazyParams.value.page,
-      per_page: "",
-      sort_field: "",
-      sort_order: "",
-      search: searchQuery.value,
-      role: selectedRole.value
+      page: (lazyParams.value.page += 1), //default page is 0
+      per_page: lazyParams.value.rows,
+      order: multisortConvert(lazyParams.value.multiSortMeta),
+      search: search.value
     })
 
     //get response
@@ -61,25 +117,30 @@ export default function useUser() {
     //assign value
     if (response) {
       customers.value = response.users
-
       totalRecords.value = customers.value.length
     }
     loading.value = false
   }
 
   const resetPagination = () => {
-    lazyParams.value.page = 0
+    lazyParams.value = {
+      page: 0,
+      rows: dt.value.rows,
+      multiSortMeta: []
+    }
   }
 
   //Pagination
   const onPage = (event) => {
     lazyParams.value = event
+    lazyParams.value.multiSortMeta = []
     fetchUserList()
   }
 
   //Sorting
   const onSort = (event) => {
     lazyParams.value = event
+    lazyParams.value.page = 0 // when sorting, page doesn't exist
     fetchUserList()
   }
 
@@ -105,15 +166,25 @@ export default function useUser() {
 
   const deleteUser = async (id) => {
     loading.value = true
-    await store.delete({ id: id })
 
+    await store.delete({ id: id })
     const response = store.getDeleteResponse
 
     if (response) {
+      EventBus.emit("show-toast", {
+        severity: "success",
+        summary: "",
+        detail: "Delete Successfully"
+      })
+      resetPagination()
       fetchUserList()
     }
 
     loading.value = false
+  }
+
+  const onToggle = (val) => {
+    selectedColumns.value = columns.value.filter((col) => val.includes(col))
   }
 
   const toggleMenu = (event) => {
@@ -121,16 +192,12 @@ export default function useUser() {
   }
 
   watch(
-    [searchQuery],
+    [search],
     useDebounceFn(() => {
       resetPagination()
       fetchUserList()
     }, 500)
   )
-
-  watch([selectedRole], () => {
-    fetchUserList()
-  })
 
   return {
     dt,
@@ -139,11 +206,14 @@ export default function useUser() {
     customers,
     loading,
     store,
-    searchQuery,
-    selectedRole,
-    roles,
+    search,
     actionItems,
     menu,
+    roles,
+    selectedRole,
+    columns,
+    selectedColumns,
+    onToggle,
     toggleMenu,
     deleteUser,
     showConfirmDialog,
