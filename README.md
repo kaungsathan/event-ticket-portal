@@ -89,16 +89,96 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   </div>
 </template>
 
-import { dateLong, dateShort } from "@/utils/formatter" 
+import { dateLong, dateShort } from "@/utils/formatter"
 
-setup() { 
-  const currentLong = dateLong(new Date()) 
+setup() {
+  const currentLong = dateLong(new Date())
   const currentShort = dateShort(new Date())
 
-  return { 
-    currentLong, 
-    currentShort 
-  } 
+  return {
+    currentLong,
+    currentShort
+  }
+}
+```
+
+### Blood Type Picker
+
+```html,js
+<template>
+  <div>
+    <BloodType v-model="bloodType" />
+  </div>
+</template>
+
+import BloodType from "@/components/BloodType"
+
+setup() {
+  const bloodType = ref("")
+
+  return {
+    bloodType
+  }
+}
+```
+
+### Gender Picker
+
+```html,js
+<template>
+  <div>
+    <Gender v-model="gender" />
+  </div>
+</template>
+
+import Gender from "@/components/Gender"
+
+setup() {
+  const gender = ref("")
+
+  return {
+    gender
+  }
+}
+```
+
+### NRC Picker
+
+```html,js
+<template>
+  <div>
+    <NRC v-model="nrc" />
+  </div>
+</template>
+
+import NRC from "@/components/NRC"
+
+setup() {
+  const nrc = ref("")
+
+  return {
+    nrc
+  }
+}
+```
+
+### Country Phone Code Picker
+
+```html,js
+<template>
+  <div>
+    <CountryPhoneCode v-model="countryCode" />
+  </div>
+</template>
+
+import CountryPhoneCode from "@/components/CountryPhoneCode"
+
+setup() {
+  const countryCode = ref({})
+
+  return {
+    countryCode
+  }
 }
 ```
 
