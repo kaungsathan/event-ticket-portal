@@ -167,14 +167,14 @@ setup() {
 ```html,js
 <template>
   <div>
-    <CountryPhoneCode v-model="countryCode" />
+    <CountryPhoneCode v-model="countryCode" defaultCountryCode="+95" />
   </div>
 </template>
 
 import CountryPhoneCode from "@/components/CountryPhoneCode"
 
 setup() {
-  const countryCode = ref({})
+  const countryCode = ref()
 
   return {
     countryCode

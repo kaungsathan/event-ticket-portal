@@ -35,12 +35,22 @@ export default defineComponent({
   name: "CountryPhoneCode",
   components: { Dropdown },
   emits: ["update:modelValue"],
+  props: {
+    defaultCountryCode: String
+  },
   setup(props, { emit }) {
     const countryPhoneCode = ref({})
     const optionsCountryPhoneCode = ref([])
 
     onMounted(() => {
       optionsCountryPhoneCode.value = countryCode
+      if (props.defaultCountryCode) {
+        optionsCountryPhoneCode.value.forEach((country) => {
+          if (country.code === props.defaultCountryCode) {
+            countryPhoneCode.value = country
+          }
+        })
+      }
     })
 
     watch([countryPhoneCode], () => {
