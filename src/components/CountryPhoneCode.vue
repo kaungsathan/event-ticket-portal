@@ -44,6 +44,10 @@ export default defineComponent({
 
     onMounted(() => {
       optionsCountryPhoneCode.value = countryCode
+      fetchDefaultCountryCode()
+    })
+
+    const fetchDefaultCountryCode = () => {
       if (props.defaultCountryCode) {
         optionsCountryPhoneCode.value.forEach((country) => {
           if (country.code === props.defaultCountryCode) {
@@ -51,11 +55,18 @@ export default defineComponent({
           }
         })
       }
-    })
+    }
 
     watch([countryPhoneCode], () => {
       emit("update:modelValue", countryPhoneCode.value)
     })
+
+    watch(
+      () => props.defaultCountryCode,
+      () => {
+        fetchDefaultCountryCode()
+      }
+    )
 
     return {
       countryPhoneCode,
