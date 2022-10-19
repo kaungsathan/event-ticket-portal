@@ -23,8 +23,10 @@ function loadLocaleMessages() {
   return messages
 }
 
-export default createI18n({
+const i18n = createI18n({
   locale: Cookies.get("locale") || process.env.VUE_APP_I18N_FALLBACK_LOCALE,
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })
+
+export default i18n

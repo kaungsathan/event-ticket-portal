@@ -2,7 +2,7 @@
   <Dropdown
     inputId="gender"
     v-model="gender"
-    :options="optionsBloodType"
+    :options="optionsGenderType"
     class="w-full"
   />
 </template>
@@ -18,7 +18,7 @@ export default defineComponent({
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const gender = ref("")
-    const optionsBloodType = ref(["MALE", "FEMALE", "PREFER NOT TO SAY"])
+    const optionsGenderType = ref(["MALE", "FEMALE", "PREFER NOT TO SAY"])
 
     watch([gender], () => {
       emit("update:modelValue", gender.value)
@@ -26,7 +26,7 @@ export default defineComponent({
 
     return {
       gender,
-      optionsBloodType
+      optionsGenderType
     }
   }
 })

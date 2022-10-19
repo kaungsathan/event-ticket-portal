@@ -4,7 +4,7 @@ const dashboardRoutes = [
     name: "dashboard",
     component: () => import("@/modules/dashboard/Home.vue"),
     meta: {
-      layout: "default",
+      layout: "collapse",
       resource: "dashboard",
       action: "read"
     }

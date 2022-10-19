@@ -6,7 +6,7 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "read",
-      layout: "default"
+      layout: "collapse"
     }
   },
   {
@@ -16,7 +16,7 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "create",
-      layout: "default"
+      layout: "collapse"
     }
   },
   {
@@ -26,7 +26,7 @@ const userRoutes = [
     meta: {
       resource: "user",
       action: "edit",
-      layout: "default"
+      layout: "collapse"
     }
   }
 ]

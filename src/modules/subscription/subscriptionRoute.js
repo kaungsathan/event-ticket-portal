@@ -6,7 +6,7 @@ const subscriptionRoutes = [
     meta: {
       resource: "scsc-subscription",
       action: "index",
-      layout: "default"
+      layout: "collapse"
     }
   }
 ]

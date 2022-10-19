@@ -9,7 +9,7 @@
   >
     <template #value="slotProps">
       <div class="country-item flex relative" v-if="slotProps.value">
-        <img :class="'flag flag-' + slotProps.value.iso.toLowerCase()" />
+        <img :class="'flag flag-' + slotProps.value.iso2" />
         <div>({{ slotProps.value.code }})</div>
       </div>
       <span v-else>
@@ -18,7 +18,7 @@
     </template>
     <template #option="slotProps">
       <div class="country-item flex relative">
-        <img :class="'flag flag-' + slotProps.option.iso.toLowerCase()" />
+        <img :class="'flag flag-' + slotProps.option.iso2" />
         <div>{{ slotProps.option.name }}</div>
       </div>
     </template>
