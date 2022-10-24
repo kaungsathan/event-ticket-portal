@@ -1,14 +1,13 @@
 <template>
   <div class="grid m-0 p-0">
-    <div class="col-2 pr-1 pl-0 py-0">
+    <div class="p-inputgroup nrc-group">
       <Dropdown
         inputId="prefix"
         v-model="prefix"
         :options="optionsPrefix"
-        class="w-full nrc"
+        class="w-full nrc border-none w-2"
       />
-    </div>
-    <div class="col-4 pr-1 pl-0 py-0">
+
       <Dropdown
         inputId="town"
         v-model="town"
@@ -16,51 +15,73 @@
         optionLabel="name"
         optionValue="name"
         :filter="true"
-        class="w-full town"
+        class="w-full town border-none w-4"
       />
-    </div>
-    <div class="col-2 pr-1 pl-0 py-0">
+
       <Dropdown
         inputId="type"
         v-model="type"
         :options="optionsType"
-        class="w-full type"
+        class="w-full type border-none w-3"
       />
-    </div>
-    <div class="col-4 pr-0 pl-0 py-0">
-      <InputMask
-        id="basic"
-        mask="999999"
+
+      <InputText
         v-model="number"
         placeholder="000000"
-        slotChar=""
-        class="w-full"
+        class="w-full border-none w-3"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, ref, watch, onMounted } from "vue"
 
 import Dropdown from "primevue/dropdown"
-import InputMask from "primevue/inputmask"
+import InputText from "primevue/inputtext"
 
 import nrcData from "@/assets/data/nrcData"
 
 export default defineComponent({
   name: "NRC",
-  components: { Dropdown, InputMask },
+  components: { Dropdown, InputText },
+  props: {
+    modelValue: {
+      type: String,
+      default: "",
+      required: true
+    }
+  },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const prefix = ref()
+    const prefix = ref("")
     const town = ref("")
     const type = ref("")
     const number = ref("")
     const optionsPrefix = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
     const optionsTown = ref([])
-    const optionsType = ref(["(N)", "(P)", "(E)", "(C)"])
+    const optionsType = ref(["N", "P", "E", "C"])
     const nrcNumber = ref("")
+
+    const nrcRegExp = new RegExp(
+      /^([0-9]{1,2})\/([A-Z]{5,8})\(([N,P,E,C])\)([0-9]{6})$/
+    )
+
+    onMounted(() => {
+      getNRCData()
+    })
+
+    const getNRCData = () => {
+      if (props.modelValue) {
+        const result = props.modelValue.split(nrcRegExp).filter(Boolean) //to remove empty string from array
+        if (result && result.length === 4) {
+          prefix.value = parseInt(result[0])
+          town.value = result[1]
+          type.value = result[2]
+          number.value = parseInt(result[3])
+        }
+      }
+    }
 
     watch(prefix, () => {
       optionsTown.value = []
@@ -72,9 +93,16 @@ export default defineComponent({
     })
 
     watch([prefix, town, type, number], () => {
-      nrcNumber.value = `${prefix.value}/${town.value}${type.value}${number.value}`
+      nrcNumber.value = `${prefix.value}/${town.value}(${type.value})${number.value}`
       emit("update:modelValue", nrcNumber.value)
     })
+
+    watch(
+      () => props.modelValue,
+      () => {
+        getNRCData()
+      }
+    )
 
     return {
       nrcData,
@@ -90,13 +118,28 @@ export default defineComponent({
 })
 </script>
 <style scope>
+.nrc-group {
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+}
+.nrc-group:focus,
+.nrc-group:hover {
+  outline: 0 none;
+  outline-offset: 0;
+  border-color: var(--primary-color);
+}
 .town .p-dropdown-trigger {
-  display: none;
+  /* display: none; */
+  width: auto !important;
 }
 .type .p-dropdown-trigger {
-  display: none;
+  /* display: none; */
+  width: auto !important;
 }
 .nrc .p-dropdown-trigger {
-  display: none;
+  /* display: none; */
+  width: auto !important;
 }
 </style>

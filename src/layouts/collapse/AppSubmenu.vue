@@ -38,14 +38,18 @@
             role="menuitem"
             @click="onMenuItemClick($event, item, i)"
           >
-            <i :class="item.icon" style="font-size: 1.2rem" />
+            <i :class="item.icon" />
             <span
               class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
               >{{ $t(`${item.label}`) }}</span
             >
             <i
               v-if="item.items"
-              class="pi pi-fw pi-plus menuitem-toggle-icon"
+              :class="
+                activeIndex === i
+                  ? 'ri-arrow-up-s-line ri-lg menuitem-toggle-icon'
+                  : 'ri-arrow-down-s-line ri-lg menuitem-toggle-icon'
+              "
             />
             <Badge v-if="item.badge" :value="item.badge" />
           </router-link>
@@ -67,7 +71,11 @@
             >
             <i
               v-if="item.items"
-              class="pi pi-fw pi-plus menuitem-toggle-icon"
+              :class="
+                activeIndex === i
+                  ? 'ri-arrow-up-s-line ri-lg menuitem-toggle-icon'
+                  : 'ri-arrow-down-s-line ri-lg menuitem-toggle-icon'
+              "
             />
             <Badge v-if="item.badge" :value="item.badge" />
           </a>

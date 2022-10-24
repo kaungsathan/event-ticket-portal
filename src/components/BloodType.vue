@@ -1,31 +1,32 @@
 <template>
   <Dropdown
     inputId="bloodType"
-    v-model="bloodType"
+    :modelValue="modelValue"
+    @change="$emit('update:modelValue', $event.value)"
     :options="optionsBloodType"
     class="w-full"
   />
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, ref } from "vue"
 
 import Dropdown from "primevue/dropdown"
 
 export default defineComponent({
   name: "BloodType",
   components: { Dropdown },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const bloodType = ref("")
+  props: {
+    modelValue: {
+      type: String,
+      default: "",
+      required: true
+    }
+  },
+  setup() {
     const optionsBloodType = ref(["A", "B", "O", "AB"])
 
-    watch([bloodType], () => {
-      emit("update:modelValue", bloodType.value)
-    })
-
     return {
-      bloodType,
       optionsBloodType
     }
   }

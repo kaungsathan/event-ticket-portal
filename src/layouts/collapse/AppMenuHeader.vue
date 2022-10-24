@@ -2,8 +2,11 @@
   <div class="layout-collapse-menu-header">
     <div class="flex align-items-center justify-content-between">
       <router-link :to="{ name: 'dashboard' }" class="w-full">
-        <div class="flex justify-content-start">
+        <div class="flex justify-content-start align-items-center">
           <img class="menu-collapse-logo" alt="Logo" :src="topbarImage()" />
+          <span class="menu-collapse-label ml-3 text-2xl text-bold"
+            >Onenex
+          </span>
         </div>
       </router-link>
       <button
@@ -13,7 +16,7 @@
       >
         <i
           class="pi"
-          :class="menuActive ? 'pi-ellipsis-h' : 'pi-ellipsis-v'"
+          :class="menuActive ? 'pi-ellipsis-v' : 'pi-ellipsis-h'"
           style="font-size: 1.5rem; color: var(--text-color)"
         />
       </button>

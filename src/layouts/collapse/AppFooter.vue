@@ -1,9 +1,7 @@
 <template>
   <div class="layout-footer">
     <img alt="Logo" :src="footerImage()" height="20" class="mr-2" />
-    <span class="font-medium ml-2"
-      >Onenex © {{ new Date().getFullYear() }}</span
-    >
+    <span class="font-medium ml-2">Heal © {{ new Date().getFullYear() }}</span>
   </div>
 </template>
 

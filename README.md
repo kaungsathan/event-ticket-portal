@@ -113,6 +113,7 @@ setup() {
 
 import BloodType from "@/components/BloodType"
 
+components: { BloodType },
 setup() {
   const bloodType = ref("")
 
@@ -133,6 +134,7 @@ setup() {
 
 import Gender from "@/components/Gender"
 
+components: { Gender },
 setup() {
   const gender = ref("")
 
@@ -153,8 +155,9 @@ setup() {
 
 import NRC from "@/components/NRC"
 
+components: { NRC },
 setup() {
-  const nrc = ref("")
+  const nrc = ref("6/HTAWANA(N)000000")
 
   return {
     nrc
@@ -162,22 +165,30 @@ setup() {
 }
 ```
 
-### Country Phone Code Picker
+### Phone Number
 
-```html,js
+````html,js
 <template>
   <div>
-    <CountryPhoneCode v-model="countryCode" defaultCountryCode="+95" />
+    <PhoneNumber
+      id="nrc"
+      v-model:countryCode="countryCode"
+      v-model:phoneNumber="phoneNumber"
+    >
+    </PhoneNumber>
   </div>
 </template>
 
-import CountryPhoneCode from "@/components/CountryPhoneCode"
+import PhoneNumber from "@/components/PhoneNumber.vue"
 
+components: { PhoneNumber },
 setup() {
-  const countryCode = ref()
+  const countryCode = ref("+95")
+  const phoneNumber = ref("092423239")
 
   return {
-    countryCode
+    phoneNumber,
+    countryCode,
   }
 }
 ```
@@ -192,4 +203,4 @@ In case you'd like to customize the layout variables, open **\_variables.scss** 
 $fontSize: 1rem;
 $borderRadius: 12px;
 $transitionDuration: 0.2s;
-```
+````

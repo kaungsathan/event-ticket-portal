@@ -10,7 +10,7 @@
     </div>
     <AppTopBar @menu-toggle="onMenuToggle" />
     <div class="layout-collapse-main-container">
-      <div class="layout-collapse-main mt-2">
+      <div class="layout-collapse-main">
         <router-view />
       </div>
       <AppFooter />

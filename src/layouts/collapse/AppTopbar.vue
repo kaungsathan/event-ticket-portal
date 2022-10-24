@@ -4,7 +4,7 @@
       class="p-link layout-collapse-menu-button layout-collapse-topbar-button ml-0 lg:hidden"
       @click="onMenuToggle"
     >
-      <i class="pi pi-bars" />
+      <i class="ri-menu-line ri-lg" />
     </button>
 
     <ul class="layout-collapse-topbar-menu flex origin-top">
@@ -30,7 +30,11 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
   name: "AppTopbar",
-  components: { AppLocale, AppThemeToggle, AppUserProfile },
+  components: {
+    AppLocale,
+    AppThemeToggle,
+    AppUserProfile
+  },
   setup() {},
   methods: {
     onMenuToggle(event) {
