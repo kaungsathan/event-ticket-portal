@@ -78,6 +78,52 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 <br>
 
+### CASL
+#### CASL Format
+```json
+[{
+  action: "read",
+  subject: "user"
+},
+{
+  action: "edit",
+  subject: "user"
+},
+{
+  action: "create",
+  subject: "user"
+},
+{
+  action: "delete",
+  subject: "user"
+}]
+```
+
+#### How to use CASL in Vue Template
+```html
+<template>
+  <div>
+    <div v-if="$can('read', 'user')">Can Read User<div>
+    <div v-if="$can('edit', 'user')">Can Edit User<div>
+    <div v-if="$can('create', 'user')">Can Create User<div>
+    <div v-if="$can('delete', 'user')">Can Delete User<div>
+  </div>
+</template>
+```
+
+#### How to use CASL in Vue Router
+```json
+{
+  path: "/user/list",
+  name: "user",
+  component: () => import("@/modules/user/list/User.vue"),
+  meta: {
+    resource: "user",
+    action: "read",
+  }
+},
+```
+
 ### Date Formatter
 
 ```html,js
@@ -125,7 +171,7 @@ setup() {
 
 ### Gender Picker
 
-```html,js
+```html,js****
 <template>
   <div>
     <Gender v-model="gender" />
