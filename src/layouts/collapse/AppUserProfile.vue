@@ -14,7 +14,7 @@
       <div class="text-sm mt-1">Userrole</div>
     </div>
     <i
-      class="ri-arrow-down-s-line ri-lg ml-2 hidden lg:block"
+      class="pi pi-angle-down ml-2 hidden lg:block"
       style="color: var(--primary-color)"
     ></i>
   </div>
