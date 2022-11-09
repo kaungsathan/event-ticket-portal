@@ -157,14 +157,13 @@ import Button from "primevue/button"
 import InputText from "primevue/inputtext"
 
 import { defineComponent } from "vue"
-import useNewUser from "./useNewUser"
+import useEdit from "./useEdit"
 
 export default defineComponent({
-  name: "NewUser",
+  name: "EditUser",
   components: { BlockUI, Button, InputText },
   setup() {
-    const { isLoading, state, v$, handleSubmit, submitted } = useNewUser()
-
+    const { isLoading, state, v$, handleSubmit, submitted } = useEdit()
     return {
       isLoading,
       state,

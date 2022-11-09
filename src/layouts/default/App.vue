@@ -25,7 +25,7 @@ import AppMenu from "./AppMenu.vue"
 // import AppConfig from "./AppConfig.vue"
 import AppFooter from "./AppFooter.vue"
 
-import menuList from "./menu"
+import menuList from "@/menu/menu"
 
 export default {
   components: {

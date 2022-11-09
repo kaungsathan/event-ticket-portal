@@ -1,10 +1,10 @@
-const userRoutes = [
+const moduleRoutes = [
   {
     path: "/user/list",
     name: "userList",
-    component: () => import("@/modules/user/list/User.vue"),
+    component: () => import("@/modules/user/list/List.vue"),
     meta: {
-      resource: "user",
+      subject: "user",
       action: "read",
       layout: "collapse"
     }
@@ -12,9 +12,9 @@ const userRoutes = [
   {
     path: "/user/new",
     name: "newUser",
-    component: () => import("@/modules/user/entry/NewUser.vue"),
+    component: () => import("@/modules/user/entry/New.vue"),
     meta: {
-      resource: "user",
+      subject: "user",
       action: "create",
       layout: "collapse"
     }
@@ -22,13 +22,13 @@ const userRoutes = [
   {
     path: "/user/:id/edit",
     name: "editUser",
-    component: () => import("@/modules/user/entry/EditUser.vue"),
+    component: () => import("@/modules/user/entry/Edit.vue"),
     meta: {
-      resource: "user",
+      subject: "user",
       action: "edit",
       layout: "collapse"
     }
   }
 ]
 
-export default userRoutes
+export default moduleRoutes

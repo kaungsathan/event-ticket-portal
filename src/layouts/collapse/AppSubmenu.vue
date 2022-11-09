@@ -142,8 +142,8 @@ export default {
       })
     },
     visible(item) {
-      if (item.resource) {
-        return ability.can(item.action || "read", item.resource)
+      if (item.subject) {
+        return ability.can(item.action || "read", item.subject)
       }
       return true
     }

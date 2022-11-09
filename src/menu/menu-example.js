@@ -7,7 +7,7 @@ const menuList = [
         icon: "pi pi-fw pi-user",
         to: "/user/list",
         action: "read",
-        resource: "user"
+        subject: "user"
       }
     ]
   },
@@ -19,14 +19,14 @@ const menuList = [
         icon: "pi pi-fw pi-home",
         to: "/",
         action: "read",
-        resource: "home"
+        subject: "home"
       },
       {
         label: "Locale",
         icon: "pi pi-fw pi-globe",
         to: "/locale",
         action: "read",
-        resource: "locale"
+        subject: "locale"
       }
     ]
   },

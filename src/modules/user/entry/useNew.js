@@ -1,16 +1,13 @@
 import { reactive, ref, onMounted } from "vue"
 import { email, required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
-import { useUserStore } from "../userStore"
-import { useRoute, useRouter } from "vue-router"
+import { useStore } from "../store"
+import { useRouter } from "vue-router"
 
-export default function useEditUser() {
-  const store = useUserStore()
-  const route = useRoute()
+export default function useNew() {
+  const store = useStore()
   const router = useRouter()
-
   const isLoading = ref(false)
-
   const state = reactive({
     name: "",
     email: "",
@@ -33,29 +30,7 @@ export default function useEditUser() {
 
   const v$ = useVuelidate(rules, state)
 
-  onMounted(() => {
-    fetchUser()
-  })
-
-  const fetchUser = async () => {
-    isLoading.value = true
-
-    await store.fetchOne({
-      id: route.params.id
-    })
-
-    const response = store.getOneResponse
-    if (response) {
-      state.name = response.firstName
-      state.email = response.email
-      state.age = response.age
-      state.phoneNumber = response.phone
-      state.gender = response.gender
-      state.birthDate = response.birthDate
-    }
-
-    isLoading.value = false
-  }
+  onMounted(() => {})
 
   const handleSubmit = (isFormValid) => {
     submitted.value = true
@@ -64,13 +39,12 @@ export default function useEditUser() {
       return
     }
 
-    updateUser()
+    addUser()
   }
-  const updateUser = async () => {
+  const addUser = async () => {
     isLoading.value = true
 
-    await store.update({
-      id: route.params.id,
+    await store.add({
       name: state.name,
       email: state.email,
       age: state.age,
@@ -79,7 +53,7 @@ export default function useEditUser() {
       birthDate: state.birthDate
     })
 
-    const response = store.getUpdateResponse
+    const response = store.addResponse
 
     if (response) {
       router.push({ name: "userList" })

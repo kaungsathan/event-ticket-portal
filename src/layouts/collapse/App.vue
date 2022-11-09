@@ -27,7 +27,7 @@ import AppTopBar from "./AppTopbar.vue"
 import AppMenu from "./AppMenu.vue"
 import AppMenuHeader from "./AppMenuHeader.vue"
 import AppFooter from "./AppFooter.vue"
-import menuList from "./menu"
+import menuList from "@/menu/menu"
 
 export default {
   components: {

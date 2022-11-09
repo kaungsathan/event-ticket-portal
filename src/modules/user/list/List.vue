@@ -40,7 +40,7 @@
           <div
             class="flex flex-wrap justify-content-between align-items-center"
           >
-            <h5 class="m-0">{{ $t("customer") }}</h5>
+            <h5 class="m-0">{{ $t("user") }}</h5>
             <span class="p-input-icon-left">
               <div class="mt-3 md:mt-0">
                 <span class="p-input-icon-left w-full md:w-auto">
@@ -69,16 +69,6 @@
               </div>
             </span>
           </div>
-          <div>
-            <MultiSelect
-              :modelValue="selectedColumns"
-              :options="columns"
-              optionLabel="header"
-              @update:modelValue="onToggle"
-              placeholder="Select Columns"
-              style="width: 20em"
-            />
-          </div>
         </template>
         <template #empty> No customers found. </template>
         <template #loading> Loading customers data. Please wait. </template>
@@ -86,22 +76,57 @@
           field="firstName"
           header="First Name"
           :sortable="true"
-          style="min-width: 150px"
+          style="min-width: 15rem"
           frozen
+        >
+          <template #body="slotProps">
+            <Avatar
+              :image="slotProps.data.image"
+              size="medium"
+              shape="circle"
+              class="mr-2"
+            />
+            {{ slotProps.data.firstName }}
+          </template>
+        </Column>
+        <Column
+          field="age"
+          header="Age"
+          :sortable="true"
+          style="min-width: 5rem"
         />
 
         <Column
-          v-for="(col, index) of selectedColumns"
-          :field="col.field"
-          :header="col.header"
-          :key="col.field + '_' + index"
-          :sortable="col.sortable"
-          :style="col.style"
-        ></Column>
+          field="phone"
+          header="Phone Number"
+          :sortable="true"
+          style="min-width: 10rem"
+        />
+
+        <Column
+          field="email"
+          header="Email Address"
+          :sortable="true"
+          style="min-width: 10rem"
+        />
+
+        <Column
+          field="gender"
+          header="Gender"
+          :sortable="true"
+          style="min-width: 10rem"
+        >
+          <template #body="slotProps">
+            <Chip
+              :label="slotProps.data.gender.toUpperCase()"
+              class="mr-2"
+            ></Chip>
+          </template>
+        </Column>
 
         <Column
           header="Actions"
-          style="min-width: 200px"
+          style="min-width: 10rem"
           alignFrozen="right"
           frozen
         >
@@ -145,28 +170,30 @@
 </template>
 
 <script>
+import Avatar from "primevue/avatar"
 import Button from "primevue/button"
 import Column from "primevue/column"
+import Chip from "primevue/chip"
 import DataTable from "primevue/datatable"
 import InputText from "primevue/inputtext"
 import Dropdown from "primevue/dropdown"
 import Menu from "primevue/menu"
-import MultiSelect from "primevue/multiselect"
 import ConfirmDialog from "primevue/confirmdialog"
 
 import { defineComponent } from "vue"
-import useUser from "./useUser"
+import useList from "./useList"
 
 export default defineComponent({
   name: "UserList",
   components: {
+    Avatar,
     Button,
     Column,
+    Chip,
     DataTable,
     InputText,
     Dropdown,
     Menu,
-    MultiSelect,
     ConfirmDialog
   },
   setup() {
@@ -179,18 +206,15 @@ export default defineComponent({
       store,
       search,
       actionItems,
-      menu,
       roles,
       selectedRole,
-      columns,
-      selectedColumns,
-      onToggle,
+      menu,
       toggleMenu,
       deleteUser,
       showConfirmDialog,
       onPage,
       onSort
-    } = useUser()
+    } = useList()
 
     return {
       dt,
@@ -201,12 +225,9 @@ export default defineComponent({
       store,
       search,
       actionItems,
-      menu,
       roles,
       selectedRole,
-      columns,
-      selectedColumns,
-      onToggle,
+      menu,
       toggleMenu,
       deleteUser,
       showConfirmDialog,
@@ -221,7 +242,6 @@ export default defineComponent({
 </i18n>
 
 <style lang="scss" scoped>
-@import "@/assets/demo/badges.scss";
 img {
   vertical-align: middle;
 }

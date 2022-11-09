@@ -1,5 +1,4 @@
 import api from "@/libs/axios"
-// import Cookies from "js-cookie"
 
 const endpoints = {
   login: "auth/login"

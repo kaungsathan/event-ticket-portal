@@ -10,7 +10,7 @@
   --primary-color: #a5b4fc;
   --primary-color-text: #1c2127;
   --font-family: MuseoSans Pyidaungsu, sans-serif;
-  --surface-0: #040d19;
+  --surface-0: #071426;
   --surface-50: #1d2530;
   --surface-100: #363d47;
   --surface-200: #4f565e;
@@ -2875,10 +2875,10 @@
   border-radius: 0;
 }
 .p-datatable .p-datatable-header {
-  background: #071426;
+  /* background: #071426; */
   color: rgba(255, 255, 255, 0.6);
-  border: 1px solid #0b213f;
-  border-width: 0 0 1px 0;
+  /* border: 1px solid #0b213f; */
+  /* border-width: 0 0 1px 0; */
   padding: 1rem 1rem;
   font-weight: 700;
 }
@@ -3144,7 +3144,7 @@
   border-radius: 0;
 }
 .p-dataview .p-paginator-bottom {
-  border-width: 0 0 1px 0;
+  /* border-width: 0 0 1px 0; */
   border-radius: 0;
 }
 .p-dataview .p-dataview-header {

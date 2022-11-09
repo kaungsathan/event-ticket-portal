@@ -2,13 +2,13 @@ import api from "@/libs/axios"
 import qs from "qs"
 
 const endpoints = {
-  subscription: "scsc/subscriptions"
+  user: "https://dummyjson.com/users"
 }
 
-const subscriptionService = {
+const service = {
   getAll: async (params) => {
     try {
-      const result = await api.get(endpoints.subscription, {
+      const result = await api.get(endpoints.user, {
         params: params,
         paramsSerializer: (params) => {
           return qs.stringify(params)
@@ -21,7 +21,7 @@ const subscriptionService = {
   },
   getOne: async (params) => {
     try {
-      const result = await api.get(`${endpoints.subscription}/${params.id}`)
+      const result = await api.get(`${endpoints.user}/${params.id}`)
       return result.data
     } catch {
       return null
@@ -29,10 +29,7 @@ const subscriptionService = {
   },
   update: async (params) => {
     try {
-      const result = await api.put(
-        `${endpoints.subscription}/${params.id}`,
-        params
-      )
+      const result = await api.put(`${endpoints.user}/${params.id}`, params)
       return result.data
     } catch {
       return null
@@ -40,7 +37,7 @@ const subscriptionService = {
   },
   add: async (params) => {
     try {
-      const result = await api.post(endpoints.subscription, params)
+      const result = await api.post(endpoints.user, params)
       return result.data
     } catch {
       return null
@@ -48,7 +45,7 @@ const subscriptionService = {
   },
   delete: async (params) => {
     try {
-      const result = await api.delete(`${endpoints.subscription}/${params.id}`)
+      const result = await api.delete(`${endpoints.user}/${params.id}`)
       return result.data
     } catch {
       return null
@@ -56,4 +53,4 @@ const subscriptionService = {
   }
 }
 
-export { subscriptionService }
+export { service }

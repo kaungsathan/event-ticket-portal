@@ -4,7 +4,7 @@
       class="p-link layout-collapse-menu-button layout-collapse-topbar-button ml-0 lg:hidden"
       @click="onMenuToggle"
     >
-      <i class="ri-menu-line ri-lg" />
+      <i class="pi pi-bars" />
     </button>
 
     <ul class="layout-collapse-topbar-menu flex origin-top">

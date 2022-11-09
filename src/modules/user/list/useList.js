@@ -1,22 +1,29 @@
 import { ref, onMounted, watch } from "vue"
-import { useSubscriptionStore } from "../subscriptionStore"
+import { useStore } from "../store"
 import { useConfirm } from "primevue/useconfirm"
 import { useDebounceFn } from "@/utils/debounce"
 import { multisortConvert } from "@/utils/multisort"
 import EventBus from "@/libs/AppEventBus"
 
-export default function useUser() {
+export default function useList() {
   const loading = ref(true)
-  const store = useSubscriptionStore()
+  const store = useStore()
   const confirm = useConfirm()
+  const menu = ref()
 
   const dt = ref() //dt data table
   const lazyParams = ref({})
-  const subscriptionList = ref()
+  const customers = ref()
   const totalRecords = ref(0)
   const search = ref("")
-  const menu = ref()
 
+  const roles = ref([
+    { name: "Admin", code: "amdin" },
+    { name: "Manager", code: "manager" },
+    { name: "User", code: "use" }
+  ])
+
+  const selectedRole = ref("")
   const actionItems = ref([
     {
       label: "Import",
@@ -38,13 +45,6 @@ export default function useUser() {
   const fetchUserList = async () => {
     loading.value = true
 
-    // lazyParams.value.multiSortMeta.forEach((param) => {
-    //   order.push({
-    //     column: param.field,
-    //     order: param.order === 1 ? "asc" : "desc"
-    //   })
-    // })
-
     //fetch API
     await store.fetchAll({
       page: (lazyParams.value.page += 1), //default page is 0
@@ -57,8 +57,8 @@ export default function useUser() {
     const response = store.getAllResponse
     //assign value
     if (response) {
-      subscriptionList.value = response.data.data
-      totalRecords.value = response.data.total
+      customers.value = response.users
+      totalRecords.value = customers.value.length
     }
     loading.value = false
   }
@@ -117,6 +117,7 @@ export default function useUser() {
         summary: "",
         detail: "Delete Successfully"
       })
+      resetPagination()
       fetchUserList()
     }
 
@@ -135,15 +136,22 @@ export default function useUser() {
     }, 500)
   )
 
+  watch([selectedRole], () => {
+    resetPagination()
+    fetchUserList()
+  })
+
   return {
     dt,
     lazyParams,
     totalRecords,
-    subscriptionList,
+    customers,
     loading,
     store,
     search,
     actionItems,
+    roles,
+    selectedRole,
     menu,
     toggleMenu,
     deleteUser,

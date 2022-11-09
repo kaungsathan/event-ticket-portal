@@ -124,8 +124,8 @@ export default {
       })
     },
     visible(item) {
-      if (item.resource) {
-        return ability.can(item.action, item.resource)
+      if (item.subject) {
+        return ability.can(item.action, item.subject)
       }
       return true
       // return typeof item.visible === "function" ? item.visible() : item.visible !== false

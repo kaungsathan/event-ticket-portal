@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
-import dashboardRoutes from "@/modules/dashboard/homeRoute"
-import userRoutes from "@/modules/user/userRoute"
+import dashboardRoutes from "@/modules/dashboard/route"
+import userRoutes from "@/modules/user/route"
 import authRoutes from "@/modules/auth/authRoute"
-import subscriptionRoutes from "@/modules/subscription/subscriptionRoute"
 // import { useAuthStore } from "@/modules/auth/authStore"
 // import { canNavigate } from "@/libs/acl/routeProtection"
 
@@ -10,7 +9,6 @@ const routes = [
   ...dashboardRoutes,
   ...authRoutes,
   ...userRoutes,
-  ...subscriptionRoutes,
   {
     path: "/error-404",
     name: "error404",

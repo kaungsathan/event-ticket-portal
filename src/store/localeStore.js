@@ -1,11 +1,10 @@
 import { defineStore } from "pinia"
-import Cookies from "js-cookie"
 
 export const useLocaleStore = defineStore({
   id: "useLocaleStore",
   state: () => ({
-    currentLocale: Cookies.get("locale") || "en",
-    currentTheme: Cookies.get("theme") || "lara-light-indigo"
+    currentLocale: localStorage.getItem("locale") || "en",
+    currentTheme: localStorage.getItem("theme") || "lara-light-indigo"
   }),
 
   getters: {
@@ -20,11 +19,11 @@ export const useLocaleStore = defineStore({
   actions: {
     async setLanguage(locale) {
       this.currentLocale = locale
-      Cookies.set("locale", locale)
+      localStorage.setItem("locale", locale)
     },
     async setTheme(theme) {
       this.currentTheme = theme
-      Cookies.set("theme", theme)
+      localStorage.setItem("theme", theme)
     }
   }
 })
