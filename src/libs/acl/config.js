@@ -1,27 +1,23 @@
 export const initialAbility = [
   {
     action: "read",
-    subject: "user"
+    subject: "users"
   },
   {
     action: "edit",
-    subject: "user"
+    subject: "users"
   },
   {
     action: "create",
-    subject: "user"
+    subject: "users"
   },
   {
     action: "delete",
-    subject: "user"
+    subject: "users"
   },
   {
     action: "read",
     subject: "home"
-  },
-  {
-    action: "read",
-    subject: "locale"
   }
 ]
 

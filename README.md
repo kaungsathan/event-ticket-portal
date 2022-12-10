@@ -79,27 +79,32 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 <br>
 
 ### CASL
+
 #### CASL Format
+
 ```json
-[{
-  action: "read",
-  subject: "user"
-},
-{
-  action: "edit",
-  subject: "user"
-},
-{
-  action: "create",
-  subject: "user"
-},
-{
-  action: "delete",
-  subject: "user"
-}]
+[
+  {
+    "action": "read",
+    "subject": "user"
+  },
+  {
+    "action": "edit",
+    "subject": "user"
+  },
+  {
+    "action": "create",
+    "subject": "user"
+  },
+  {
+    "action": "delete",
+    "subject": "user"
+  }
+]
 ```
 
 #### How to use CASL in Vue Template
+
 ```html
 <template>
   <div>
@@ -112,13 +117,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```
 
 #### How to use CASL in Vue Router
+
 ```json
 {
   path: "/user/list",
   name: "user",
   component: () => import("@/modules/user/list/User.vue"),
   meta: {
-    resource: "user",
+    subject: "user",
     action: "read",
   }
 },
@@ -126,7 +132,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Date Formatter
 
-```html,js
+```html,javascript
 <template>
   <div>
     <h5>{{ $moment().format("MMMM Do YYYY, h:mm:ss a") }}</h5>
@@ -150,7 +156,7 @@ setup() {
 
 ### Blood Type Picker
 
-```html,js
+```html,javascript
 <template>
   <div>
     <BloodType v-model="bloodType" />
@@ -171,7 +177,7 @@ setup() {
 
 ### Gender Picker
 
-```html,js****
+```html,javascript
 <template>
   <div>
     <Gender v-model="gender" />
@@ -192,7 +198,7 @@ setup() {
 
 ### NRC Picker
 
-```html,js
+```html,javascript
 <template>
   <div>
     <NRC v-model="nrc" />
@@ -213,7 +219,7 @@ setup() {
 
 ### Phone Number
 
-````html,js
+```html,javascript
 <template>
   <div>
     <PhoneNumber
@@ -249,4 +255,4 @@ In case you'd like to customize the layout variables, open **\_variables.scss** 
 $fontSize: 1rem;
 $borderRadius: 12px;
 $transitionDuration: 0.2s;
-````
+```

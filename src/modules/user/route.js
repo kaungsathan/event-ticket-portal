@@ -4,7 +4,7 @@ const moduleRoutes = [
     name: "userList",
     component: () => import("@/modules/user/list/List.vue"),
     meta: {
-      subject: "user",
+      subject: "users",
       action: "read",
       layout: "collapse"
     }
@@ -14,7 +14,7 @@ const moduleRoutes = [
     name: "newUser",
     component: () => import("@/modules/user/entry/New.vue"),
     meta: {
-      subject: "user",
+      subject: "users",
       action: "create",
       layout: "collapse"
     }
@@ -24,7 +24,7 @@ const moduleRoutes = [
     name: "editUser",
     component: () => import("@/modules/user/entry/Edit.vue"),
     meta: {
-      subject: "user",
+      subject: "users",
       action: "edit",
       layout: "collapse"
     }

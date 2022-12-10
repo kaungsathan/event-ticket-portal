@@ -16,12 +16,13 @@ api.interceptors.request.use(function (config) {
   const store = useAuthStore()
   const token = store.getToken
   config.headers.common["Authorization"] = `Bearer ${token}`
+  config.transformResponse = (data) => data
   return config
 })
 
 api.interceptors.response.use(
   (res) => {
-    res.data = JSONbig.parse(JSON.stringify(res.data))
+    res.data = JSONbig.parse(res.data)
     return res
   },
   (err) => {
@@ -31,29 +32,27 @@ api.interceptors.response.use(
         const store = useAuthStore()
         store.logout()
         router.push({ name: "login" })
+      } else if (err.response.status === 422) {
+        return Promise.reject(err.response)
       }
-      /**
-       * Can see EventBus in AppWrapper(Top Component)
-       */
-      EventBus.emit("show-toast", {
-        severity: "error",
-        summary: "",
-        detail: err.message
-      })
+      showToast(err.message.data.message)
     } else if (err.request) {
-      EventBus.emit("show-toast", {
-        severity: "error",
-        summary: "",
-        detail: err.message
-      })
+      showToast(err.message)
     } else {
-      EventBus.emit("show-toast", {
-        severity: "error",
-        summary: "",
-        detail: err.message
-      })
+      showToast(err.message)
     }
   }
 )
+
+function showToast(message) {
+  /**
+   * Can see EventBus in AppWrapper(Top Component)
+   */
+  EventBus.emit("show-toast", {
+    severity: "error",
+    summary: "",
+    detail: message
+  })
+}
 
 export default api

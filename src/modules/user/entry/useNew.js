@@ -1,4 +1,4 @@
-import { reactive, ref, onMounted } from "vue"
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue"
 import { email, required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
 import { useStore } from "../store"
@@ -32,6 +32,10 @@ export default function useNew() {
 
   onMounted(() => {})
 
+  onBeforeUnmount(() => {
+    store.$dispose()
+  })
+
   const handleSubmit = (isFormValid) => {
     submitted.value = true
 
@@ -41,6 +45,7 @@ export default function useNew() {
 
     addUser()
   }
+
   const addUser = async () => {
     isLoading.value = true
 

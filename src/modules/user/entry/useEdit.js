@@ -1,4 +1,4 @@
-import { reactive, ref, onMounted } from "vue"
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue"
 import { email, required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
 import { useStore } from "../store"
@@ -35,6 +35,10 @@ export default function useEdit() {
 
   onMounted(() => {
     fetchUser()
+  })
+
+  onBeforeUnmount(() => {
+    store.$dispose()
   })
 
   const fetchUser = async () => {

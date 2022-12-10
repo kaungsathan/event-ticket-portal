@@ -1,4 +1,4 @@
-import { ref, onMounted, watch } from "vue"
+import { ref, onMounted, watch, onBeforeUnmount } from "vue"
 import { useStore } from "../store"
 import { useConfirm } from "primevue/useconfirm"
 import { useDebounceFn } from "@/utils/debounce"
@@ -40,6 +40,10 @@ export default function useList() {
   onMounted(() => {
     resetPagination()
     fetchUserList()
+  })
+
+  onBeforeUnmount(() => {
+    store.$dispose()
   })
 
   const fetchUserList = async () => {

@@ -52,7 +52,7 @@
                   />
                 </span>
                 <router-link
-                  v-if="$can('create', 'user')"
+                  v-if="$can('create', 'users')"
                   :to="{ name: 'newUser' }"
                 >
                   <Button
@@ -133,7 +133,7 @@
           <template #body="{ data }">
             <div class="flex">
               <router-link
-                v-if="$can('edit', 'user')"
+                v-if="$can('edit', 'users')"
                 :to="{ name: 'editUser', params: { id: data.id } }"
               >
                 <Button
@@ -143,7 +143,7 @@
                 />
               </router-link>
               <Button
-                v-if="$can('delete', 'user')"
+                v-if="$can('delete', 'users')"
                 type="button"
                 icon="pi pi-trash"
                 class="p-button-danger p-button-rounded p-button-outlined"

@@ -13,7 +13,11 @@
         role="none"
       >
         <template v-if="root">
-          <div class="layout-menuitem-root-text" :aria-label="item.label">
+          <div
+            v-if="item.label"
+            class="layout-menuitem-root-text"
+            :aria-label="item.label"
+          >
             {{ $t(item.label) }}
           </div>
           <appsubmenu

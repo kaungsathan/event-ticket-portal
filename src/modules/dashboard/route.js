@@ -5,7 +5,7 @@ const moduleRoutes = [
     component: () => import("@/modules/dashboard/Index.vue"),
     meta: {
       layout: "collapse",
-      subject: "dashboard",
+      subject: "users",
       action: "read"
     }
   }

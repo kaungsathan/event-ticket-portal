@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue"
+import { reactive, ref, onBeforeUnmount } from "vue"
 import { useAuthStore } from "../authStore"
 import { required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
@@ -11,6 +11,10 @@ export default function useLogin() {
   const checked = ref(false)
   const submitted = ref(false)
   const isLoading = ref(false)
+
+  onBeforeUnmount(() => {
+    store.$dispose()
+  })
 
   const state = reactive({
     identifier: "",
@@ -55,7 +59,6 @@ export default function useLogin() {
 
   return {
     checked,
-
     state,
     v$,
     handleSubmit,

@@ -5,9 +5,10 @@ import { initialAbility } from "./config"
 // * Handles auto fetching previous abilities if already logged in user
 // ? You can update this if you store user abilities to more secure place
 // ! Anyone can update localStorage so be careful and please update this
-const userData = localStorage.getItem("userData")
-  ? JSON.parse(localStorage.getItem("userData"))
+const userData = localStorage.getItem("userAbility")
+  ? JSON.parse(localStorage.getItem("userAbility"))
   : null
-const existingAbility = userData ? userData.allowed_permissions : initialAbility
+
+const existingAbility = userData || initialAbility
 
 export default new Ability(existingAbility)

@@ -136,32 +136,35 @@
           >
         </div>
       </div>
-      <div class="flex justify-content-start">
-        <div>
-          <Button type="submit" label="Save" class="mt-2" />
-        </div>
-        <router-link v-if="$can('read', 'user')" :to="{ name: 'userList' }">
+      <div class="flex justify-content-end">
+        <router-link v-if="$can('read', 'users')" :to="{ name: 'userList' }">
           <div>
-            <Button label="Cancel" class="ml-2 mt-2 p-button-outlined" />
+            <Button
+              label="Cancel"
+              class="mt-2 p-button-secondary p-button-text"
+            />
           </div>
         </router-link>
+        <div class="ml-2">
+          <Button type="submit" label="Save" class="mt-2 p-button-info" />
+        </div>
       </div>
     </form>
-    <BlockUI :blocked="isLoading" :full-screen="true" />
+    <Loading v-if="isLoading" />
   </div>
 </template>
 
 <script>
-import BlockUI from "primevue/blockui"
 import Button from "primevue/button"
 import InputText from "primevue/inputtext"
+import Loading from "@/components/Loading.vue"
 
 import { defineComponent } from "vue"
 import useEdit from "./useEdit"
 
 export default defineComponent({
   name: "EditUser",
-  components: { BlockUI, Button, InputText },
+  components: { Loading, Button, InputText },
   setup() {
     const { isLoading, state, v$, handleSubmit, submitted } = useEdit()
     return {

@@ -37,8 +37,8 @@ export default {
     },
     topbarImage() {
       return this.$appState.darkTheme
-        ? require("@/assets/images/logo-white.svg")
-        : require("@/assets/images/logo-dark.svg")
+        ? require("@/assets/images/logo.png")
+        : require("@/assets/images/logo.png")
     }
   }
 }
