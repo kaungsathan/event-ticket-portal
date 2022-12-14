@@ -3,11 +3,13 @@ import { email, required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
 import { useStore } from "../store"
 import { useRouter } from "vue-router"
+import { Errors } from "@/utils/serverValidation"
 
 export default function useNew() {
   const store = useStore()
   const router = useRouter()
   const isLoading = ref(false)
+  const errors = new Errors()
   const state = reactive({
     name: "",
     email: "",
@@ -47,24 +49,33 @@ export default function useNew() {
   }
 
   const addUser = async () => {
+    errors.clear()
     isLoading.value = true
 
-    await store.add({
-      name: state.name,
-      email: state.email,
-      age: state.age,
-      phoneNumber: state.phoneNumber,
-      gender: state.gender,
-      birthDate: state.birthDate
-    })
+    try {
+      await store.add({
+        name: state.name,
+        email: state.email,
+        age: state.age,
+        phoneNumber: state.phoneNumber,
+        gender: state.gender,
+        birthDate: state.birthDate
+      })
 
-    const response = store.addResponse
+      const response = store.addResponse
 
-    if (response) {
-      router.push({ name: "userList" })
+      if (response) {
+        router.push({ name: "userList" })
+      }
+
+      isLoading.value = false
+    } catch (error) {
+      isLoading.value = false
+      if (error.status === 422) {
+        const err = error.data.data
+        errors.record(err)
+      }
     }
-
-    isLoading.value = false
   }
 
   return {
@@ -72,6 +83,7 @@ export default function useNew() {
     state,
     v$,
     handleSubmit,
-    submitted
+    submitted,
+    errors
   }
 }

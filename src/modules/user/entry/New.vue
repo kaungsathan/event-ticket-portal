@@ -20,6 +20,13 @@
             class="p-error"
             >{{ v$.name.required.$message.replace("Value", "Name") }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('name')" class="p-error">
+            <div v-for="error in errors.get('name')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
         <div class="field col-12 md:col-6 lg:col-4">
           <label for="age" :class="{ 'p-error': v$.age.$invalid && submitted }"
@@ -36,6 +43,13 @@
             class="p-error"
             >{{ v$.age.required.$message.replace("Value", "Age") }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('age')" class="p-error">
+            <div v-for="error in errors.get('age')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
         <div class="field col-12 md:col-6 lg:col-4">
           <label
@@ -66,6 +80,13 @@
             class="p-error"
             >{{ v$.email.required.$message.replace("Value", "Email") }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('email')" class="p-error">
+            <div v-for="error in errors.get('email')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
         <div class="field col-12 md:col-6 lg:col-4">
           <label
@@ -89,6 +110,13 @@
               v$.phoneNumber.required.$message.replace("Value", "PhoneNumber")
             }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('phone_number')" class="p-error">
+            <div v-for="error in errors.get('phone_number')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
 
         <div class="field col-12 md:col-6 lg:col-4">
@@ -110,6 +138,13 @@
             class="p-error"
             >{{ v$.gender.required.$message.replace("Value", "Gender") }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('gender')" class="p-error">
+            <div v-for="error in errors.get('gender')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
 
         <div class="field col-12 md:col-6 lg:col-4">
@@ -134,6 +169,13 @@
               v$.birthDate.required.$message.replace("Value", "BirthDate")
             }}</small
           >
+          <!-- Server Validation -->
+          <small v-if="errors.has('birth_date')" class="p-error">
+            <div v-for="error in errors.get('birth_date')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
         </div>
       </div>
       <div class="flex justify-content-end">
@@ -166,14 +208,15 @@ export default defineComponent({
   name: "NewUser",
   components: { Loading, Button, InputText },
   setup() {
-    const { isLoading, state, v$, handleSubmit, submitted } = useNew()
+    const { isLoading, state, v$, handleSubmit, submitted, errors } = useNew()
 
     return {
       isLoading,
       state,
       v$,
       handleSubmit,
-      submitted
+      submitted,
+      errors
     }
   }
 })

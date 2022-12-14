@@ -3,6 +3,7 @@ import { email, required } from "@vuelidate/validators"
 import { useVuelidate } from "@vuelidate/core"
 import { useStore } from "../store"
 import { useRoute, useRouter } from "vue-router"
+import { Errors } from "@/utils/serverValidation"
 
 export default function useEdit() {
   const store = useStore()
@@ -10,6 +11,7 @@ export default function useEdit() {
   const router = useRouter()
 
   const isLoading = ref(false)
+  const errors = new Errors()
 
   const state = reactive({
     name: "",
@@ -43,6 +45,7 @@ export default function useEdit() {
 
   const fetchUser = async () => {
     isLoading.value = true
+    errors.clear()
 
     await store.fetchOne({
       id: route.params.id
@@ -73,23 +76,31 @@ export default function useEdit() {
   const updateUser = async () => {
     isLoading.value = true
 
-    await store.update({
-      id: route.params.id,
-      name: state.name,
-      email: state.email,
-      age: state.age,
-      phoneNumber: state.phoneNumber,
-      gender: state.gender,
-      birthDate: state.birthDate
-    })
+    try {
+      await store.update({
+        id: route.params.id,
+        name: state.name,
+        email: state.email,
+        age: state.age,
+        phoneNumber: state.phoneNumber,
+        gender: state.gender,
+        birthDate: state.birthDate
+      })
 
-    const response = store.getUpdateResponse
+      const response = store.getUpdateResponse
 
-    if (response) {
-      router.push({ name: "userList" })
+      if (response) {
+        router.push({ name: "userList" })
+      }
+
+      isLoading.value = false
+    } catch (error) {
+      isLoading.value = false
+      if (error.status === 422) {
+        const err = error.data.data
+        errors.record(err)
+      }
     }
-
-    isLoading.value = false
   }
 
   return {
@@ -97,6 +108,7 @@ export default function useEdit() {
     state,
     v$,
     handleSubmit,
-    submitted
+    submitted,
+    errors
   }
 }
