@@ -32,6 +32,8 @@ api.interceptors.response.use(
         const store = useAuthStore()
         store.logout()
         router.push({ name: "login" })
+      } else if (err.response.status === 403) {
+        router.push({ name: "not-authorized" })
       } else if (err.response.status === 422) {
         return Promise.reject(err.response)
       }
