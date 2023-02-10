@@ -1,88 +1,59 @@
 <template>
-  <div>
-    <component :is="layout">
-      <router-view />
-    </component>
-  </div>
-  <Toast position="bottom-right"></Toast>
+    <router-view />
+    <Toast position="bottom-right"></Toast>
 </template>
 
-<script>
-import EventBus from "@/libs/AppEventBus"
-import LayoutDefault from "@/layouts/default/App.vue"
-import LayoutFull from "@/layouts/full/App.vue"
-import LayoutCollapse from "@/layouts/collapse/App.vue"
-import Toast from "primevue/toast"
+<script setup>
+import EventBus from '@/libs/AppEventBus'
 
-export default {
-  themeChangeListener: null,
-  components: { LayoutDefault, LayoutFull, LayoutCollapse, Toast },
-  computed: {
-    layout() {
-      if (this.$route.meta.layout === "default") return "layout-default"
-      if (this.$route.meta.layout === "collapse") return "layout-collapse"
-      return "layout-full"
-    }
-  },
-  mounted() {
-    if (this.$appState.darkTheme) {
-      const elementId = "theme-link"
-      const linkElement = document.getElementById(elementId)
-      const cloneLinkElement = linkElement.cloneNode(true)
-      const newThemeUrl = linkElement
-        .getAttribute("href")
-        .replace("lara-light-indigo", this.$appState.theme)
+import Toast from 'primevue/toast'
+import { onMounted, onBeforeUnmount } from 'vue'
+import { useToast } from 'primevue/usetoast'
+import { useLayout } from '@/layouts/composables/layout'
+import { useThemeStore } from './store/themeStore'
 
-      cloneLinkElement.setAttribute("id", elementId + "-clone")
-      cloneLinkElement.setAttribute("href", newThemeUrl)
-      cloneLinkElement.addEventListener("load", () => {
+const toast = useToast()
+const themeStore = useThemeStore()
+const { changeThemeSettings, layoutConfig } = useLayout()
+
+onMounted(() => {
+    setupTheme()
+    EventBus.on('theme-change', onChangeTheme)
+    EventBus.on('show-toast', showToast)
+})
+
+onBeforeUnmount(() => {
+    EventBus.off('theme-change', onChangeTheme)
+    EventBus.off('show-toast', showToast)
+})
+
+const setupTheme = () => {
+    const currentTheme = themeStore.getCurrentTheme
+    const mode = themeStore.getMode
+    onChangeTheme({ theme: currentTheme, mode: mode })
+}
+
+const onChangeTheme = ({ theme, mode }) => {
+    const elementId = 'theme-css'
+    const linkElement = document.getElementById(elementId)
+    const cloneLinkElement = linkElement.cloneNode(true)
+    const newThemeUrl = linkElement.getAttribute('href').replace(layoutConfig.theme.value, theme)
+    cloneLinkElement.setAttribute('id', elementId + '-clone')
+    cloneLinkElement.setAttribute('href', newThemeUrl)
+    cloneLinkElement.addEventListener('load', () => {
         linkElement.remove()
-        cloneLinkElement.setAttribute("id", elementId)
-      })
-      linkElement.parentNode.insertBefore(
-        cloneLinkElement,
-        linkElement.nextSibling
-      )
-    }
-    this.themeChangeListener = (event) => {
-      const elementId = "theme-link"
-      const linkElement = document.getElementById(elementId)
-      const cloneLinkElement = linkElement.cloneNode(true)
-      const newThemeUrl = linkElement
-        .getAttribute("href")
-        .replace(this.$appState.theme, event.theme)
+        cloneLinkElement.setAttribute('id', elementId)
+        changeThemeSettings(theme, mode)
+    })
+    linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling)
+}
 
-      cloneLinkElement.setAttribute("id", elementId + "-clone")
-      cloneLinkElement.setAttribute("href", newThemeUrl)
-      cloneLinkElement.addEventListener("load", () => {
-        linkElement.remove()
-        cloneLinkElement.setAttribute("id", elementId)
-      })
-      linkElement.parentNode.insertBefore(
-        cloneLinkElement,
-        linkElement.nextSibling
-      )
-
-      this.$appState.theme = event.theme
-      this.$appState.darkTheme = event.dark
-    }
-
-    EventBus.on("theme-change", this.themeChangeListener)
-    EventBus.on("show-toast", this.showToast)
-  },
-  methods: {
-    showToast(event) {
-      this.$toast.add({
+const showToast = (event) => {
+    toast.add({
         severity: event.severity,
         summary: event.summary,
         detail: event.detail,
-        life: 3000
-      })
-    }
-  },
-  beforeUnmount() {
-    EventBus.off("theme-change", this.themeChangeListener)
-    EventBus.off("show-toast", this.showToast)
-  }
+        life: event.life
+    })
 }
 </script>

@@ -1,5 +1,5 @@
-import { app } from "./main-app"
-import moment from "moment"
+import { app } from './main-app'
+import moment from 'moment'
 // import { getCurrentInstance } from "vue"
 
 app.config.globalProperties.$moment = moment

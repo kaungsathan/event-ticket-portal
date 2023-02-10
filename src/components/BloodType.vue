@@ -1,35 +1,19 @@
 <template>
-  <Dropdown
-    inputId="bloodType"
-    :modelValue="modelValue"
-    @change="$emit('update:modelValue', $event.value)"
-    :options="optionsBloodType"
-    class="w-full"
-  />
+    <Dropdown input-id="bloodType" :model-value="modelValue" :options="optionsBloodType" class="w-full" @change="$emit('update:modelValue', $event.value)" />
 </template>
 
-<script>
-import { defineComponent, ref } from "vue"
+<script setup>
+import { ref } from 'vue'
 
-import Dropdown from "primevue/dropdown"
+import Dropdown from 'primevue/dropdown'
 
-export default defineComponent({
-  name: "BloodType",
-  components: { Dropdown },
-  props: {
+const optionsBloodType = ref(['A', 'B', 'O', 'AB'])
+
+defineProps({
     modelValue: {
-      type: String,
-      default: "",
-      required: true
+        type: String,
+        default: '',
+        required: true
     }
-  },
-  setup() {
-    const optionsBloodType = ref(["A", "B", "O", "AB"])
-
-    return {
-      optionsBloodType
-    }
-  }
 })
 </script>
-<style scope></style>

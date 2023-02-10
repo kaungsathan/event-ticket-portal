@@ -1,177 +1,67 @@
 <template>
-  <div
-    class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
-  >
-    <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 80%">
-      <div
-        class="col-12 xl:col-6"
-        style="
-          border-radius: 56px;
-          padding: 0.3rem;
-          background: linear-gradient(
-            180deg,
-            var(--primary-color),
-            rgba(33, 150, 243, 0) 30%
-          );
-        "
-      >
-        <div
-          class="h-full w-full m-0 py-7 px-4"
-          style="
-            border-radius: 53px;
-            background: linear-gradient(
-              180deg,
-              var(--surface-50) 38.9%,
-              var(--surface-0)
-            );
-          "
-        >
-          <div class="text-center mb-5">
-            <div class="text-900 text-3xl font-medium mb-3">
-              Welcome, Isabel!
-            </div>
-            <span class="text-600 font-medium">Sign in to continue</span>
-          </div>
+    <div class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+        <div class="grid justify-content-center p-2 lg:p-0" style="min-width: 80%">
+            <div class="col-12 xl:col-6" style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color), rgba(33, 150, 243, 0) 30%)">
+                <div class="h-full w-full m-0 py-7 px-4" style="border-radius: 53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0))">
+                    <div class="text-center mb-5">
+                        <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
+                        <span class="text-600 font-medium">Sign in to continue</span>
+                    </div>
 
-          <form @submit.prevent="handleSubmit(!v$.$invalid)">
-            <div class="w-full md:w-10 mx-auto">
-              <label
-                for="identifier"
-                class="block text-900 text-xl font-medium mb-2"
-                :class="{ 'p-error': v$.identifier.$invalid && submitted }"
-                >Identifier</label
-              >
-              <InputText
-                id="identifier"
-                v-model="v$.identifier.$model"
-                :class="{ 'p-invalid': v$.identifier.$invalid && submitted }"
-                type="text"
-                class="w-full"
-                placeholder="identifier"
-                style="padding: 1rem"
-              />
+                    <form @submit.prevent="handleSubmit(!v$.$invalid)">
+                        <div class="w-full md:w-10 mx-auto">
+                            <label for="identifier" class="block text-900 text-xl font-medium mb-2" :class="{ 'p-error': v$.identifier.$invalid && submitted }">Identifier</label>
+                            <InputText id="identifier" v-model="v$.identifier.$model" :class="{ 'p-invalid': v$.identifier.$invalid && submitted }" type="text" class="w-full" placeholder="identifier" style="padding: 1rem" />
 
-              <span v-if="v$.identifier.$error && submitted">
-                <span
-                  v-for="(error, index) of v$.identifier.$errors"
-                  id="email-error"
-                  :key="index"
-                >
-                  <small class="p-error">{{ error.$message }}</small>
-                </span>
-              </span>
-              <small
-                v-else-if="
-                  (v$.identifier.$invalid && submitted) ||
-                  v$.identifier.$pending.$response
-                "
-                class="p-error"
-                >{{
-                  v$.identifier.required.$message.replace("Value", "Identifier")
-                }}</small
-              >
+                            <span v-if="v$.identifier.$error && submitted">
+                                <span v-for="(error, index) of v$.identifier.$errors" id="email-error" :key="index">
+                                    <small class="p-error">{{ error.$message }}</small>
+                                </span>
+                            </span>
+                            <small v-else-if="(v$.identifier.$invalid && submitted) || v$.identifier.$pending.$response" class="p-error">{{ v$.identifier.required.$message.replace('Value', 'Identifier') }}</small>
 
-              <label
-                for="password"
-                class="block text-900 font-medium text-xl mb-2 mt-3"
-                :class="{ 'p-error': v$.password.$invalid && submitted }"
-                >Password</label
-              >
-              <Password
-                id="password"
-                v-model="v$.password.$model"
-                placeholder="Password"
-                class="w-full"
-                input-class="w-full"
-                input-style="padding:1rem"
-                :class="{ 'p-invalid': v$.password.$invalid && submitted }"
-                :feedback="false"
-              />
+                            <label for="password" class="block text-900 font-medium text-xl mb-2 mt-3" :class="{ 'p-error': v$.password.$invalid && submitted }">Password</label>
+                            <Password id="password" v-model="v$.password.$model" placeholder="Password" class="w-full" input-class="w-full" input-style="padding:1rem" :class="{ 'p-invalid': v$.password.$invalid && submitted }" :feedback="false" />
 
-              <small
-                v-if="
-                  (v$.password.$invalid && submitted) ||
-                  v$.password.$pending.$response
-                "
-                class="p-error"
-                >{{
-                  v$.password.required.$message.replace("Value", "Password")
-                }}</small
-              >
+                            <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{ v$.password.required.$message.replace('Value', 'Password') }}</small>
 
-              <div
-                class="flex align-items-center justify-content-between mb-5 mt-3"
-              >
-                <div class="flex align-items-center">
-                  <Checkbox
-                    id="rememberme1"
-                    v-model="checked"
-                    :binary="true"
-                    class="mr-2"
-                  />
-                  <label for="rememberme1">Remember me</label>
+                            <div class="flex align-items-center justify-content-between mb-5 mt-3">
+                                <div class="flex align-items-center">
+                                    <Checkbox id="rememberme1" v-model="checked" :binary="true" class="mr-2" />
+                                    <label for="rememberme1">Remember me</label>
+                                </div>
+                                <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
+                            </div>
+                            <Button type="submit" label="Sign In" class="w-full p-3 text-xl" />
+                        </div>
+                    </form>
                 </div>
-                <a
-                  class="font-medium no-underline ml-2 text-right cursor-pointer"
-                  style="color: var(--primary-color)"
-                  >Forgot password?</a
-                >
-              </div>
-              <Button
-                type="submit"
-                label="Sign In"
-                class="w-full p-3 text-xl"
-              />
             </div>
-          </form>
         </div>
-      </div>
+        <Loading v-if="isLoading"></Loading>
     </div>
-    <BlockUI :blocked="isLoading" :full-screen="true" />
-  </div>
 </template>
 
-<script>
-import BlockUI from "primevue/blockui"
-import Button from "primevue/button"
-import Checkbox from "primevue/checkbox"
-import Password from "primevue/password"
-import InputText from "primevue/inputtext"
+<script setup>
+import Button from 'primevue/button'
+import Checkbox from 'primevue/checkbox'
+import Password from 'primevue/password'
+import InputText from 'primevue/inputtext'
+import Loading from '@/components/Loading.vue'
 
-import { defineComponent } from "vue"
-import useLogin from "./useLogin"
+import useLogin from './useLogin'
 
-export default defineComponent({
-  name: "Login",
-  components: { BlockUI, Button, Checkbox, Password, InputText },
-  setup() {
-    const { checked, state, v$, handleSubmit, submitted, isLoading } =
-      useLogin()
-
-    return {
-      checked,
-
-      state,
-      v$,
-      handleSubmit,
-      submitted,
-      isLoading
-    }
-  }
-})
+const { checked, v$, handleSubmit, submitted, isLoading } = useLogin()
 </script>
 
-<i18n src="./../locale.json">
-</i18n>
-
-<style scoped>
+<style lang="scss" scoped>
 .pi-eye {
-  transform: scale(1.6);
-  margin-right: 1rem;
+    transform: scale(1.6);
+    margin-right: 1rem;
 }
 
 .pi-eye-slash {
-  transform: scale(1.6);
-  margin-right: 1rem;
+    transform: scale(1.6);
+    margin-right: 1rem;
 }
 </style>
