@@ -1,14 +1,21 @@
+import AppLayout from '@/layouts/default/AppLayout.vue'
+
 const moduleRoutes = [
-  {
-    path: "",
-    name: "dashboard",
-    component: () => import("@/modules/dashboard/Index.vue"),
-    meta: {
-      layout: "collapse",
-      subject: "users",
-      action: "read"
+    {
+        path: '/',
+        component: AppLayout,
+        children: [
+            {
+                path: '/',
+                name: 'dashboard',
+                component: () => import('@/modules/dashboard/Index.vue'),
+                meta: {
+                    subject: 'users',
+                    action: 'read'
+                }
+            }
+        ]
     }
-  }
 ]
 
 export default moduleRoutes

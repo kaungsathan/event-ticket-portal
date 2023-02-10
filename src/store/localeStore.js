@@ -1,29 +1,21 @@
-import { defineStore } from "pinia"
+import { defineStore } from 'pinia'
 
 export const useLocaleStore = defineStore({
-  id: "useLocaleStore",
-  state: () => ({
-    currentLocale: localStorage.getItem("locale") || "en",
-    currentTheme: localStorage.getItem("theme") || "lara-light-indigo"
-  }),
+    id: 'useLocaleStore',
+    state: () => ({
+        locale: localStorage.getItem('locale') || 'en'
+    }),
 
-  getters: {
-    getCurrentLanguage(state) {
-      return state.currentLocale
+    getters: {
+        getLocale(state) {
+            return state.locale
+        }
     },
-    getCurrentTheme(state) {
-      return state.currentTheme
-    }
-  },
 
-  actions: {
-    async setLanguage(locale) {
-      this.currentLocale = locale
-      localStorage.setItem("locale", locale)
-    },
-    async setTheme(theme) {
-      this.currentTheme = theme
-      localStorage.setItem("theme", theme)
+    actions: {
+        setLocale(locale) {
+            this.locale = locale
+            localStorage.setItem('locale', locale)
+        }
     }
-  }
 })

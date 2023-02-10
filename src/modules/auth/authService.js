@@ -1,19 +1,19 @@
-import api from "@/libs/axios"
+import api from '@/libs/axios'
 
 const endpoints = {
-  login: "auth/login"
+    login: 'auth/login'
 }
 
 const authService = {
-  login: async (params) => {
-    try {
-      const result = await api.post(endpoints.login, params)
-      return result.data
-    } catch {
-      return null
-    }
-  },
-  logout: () => {}
+    login: async (params) => {
+        try {
+            const result = await api.post(endpoints.login, params)
+            return result.data
+        } catch {
+            return null
+        }
+    },
+    logout: () => {}
 }
 
 export { authService }

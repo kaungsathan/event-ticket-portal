@@ -84,22 +84,22 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ```json
 [
-  {
-    "action": "read",
-    "subject": "user"
-  },
-  {
-    "action": "edit",
-    "subject": "user"
-  },
-  {
-    "action": "create",
-    "subject": "user"
-  },
-  {
-    "action": "delete",
-    "subject": "user"
-  }
+    {
+        "action": "read",
+        "subject": "user"
+    },
+    {
+        "action": "edit",
+        "subject": "user"
+    },
+    {
+        "action": "create",
+        "subject": "user"
+    },
+    {
+        "action": "delete",
+        "subject": "user"
+    }
 ]
 ```
 
