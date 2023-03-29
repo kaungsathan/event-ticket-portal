@@ -16,9 +16,9 @@ api.interceptors.request.use(function (config) {
     const store = useAuthStore()
     const token = store.getToken
     if (token) {
-        config.headers.common['Authorization'] = `Bearer ${token}`
+        config.headers['Authorization'] = `Bearer ${token}`
     }
-    config.transformResponse = (data) => data
+    // config.transformResponse = (data) => data
     return config
 })
 
@@ -28,9 +28,7 @@ api.interceptors.response.use(
         return res
     },
     (err) => {
-        err = JSON.parse(err)
         if (err.response) {
-            console.log(err)
             if (err.response.status === 401) {
                 const store = useAuthStore()
                 store.logout()

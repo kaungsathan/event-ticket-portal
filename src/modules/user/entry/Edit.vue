@@ -109,7 +109,7 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Loading from '@/components/Loading.vue'
 
-import useEdit from './useEdit'
+import { useEdit } from './useEdit'
 
 const { isLoading, v$, handleSubmit, submitted, errors } = useEdit()
 </script>

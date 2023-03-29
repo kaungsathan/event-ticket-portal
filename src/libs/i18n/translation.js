@@ -51,7 +51,6 @@ const Trans = {
     },
 
     getPersistedLocale() {
-        console.log(localeStore.getLocale)
         const persistedLocale = localeStore.getLocale
 
         if (Trans.isLocaleSupported(persistedLocale)) {

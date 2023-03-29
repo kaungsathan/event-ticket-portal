@@ -49,7 +49,7 @@ import Password from 'primevue/password'
 import InputText from 'primevue/inputtext'
 import Loading from '@/components/Loading.vue'
 
-import useLogin from './useLogin'
+import { useLogin } from './useLogin'
 
 const { checked, v$, handleSubmit, submitted, isLoading } = useLogin()
 </script>

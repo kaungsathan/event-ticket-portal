@@ -5,7 +5,7 @@ import { useDebounceFn } from '@/utils/debounce'
 import { multisortConvert } from '@/utils/multisort'
 import EventBus from '@/libs/AppEventBus'
 
-export default function useList() {
+export const useList = () => {
     const loading = ref(true)
     const store = useStore()
     const confirm = useConfirm()
@@ -77,7 +77,8 @@ export default function useList() {
         lazyParams.value = {
             page: 0,
             rows: dt.value.rows,
-            multiSortMeta: []
+            multiSortMeta: [],
+            first: 0
         }
     }
 
@@ -92,6 +93,7 @@ export default function useList() {
     const onSort = (event) => {
         lazyParams.value = event
         lazyParams.value.page = 0 // when sorting, page doesn't exist
+        lazyParams.value.first = 0
         fetchUserList()
     }
 

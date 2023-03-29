@@ -109,7 +109,7 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Loading from '@/components/Loading.vue'
 
-import useNew from './useNew'
+import { useNew } from './useNew'
 
 const { isLoading, v$, handleSubmit, submitted, errors } = useNew()
 </script>

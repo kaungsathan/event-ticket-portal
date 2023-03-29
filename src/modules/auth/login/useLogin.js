@@ -4,7 +4,7 @@ import { required } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { useRouter } from 'vue-router'
 
-export default function useLogin() {
+export const useLogin = () => {
     const store = useAuthStore()
     const router = useRouter()
 

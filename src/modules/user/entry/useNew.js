@@ -5,7 +5,7 @@ import { useStore } from '../store'
 import { useRouter } from 'vue-router'
 import { Errors } from '@/utils/serverValidation'
 
-export default function useNew() {
+export const useNew = () => {
     const store = useStore()
     const router = useRouter()
     const isLoading = ref(false)

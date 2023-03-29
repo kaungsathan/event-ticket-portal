@@ -1,10 +1,10 @@
 import { onMounted, ref } from 'vue'
 
-export default function useDevice() {
+export const useDevice = () => {
     const isMobile = ref(window.innerWidth <= 767)
 
     onMounted(() => {
-        window.addEventListener('resize', function () {
+        window.addEventListener('resize', () => {
             isMobile.value = window.innerWidth <= 767
         })
     })

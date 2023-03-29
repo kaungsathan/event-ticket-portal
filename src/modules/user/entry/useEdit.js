@@ -5,7 +5,7 @@ import { useStore } from '../store'
 import { useRoute, useRouter } from 'vue-router'
 import { Errors } from '@/utils/serverValidation'
 
-export default function useEdit() {
+export const useEdit = () => {
     const store = useStore()
     const route = useRoute()
     const router = useRouter()

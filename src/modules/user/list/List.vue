@@ -19,6 +19,7 @@
                 @sort="onSort($event)"
                 sortMode="multiple"
                 :multiSortMeta="lazyParams.multiSortMeta"
+                :first="lazyParams.first"
                 :totalRecords="totalRecords"
                 :rows="10"
                 :rowsPerPageOptions="[10, 20, 50, 100]"
@@ -94,8 +95,8 @@ import Menu from 'primevue/menu'
 import OverlayPanel from 'primevue/overlaypanel'
 import Checkbox from 'primevue/checkbox'
 
-import useList from './useList'
-import useDevice from '@/utils/device'
+import { useList } from './useList'
+import { useDevice } from '@/utils/device'
 
 const { dt, lazyParams, totalRecords, customers, loading, search, actionItems, roles, selectedRole, actionMenu, toggleActionMenu, showConfirmDialog, onPage, onSort, toggleColumnMenu, selectedColumns, columns, columnMenu } = useList()
 const { isMobile } = useDevice()
