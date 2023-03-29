@@ -28,6 +28,7 @@ api.interceptors.response.use(
         return res
     },
     (err) => {
+        err = JSON.parse(err)
         if (err.response) {
             console.log(err)
             if (err.response.status === 401) {
