@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <Loading v-if="isLoading"></Loading>
+        <Loading v-if="isLoading" />
     </div>
 </template>
 
@@ -54,7 +54,7 @@ import { useLogin } from './useLogin'
 const { checked, v$, handleSubmit, submitted, isLoading } = useLogin()
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .pi-eye {
     transform: scale(1.6);
     margin-right: 1rem;

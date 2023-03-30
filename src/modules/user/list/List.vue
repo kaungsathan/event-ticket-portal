@@ -19,11 +19,11 @@
                 @sort="onSort($event)"
                 sortMode="multiple"
                 :multiSortMeta="lazyParams.multiSortMeta"
-                :first="lazyParams.first"
                 :totalRecords="totalRecords"
                 :rows="10"
                 :rowsPerPageOptions="[10, 20, 50, 100]"
                 :scrollable="true"
+                :first="lazyParams.first"
                 scrollHeight="60vh"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -33,7 +33,7 @@
             >
                 <template #header>
                     <div class="flex flex-wrap justify-content-between align-items-center">
-                        <h5 class="m-0">{{ $t('userList') }}</h5>
+                        <h5 class="m-0">User</h5>
                         <span class="p-input-icon-left">
                             <div class="mt-3 md:mt-0">
                                 <span class="p-input-icon-left w-full md:w-auto">
@@ -50,7 +50,7 @@
                                 <OverlayPanel ref="columnMenu" appendTo="body" id="columnPanel" style="width: 250px">
                                     <div v-for="column in columns" :key="column.field" class="field-checkbox">
                                         <Checkbox :inputId="column.field" name="column" :modelValue="column.selected" :binary="true" @change="column.selected = !column.selected" :disabled="column.frozen" />
-                                        <label :for="column.field">{{ $t(column.header) }}</label>
+                                        <label :for="column.field">{{ column.header }}</label>
                                     </div>
                                 </OverlayPanel>
                                 <Button icon="pi pi-sliders-h" @click="toggleColumnMenu" class="p-button-secondary p-button-outlined ml-2 mt-2 md:mt-0" />
@@ -61,7 +61,7 @@
                 <template #empty> No customers found. </template>
                 <template #loading> Loading customers data. Please wait. </template>
 
-                <Column v-for="column in selectedColumns" :key="column.field" :field="column.field" :header="$t(column.header)" :sortable="column.sortable" :frozen="!isMobile && column.frozen" :alignFrozen="column.alignFrozen" :style="column.style">
+                <Column v-for="column in selectedColumns" :key="column.field" :field="column.field" :header="column.header" :sortable="column.sortable" :frozen="!isMobile && column.frozen" :alignFrozen="column.alignFrozen" :style="column.style">
                     <template v-if="column.field === 'gender'" #body="{ data }">
                         <Chip :label="data.gender.toUpperCase()" class="mr-2"></Chip>
                     </template>
@@ -81,19 +81,28 @@
             </DataTable>
         </div>
     </div>
+    <ConfirmDialog>
+        <template #message="slotProps">
+            <div class="text-center w-full">
+                <i :class="slotProps.message.icon" class="mt-2 text-red-500 text-5xl"></i>
+                <div class="mt-2">{{ slotProps.message.message }}</div>
+            </div>
+        </template>
+    </ConfirmDialog>
 </template>
 
 <script setup>
 import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
 import Column from 'primevue/column'
+import Checkbox from 'primevue/checkbox'
 import Chip from 'primevue/chip'
 import DataTable from 'primevue/datatable'
 import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
 import Menu from 'primevue/menu'
 import OverlayPanel from 'primevue/overlaypanel'
-import Checkbox from 'primevue/checkbox'
+import ConfirmDialog from 'primevue/confirmdialog'
 
 import { useList } from './useList'
 import { useDevice } from '@/utils/device'
@@ -103,5 +112,5 @@ const { isMobile } = useDevice()
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/custom-table.scss';
+@import '@/assets/style/custom-table.scss';
 </style>

@@ -1,4 +1,4 @@
-import AppLayout from '@/layouts/default/AppLayout.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 
 const moduleRoutes = [
     {

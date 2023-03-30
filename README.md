@@ -32,9 +32,9 @@ Node >= 16
 ### Edit .env
 
 ```
-VUE_APP_ENV=local
-VUE_APP_ROOT_API=https://yla-api.dev.onenex.dev/api/
-VUE_APP_I18N_FALLBACK_LOCALE=en
+VITE_ENV=local
+VITE_ROOT_API=https://yla-api.dev.onenex.dev/api/
+VITE_I18N_FALLBACK_LOCALE=en
 ```
 
 ```

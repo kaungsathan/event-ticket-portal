@@ -1,17 +1,6 @@
 {
     "en": "English",
     "mm": "မြန်မာ",
-    "userList": "User List",
     "dashboard": "Dashboard",
-    "home": "Home",
-    "firstName": "First Name",
-    "age": "Age",
-    "gender": "Gender",
-    "phoneNumber": "Phone Number",
-    "emailAddress": "Email Address",
-    "birthDate": "Birth Date",
-    "bloodGroup": "Blood Group",
-    "height": "Height",
-    "weight": "Weight",
-    "actions": "Actions"
+    "user": "User"
 }

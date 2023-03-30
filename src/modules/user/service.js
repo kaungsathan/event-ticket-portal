@@ -24,12 +24,20 @@ const service = {
         }
     },
     update: async (params) => {
-        const result = await api.put(`${endpoints.user}/${params.id}`, params)
-        return result.data
+        try {
+            const result = await api.put(`${endpoints.user}/${params.id}`, params)
+            return result.data
+        } catch {
+            return null
+        }
     },
     add: async (params) => {
-        const result = await api.post(endpoints.user, params)
-        return result.data
+        try {
+            const result = await api.post(endpoints.user, params)
+            return result.data
+        } catch {
+            return null
+        }
     },
     delete: async (params) => {
         try {

@@ -6,11 +6,11 @@ const localeStore = useLocaleStore()
 
 const Trans = {
     get defaultLocale() {
-        return process.env.VUE_APP_I18N_FALLBACK_LOCALE
+        return localeStore.getLocale
     },
 
     get supportedLocales() {
-        return process.env.VUE_APP_SUPPORTED_LOCALES.split(',')
+        return import.meta.env.VITE_SUPPORTED_LOCALES.split(',')
     },
 
     get currentLocale() {
@@ -51,6 +51,7 @@ const Trans = {
     },
 
     getPersistedLocale() {
+        console.log(localeStore.getLocale)
         const persistedLocale = localeStore.getLocale
 
         if (Trans.isLocaleSupported(persistedLocale)) {
