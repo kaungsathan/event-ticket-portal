@@ -1,17 +1,6 @@
 {
     "en": "English",
     "mm": "မြန်မာ",
-    "userList": "အသုံးပြုသူစာရင်း",
     "dashboard": "ပင်မစာမျက်နှာ",
-    "home": "ပင်မ",
-    "firstName": "အမည်",
-    "age": "အသက်",
-    "gender": "ကျား/မ",
-    "phoneNumber": "ဖုန်းနံပါတ်",
-    "emailAddress": "အီးမေးလ်",
-    "birthDate": "မွေးနေ့",
-    "bloodGroup": "သွေးအမျိုးအစား",
-    "height": "အရပ်",
-    "weight": "အလေးချိန်",
-    "actions": "လုပ်ဆောင်ချက်"
+    "user": "အသုံးပြုသူ"
 }

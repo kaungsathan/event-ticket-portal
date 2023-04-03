@@ -35,7 +35,9 @@ export const useLogin = () => {
             return
         }
 
-        loginUser()
+        if (!isLoading.value) {
+            loginUser()
+        }
     }
 
     const loginUser = async () => {

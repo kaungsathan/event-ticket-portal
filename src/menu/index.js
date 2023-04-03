@@ -1,0 +1,22 @@
+const menuList = [
+    {
+        items: [
+            {
+                label: 'dashboard',
+                icon: 'pi pi-fw pi-home',
+                to: '/'
+                // action: "read",
+                // subject: "dashboard"
+            },
+            {
+                label: 'user',
+                icon: 'pi pi-fw pi-user',
+                to: '/user'
+                // action: "read",
+                // subject: "user"
+            }
+        ]
+    }
+]
+
+export default menuList

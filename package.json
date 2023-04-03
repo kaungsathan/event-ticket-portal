@@ -1,51 +1,45 @@
 {
-    "name": "portal-starter-kit",
-    "version": "0.1.0",
+    "name": "onenex",
+    "version": "2.0.0",
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "eslint --ext .js,.vue .",
-        "lint-fix": "eslint --fix --ext .js,.vue .",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
         "format": "prettier .  --write",
         "prepare": "husky install"
     },
     "dependencies": {
         "@casl/ability": "^6.3.3",
         "@casl/vue": "^2.2.1",
-        "@vuelidate/core": "^2.0.0",
-        "@vuelidate/validators": "^2.0.0",
-        "axios": "^1.3.2",
-        "core-js": "^3.27.2",
-        "json-bigint": "^1.0.0",
+        "@intlify/unplugin-vue-i18n": "^0.10.0",
+        "@vuelidate/core": "^2.0.1",
+        "@vuelidate/validators": "^2.0.1",
+        "axios": "^1.3.4",
+        "json-parse-bigint": "^1.0.4",
         "moment": "^2.29.4",
-        "pinia": "^2.0.30",
+        "pinia": "^2.0.33",
         "primeflex": "^3.3.0",
-        "primeicons": "6.0.1",
-        "primevue": "3.23.0",
-        "prismjs": "^1.29.0",
+        "primeicons": "^6.0.1",
+        "primevue": "^3.26.1",
         "vue": "^3.2.47",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.16",
-        "@babel/eslint-parser": "^7.12.16",
-        "@vue/cli-plugin-babel": "~5.0.0",
-        "@vue/cli-plugin-eslint": "~5.0.0",
-        "@vue/cli-plugin-router": "~5.0.0",
-        "@vue/cli-service": "~5.0.0",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "eslint-plugin-vue": "^8.7.1",
-        "husky": "^8.0.1",
-        "prettier": "^2.4.1",
-        "sass": "^1.54.9",
-        "sass-loader": "^13.0.2"
+        "@rushstack/eslint-patch": "^1.2.0",
+        "@vitejs/plugin-vue": "^3.1.2",
+        "@vue/eslint-config-prettier": "^7.1.0",
+        "eslint": "^8.37.0",
+        "eslint-plugin-vue": "^9.10.0",
+        "husky": "^8.0.3",
+        "prettier": "^2.8.7",
+        "sass": "^1.60.0",
+        "vite": "^3.1.8"
     },
     "lint-staged": {
-        "*.{js,vue}": [
-            "eslint --fix --ext .js,.vue .",
+        "*.{js,vue,jsx,cjs,mjs}": [
+            "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
             "prettier --write --ignore-unknown"
         ]
     }

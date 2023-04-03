@@ -12,8 +12,7 @@ const authService = {
         } catch {
             return null
         }
-    },
-    logout: () => {}
+    }
 }
 
 export { authService }

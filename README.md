@@ -12,6 +12,7 @@ Vue3 Modular Architecture Portal Starter Kit
 [I18ns](https://vue-i18n.intlify.dev/) - Vue I18n is internationalization plugin for Vue.js<br>
 [CASL](https://casl.js.org/v6/en/) - Isomorphic Authorization JavaScript library<br>
 [Husky](https://typicode.github.io/husky/) - Modern native git hooks made easy<br>
+[Vite](https://vitejs.dev/) - Next Generation Frontend Tooling<br>
 
 ## UI
 
@@ -32,9 +33,9 @@ Node >= 16
 ### Edit .env
 
 ```
-VUE_APP_ENV=local
-VUE_APP_ROOT_API=https://yla-api.dev.onenex.dev/api/
-VUE_APP_I18N_FALLBACK_LOCALE=en
+VITE_ENV=local
+VITE_ROOT_API=
+VITE_I18N_FALLBACK_LOCALE=en
 ```
 
 ```
@@ -44,7 +45,7 @@ npm install
 ### Compiles and hot-reloads for development
 
 ```
-npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
@@ -74,7 +75,7 @@ password: password
 
 ### Customize configuration
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Configuration Reference](https://vitejs.dev/guide/).
 
 <br>
 
@@ -82,23 +83,23 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 #### CASL Format
 
-```json
-[
+```javascript
+;[
     {
-        "action": "read",
-        "subject": "user"
+        action: 'read',
+        subject: 'user'
     },
     {
-        "action": "edit",
-        "subject": "user"
+        action: 'edit',
+        subject: 'user'
     },
     {
-        "action": "create",
-        "subject": "user"
+        action: 'create',
+        subject: 'user'
     },
     {
-        "action": "delete",
-        "subject": "user"
+        action: 'delete',
+        subject: 'user'
     }
 ]
 ```
@@ -118,7 +119,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 #### How to use CASL in Vue Router
 
-```json
+```javascript
 {
   path: "/user/list",
   name: "user",
@@ -128,6 +129,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     action: "read",
   }
 },
+```
+
+```javascript
+if (!canNavigate(to)) {
+    // Redirect to login if not logged in
+    if (!isLoggedIn) return next({ name: 'login' })
+
+    // If logged in => not authorized
+    return next({ name: 'not-authorized' })
+}
 ```
 
 ### Date Formatter
@@ -140,18 +151,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     <h5>{{ currentShort }}</h5>
   </div>
 </template>
-
+<script setup>
 import { dateLong, dateShort } from "@/utils/formatter"
 
-setup() {
-  const currentLong = dateLong(new Date())
-  const currentShort = dateShort(new Date())
+const currentLong = dateLong(new Date())
+const currentShort = dateShort(new Date())
 
-  return {
-    currentLong,
-    currentShort
-  }
-}
+</script>
 ```
 
 ### Blood Type Picker
@@ -162,17 +168,13 @@ setup() {
     <BloodType v-model="bloodType" />
   </div>
 </template>
-
+<script setup>
 import BloodType from "@/components/BloodType"
 
-components: { BloodType },
-setup() {
-  const bloodType = ref("")
+const bloodType = ref("")
 
-  return {
-    bloodType
-  }
-}
+</script>
+
 ```
 
 ### Gender Picker
@@ -183,17 +185,12 @@ setup() {
     <Gender v-model="gender" />
   </div>
 </template>
-
+<script setup>
 import Gender from "@/components/Gender"
 
-components: { Gender },
-setup() {
-  const gender = ref("")
+const gender = ref("")
 
-  return {
-    gender
-  }
-}
+</script>
 ```
 
 ### NRC Picker
@@ -204,17 +201,12 @@ setup() {
     <NRC v-model="nrc" />
   </div>
 </template>
-
+<script setup>
 import NRC from "@/components/NRC"
 
-components: { NRC },
-setup() {
-  const nrc = ref("6/HTAWANA(N)000000")
+const nrc = ref("6/HTAWANA(N)000000")
 
-  return {
-    nrc
-  }
-}
+</script>
 ```
 
 ### Phone Number
@@ -230,19 +222,13 @@ setup() {
     </PhoneNumber>
   </div>
 </template>
-
+<script setup>
 import PhoneNumber from "@/components/PhoneNumber.vue"
 
-components: { PhoneNumber },
-setup() {
-  const countryCode = ref("+95")
-  const phoneNumber = ref("092423239")
+const countryCode = ref("+95")
+const phoneNumber = ref("092423239")
 
-  return {
-    phoneNumber,
-    countryCode,
-  }
-}
+</script>
 ```
 
 ## SASS Variables
