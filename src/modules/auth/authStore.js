@@ -30,8 +30,8 @@ export const useAuthStore = defineStore({
             const response = await authService.login(params)
             this.loginResponse = response
             if (response) {
-                this.token = response.data.access_token
                 this.userData = JSON.stringify(response.data.user)
+                this.token = response.data.access_token
                 //update abality after successfully login
                 ability.update(response.data.allowed_permissions)
 

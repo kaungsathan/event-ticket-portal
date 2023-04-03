@@ -24,23 +24,31 @@ export const useList = () => {
         { name: 'User', code: 'use' }
     ])
 
-    const selectedRole = ref('')
-    const actionItems = ref([
-        { label: 'Import', icon: 'pi pi-download', command: () => {} },
-        { label: 'Export', icon: 'pi pi-upload', command: () => {} }
+    const columns = ref([
+        { field: 'firstName', header: 'First Name', sortable: true, selected: true, style: 'min-width: 15rem', frozen: true },
+        { field: 'age', header: 'Age', sortable: true, selected: false, style: 'min-width: 5rem' },
+        { field: 'gender', header: 'Gender', sortable: true, selected: true, style: 'min-width: 15rem' },
+        { field: 'phone', header: 'Phone Number', sortable: true, selected: true, style: 'min-width: 15rem' },
+        { field: 'email', header: 'Email Address', sortable: false, selected: false, style: 'min-width: 15rem' },
+        { field: 'birthDate', header: 'Birth Date', sortable: true, selected: true, style: 'min-width: 15rem' },
+        { field: 'bloodGroup', header: 'Blood Group', sortable: true, selected: true, style: 'min-width: 10rem' },
+        { field: 'height', header: 'Height', sortable: true, selected: true, style: 'min-width: 10rem' },
+        { field: 'weight', header: 'Weight', sortable: true, selected: false, style: 'min-width: 10rem' },
+        { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
     ])
 
-    const columns = ref([
-        { field: 'firstName', header: 'firstName', sortable: true, selected: true, style: 'min-width: 15rem', frozen: true },
-        { field: 'age', header: 'age', sortable: true, selected: false, style: 'min-width: 5rem' },
-        { field: 'gender', header: 'gender', sortable: true, selected: true, style: 'min-width: 15rem' },
-        { field: 'phone', header: 'phoneNumber', sortable: true, selected: true, style: 'min-width: 15rem' },
-        { field: 'email', header: 'emailAddress', sortable: false, selected: false, style: 'min-width: 15rem' },
-        { field: 'birthDate', header: 'birthDate', sortable: true, selected: true, style: 'min-width: 15rem' },
-        { field: 'bloodGroup', header: 'bloodGroup', sortable: true, selected: true, style: 'min-width: 10rem' },
-        { field: 'height', header: 'height', sortable: true, selected: true, style: 'min-width: 10rem' },
-        { field: 'weight', header: 'weight', sortable: true, selected: false, style: 'min-width: 10rem' },
-        { field: 'actions', header: 'actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
+    const selectedRole = ref('')
+    const actionItems = ref([
+        {
+            label: 'Import',
+            icon: 'pi pi-download',
+            command: () => {}
+        },
+        {
+            label: 'Export',
+            icon: 'pi pi-upload',
+            command: () => {}
+        }
     ])
 
     onMounted(() => {
@@ -65,6 +73,7 @@ export const useList = () => {
 
         //get response
         const response = store.getAllResponse
+
         //assign value
         if (response) {
             customers.value = response.users
@@ -99,12 +108,13 @@ export const useList = () => {
 
     const showConfirmDialog = (id) => {
         confirm.require({
-            message: 'Are you sure?',
+            header: 'Confirmation',
+            message: 'Are you sure want to delete?',
             icon: 'pi pi-exclamation-triangle',
             acceptLabel: 'Yes, delete it',
             rejectLabel: 'Cancel',
             acceptClass: 'p-button-danger',
-            rejectClass: 'p-button-danger p-button-text',
+            rejectClass: 'p-button-secondary p-button-text',
             accept: () => {
                 deleteUser(id)
             },
@@ -161,5 +171,24 @@ export const useList = () => {
         fetchUserList()
     })
 
-    return { dt, lazyParams, totalRecords, customers, loading, store, search, actionItems, roles, selectedRole, actionMenu, toggleActionMenu, deleteUser, showConfirmDialog, onPage, onSort, toggleColumnMenu, selectedColumns, columns, columnMenu }
+    return {
+        dt,
+        lazyParams,
+        totalRecords,
+        customers,
+        loading,
+        search,
+        actionItems,
+        roles,
+        selectedRole,
+        actionMenu,
+        toggleActionMenu,
+        showConfirmDialog,
+        onPage,
+        onSort,
+        toggleColumnMenu,
+        selectedColumns,
+        columns,
+        columnMenu
+    }
 }

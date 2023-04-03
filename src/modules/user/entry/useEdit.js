@@ -71,7 +71,9 @@ export const useEdit = () => {
             return
         }
 
-        updateUser()
+        if (!isLoading.value) {
+            updateUser()
+        }
     }
     const updateUser = async () => {
         isLoading.value = true

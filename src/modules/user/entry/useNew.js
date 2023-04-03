@@ -45,7 +45,9 @@ export const useNew = () => {
             return
         }
 
-        addUser()
+        if (!isLoading.value) {
+            addUser()
+        }
     }
 
     const addUser = async () => {

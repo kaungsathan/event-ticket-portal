@@ -1,33 +1,34 @@
 import axios from 'axios'
 import EventBus from '@/libs/AppEventBus'
-import JSONbig from 'json-bigint'
+import JsonParseBigInt from 'json-parse-bigint'
 import { useAuthStore } from '@/modules/auth/authStore'
-import router from '@/routers'
+import router from '@/router'
 
 const api = axios.create({
-    baseURL: process.env.VUE_APP_ROOT_API,
+    baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
         Accept: 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
     }
 })
 
-api.interceptors.request.use(function (config) {
+api.interceptors.request.use((config) => {
     const store = useAuthStore()
     const token = store.getToken
     if (token) {
         config.headers['Authorization'] = `Bearer ${token}`
     }
-    // config.transformResponse = (data) => data
+    config.transformResponse = (data) => data
     return config
 })
 
 api.interceptors.response.use(
     (res) => {
-        res.data = JSONbig.parse(res.data)
+        res.data = JsonParseBigInt(res.data)
         return res
     },
     (err) => {
+        err.response.data = JSON.parse(err.response.data)
         if (err.response) {
             if (err.response.status === 401) {
                 const store = useAuthStore()
@@ -38,7 +39,7 @@ api.interceptors.response.use(
             } else if (err.response.status === 422) {
                 return Promise.reject(err.response)
             }
-            showToast(err.message.data.message)
+            showToast(err.message)
         } else if (err.request) {
             showToast(err.message)
         } else {
@@ -47,14 +48,12 @@ api.interceptors.response.use(
     }
 )
 
-function showToast(message) {
-    /**
-     * Can see EventBus in AppWrapper(Top Component)
-     */
+const showToast = (message) => {
     EventBus.emit('show-toast', {
         severity: 'error',
         summary: '',
-        detail: message
+        detail: message,
+        life: 3000
     })
 }
 

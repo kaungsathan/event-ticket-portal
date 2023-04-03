@@ -1,4 +1,4 @@
 import { app } from './main-app'
-import router from '@/routers'
+import router from '@/router'
 
 app.use(router)

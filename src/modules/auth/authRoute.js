@@ -2,7 +2,7 @@ const authRoutes = [
     {
         path: '/login',
         name: 'login',
-        component: () => import('./login/Login'),
+        component: () => import('@/modules/auth/login/Login.vue'),
         meta: { redirectIfLoggedIn: true }
     }
 ]
