@@ -4,6 +4,7 @@ import userRoutes from '@/modules/user/route'
 import authRoutes from '@/modules/auth/authRoute'
 import { useAuthStore } from '@/modules/auth/authStore'
 import { canNavigate } from '@/libs/acl/routeProtection'
+import EventBus from '@/libs/AppEventBus'
 
 const routes = [
     ...authRoutes,
@@ -52,6 +53,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    // Set progress to true when navigating to a new route
+    EventBus.emit('progress', true)
+
     window.scrollTo(0, 0)
     const authStore = useAuthStore()
     const isLoggedIn = authStore.isAuth
@@ -68,6 +72,11 @@ router.beforeEach((to, from, next) => {
         return next({ name: 'dashboard' })
     }
     return next()
+})
+
+router.afterEach(() => {
+    // Set progress to false when the route has finished loading
+    EventBus.emit('progress', false)
 })
 
 export default router
