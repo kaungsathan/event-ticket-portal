@@ -11,7 +11,9 @@ const moduleRoutes = [
                 component: () => import('@/modules/user/list/List.vue'),
                 meta: {
                     subject: 'users',
-                    action: 'read'
+                    action: 'read',
+                    title: 'User',
+                    breadcrumbs: [{ title: 'User List', routeName: 'userList' }]
                 }
             },
             {
@@ -20,7 +22,12 @@ const moduleRoutes = [
                 component: () => import('@/modules/user/entry/New.vue'),
                 meta: {
                     subject: 'users',
-                    action: 'create'
+                    action: 'create',
+                    title: 'New User',
+                    breadcrumbs: [
+                        { title: 'User List', routeName: 'userList' },
+                        { title: 'New', routeName: 'newUser' }
+                    ]
                 }
             },
             {
@@ -29,7 +36,12 @@ const moduleRoutes = [
                 component: () => import('@/modules/user/entry/Edit.vue'),
                 meta: {
                     subject: 'users',
-                    action: 'edit'
+                    action: 'edit',
+                    title: 'Edit User',
+                    breadcrumbs: [
+                        { title: 'User List', routeName: 'userList' },
+                        { title: 'Edit', routeName: 'editUser' }
+                    ]
                 }
             }
         ]
