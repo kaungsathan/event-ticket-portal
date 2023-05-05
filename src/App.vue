@@ -1,10 +1,12 @@
 <template>
+    <RouterProgressBar />
     <router-view />
     <Toast position="bottom-right" />
 </template>
 
 <script setup>
 import Toast from 'primevue/toast'
+import RouterProgressBar from '@/components/RouterProgressBar.vue'
 import { onMounted, onBeforeUnmount } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import EventBus from '@/libs/AppEventBus'

@@ -4,6 +4,8 @@
             <i class="pi pi-bars" />
         </button>
 
+        <AppBreadcrumb />
+
         <ul class="layout-collapse-topbar-menu flex origin-top">
             <li>
                 <AppThemeToggle />
@@ -22,6 +24,7 @@
 import AppLocale from './AppLocale.vue'
 import AppThemeToggle from './AppThemeToggle.vue'
 import AppUserProfile from './AppUserProfile.vue'
+import AppBreadcrumb from './AppBreadcrumb.vue'
 
 const emit = defineEmits(['menu-toggle'])
 

@@ -25,17 +25,24 @@ import AppMenuHeader from './AppMenuHeader.vue'
 import AppFooter from './AppFooter.vue'
 import menuList from '@/menu'
 import { useLayout } from '@/layout/composables/layout'
+import { useMenuStore } from '../store/menuStore'
+import { onBeforeUnmount } from 'vue'
 
 import { computed, ref } from 'vue'
 
 const { layoutConfig } = useLayout()
+const menuStore = useMenuStore()
 
 const layoutMode = ref('static')
-const staticMenuInactive = ref(false)
+const staticMenuInactive = ref(menuStore.getStaticMenuInactive)
 const overlayMenuActive = ref(false)
 const mobileMenuActive = ref(false)
 const menu = ref(menuList)
 const menuClick = ref(false)
+
+onBeforeUnmount(() => {
+    menuStore.$dispose()
+})
 
 const containerClass = computed(() => {
     return [
@@ -72,6 +79,7 @@ const onMenuToggle = (event) => {
             overlayMenuActive.value = !overlayMenuActive.value
             mobileMenuActive.value = false
         } else if (layoutMode.value === 'static') {
+            menuStore.setStaticMenuInactive(!staticMenuInactive.value)
             staticMenuInactive.value = !staticMenuInactive.value
         }
     } else {
