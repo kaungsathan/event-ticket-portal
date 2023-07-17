@@ -47,7 +47,9 @@ onUnmounted(() => {
 })
 
 const handleScroll = () => {
-    languageMenu.value.hide()
+    if (languageMenu.value) {
+        languageMenu.value.hide()
+    }
 }
 
 const getFlagUrl = () => {

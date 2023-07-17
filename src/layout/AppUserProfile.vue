@@ -52,7 +52,9 @@ const togglePanel = (event) => {
 }
 
 const handleScroll = () => {
-    userMenu.value.hide()
+    if (userMenu.value) {
+        userMenu.value.hide()
+    }
 }
 
 onMounted(() => {
