@@ -28,6 +28,15 @@ Vue3 Modular Architecture Portal Starter Kit
 Node >= 16
 <br>
 
+## Learning Resources
+
+[Cheatsheets](https://www.vuemastery.com/vue-cheat-sheet)<br>
+[PrimeFlex](https://www.primefaces.org/primeflex/)<br>
+[VueUse](https://vueuse.org/)<br>
+[Vue Community](https://vue-community.org/)<br>
+[Vue Newsletter](https://vuejsdevelopers.com/newsletter/)<br>
+<br>
+
 ## Project setup
 
 ### Edit .env
@@ -84,7 +93,7 @@ See [Configuration Reference](https://vitejs.dev/guide/).
 #### CASL Format
 
 ```javascript
-;[
+[
     {
         action: 'read',
         subject: 'user'
