@@ -15,11 +15,15 @@ export default defineConfig(({ command }) => {
                 include: resolve(dirname(fileURLToPath(import.meta.url)), './src/libs/i18n/locales/**')
             })
         ],
-        base: command === 'serve' ? '' : '/onenex/',
+        base: command === 'serve' ? '' : '',
         resolve: {
             alias: {
                 '@': fileURLToPath(new URL('./src', import.meta.url))
             }
+        },
+        server: {
+            host: '0.0.0.0',
+            port: 4173
         }
     }
 })
