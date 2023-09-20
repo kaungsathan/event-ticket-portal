@@ -43,6 +43,21 @@ const moduleRoutes = [
                         { title: 'Edit', routeName: 'editUser' }
                     ]
                 }
+            },
+            {
+                path: ':id/show',
+                name: 'editUser',
+                component: () => import('@/modules/user/entry/Edit.vue'),
+                meta: {
+                    subject: 'users',
+                    action: 'edit',
+                    title: 'Edit User',
+                    breadcrumbs: [
+                        { title: 'User List', routeName: 'userList' },
+                        { title: 'Edit', routeName: 'editUser' },
+                        { title: 'show', routeName: 'editUser', params: {} }
+                    ]
+                }
             }
         ]
     }
