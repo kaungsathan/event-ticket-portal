@@ -11,3 +11,32 @@ $gutter: 1rem; //for primeflex grid system
 /* Demos */
 @import '@/assets/demo/styles/flags/flags.css';
 @import '@/assets/demo/styles/badges.scss';
+
+.card {
+    padding: 1rem;
+}
+.field {
+    margin-bottom: 0;
+}
+
+#password .p-icon {
+    right: 0;
+    margin-right: 10px;
+}
+
+.layout-collapse-menu li a {
+    border-radius: 1.5rem !important;
+    // border-radius: 0.5rem 1.5rem 1.5rem 0.5rem !important;
+}
+
+.layout-collapse-sidebar {
+    background-color: var(--surface-ground) !important;
+}
+
+.layout-collapse-topbar {
+    background-color: var(--surface-ground) !important;
+}
+
+.layout-collapse-menu-header {
+    background-color: var(--surface-ground) !important;
+}

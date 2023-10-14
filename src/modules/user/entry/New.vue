@@ -1,117 +1,145 @@
 <template>
-    <div class="card">
-        <h5 class="text-start">User</h5>
-        <form class="p-fluid" @submit.prevent="handleSubmit(!v$.$invalid)">
-            <div class="grid">
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="name" :class="{ 'p-error': v$.name.$invalid && submitted }">Name*</label>
-                    <InputText id="name" v-model="v$.name.$model" :class="{ 'p-invalid': v$.name.$invalid && submitted }" />
+  <div class="card">
+    <h5 class="text-start"></h5>
+    <form class="p-fluid" @submit.prevent="handleSubmit(!v$.$invalid)">
+      <div class="grid">
+        <!-- User Profile -->
+        <div class="field col-12 flex align-items-center">
+          <div class="flex align-items-center">
+            <img :src="avatarPreview" class="mr-4 avatar" />
+            <FileUpload mode="basic" customUpload="true" name="avatar" accept="image/*" class="p-button-outlined p-button-plain" chooseLabel="Browse" @clear="onFileRemove" @select="onFileChange"></FileUpload>
+          </div>
+        </div>
 
-                    <small v-if="(v$.name.$invalid && submitted) || v$.name.$pending.$response" class="p-error">{{ v$.name.required.$message.replace('Value', 'Name') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('name')" class="p-error">
-                        <div v-for="error in errors.get('name')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="age" :class="{ 'p-error': v$.age.$invalid && submitted }">Age*</label>
-                    <InputText id="age" v-model="v$.age.$model" :class="{ 'p-invalid': v$.age.$invalid && submitted }" />
+        <!-- Username -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="username" :class="{ 'p-error': v$.username.$invalid && submitted }">Username<span class="p-error">*</span></label>
+          <InputText id="username" v-model="v$.username.$model" :class="{ 'p-invalid': v$.username.$invalid && submitted }" />
 
-                    <small v-if="(v$.age.$invalid && submitted) || v$.age.$pending.$response" class="p-error">{{ v$.age.required.$message.replace('Value', 'Age') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('age')" class="p-error">
-                        <div v-for="error in errors.get('age')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="email" :class="{ 'p-error': v$.email.$invalid && submitted }">Email*</label>
-                    <InputText id="email" v-model="v$.email.$model" :class="{ 'p-invalid': v$.email.$invalid && submitted }" aria-describedby="email-error" />
-
-                    <span v-if="v$.email.$error && submitted">
-                        <span v-for="(error, index) of v$.email.$errors" id="email-error" :key="index">
-                            <small class="p-error">{{ error.$message }}</small>
-                        </span>
-                    </span>
-                    <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{ v$.email.required.$message.replace('Value', 'Email') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('email')" class="p-error">
-                        <div v-for="error in errors.get('email')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="phoneNumber" :class="{ 'p-error': v$.phoneNumber.$invalid && submitted }">Phone Number*</label>
-                    <InputText id="phoneNumber" v-model="v$.phoneNumber.$model" :class="{ 'p-invalid': v$.phoneNumber.$invalid && submitted }" />
-
-                    <small v-if="(v$.phoneNumber.$invalid && submitted) || v$.phoneNumber.$pending.$response" class="p-error">{{ v$.phoneNumber.required.$message.replace('Value', 'PhoneNumber') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('phone_number')" class="p-error">
-                        <div v-for="error in errors.get('phone_number')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
-
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="gender" :class="{ 'p-error': v$.gender.$invalid && submitted }">Gender*</label>
-                    <InputText id="gender" v-model="v$.gender.$model" :class="{ 'p-invalid': v$.gender.$invalid && submitted }" />
-
-                    <small v-if="(v$.gender.$invalid && submitted) || v$.gender.$pending.$response" class="p-error">{{ v$.gender.required.$message.replace('Value', 'Gender') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('gender')" class="p-error">
-                        <div v-for="error in errors.get('gender')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
-
-                <div class="field col-12 md:col-6 lg:col-4">
-                    <label for="birthDate" :class="{ 'p-error': v$.birthDate.$invalid && submitted }">Birth of Date*</label>
-                    <InputText id="gender" v-model="v$.birthDate.$model" :class="{ 'p-invalid': v$.birthDate.$invalid && submitted }" />
-
-                    <small v-if="(v$.birthDate.$invalid && submitted) || v$.birthDate.$pending.$response" class="p-error">{{ v$.birthDate.required.$message.replace('Value', 'BirthDate') }}</small>
-                    <!-- Server Validation -->
-                    <small v-if="errors.has('birth_date')" class="p-error">
-                        <div v-for="error in errors.get('birth_date')" :key="error">
-                            {{ error }}
-                        </div>
-                    </small>
-                    <!-- Server Validation -->
-                </div>
+          <small v-if="(v$.username.$invalid && submitted) || v$.username.$pending.$response" class="p-error">{{ v$.username.required.$message.replace('Value', 'Username') }}</small>
+          <!-- Server Validation -->
+          <small v-if="errors.has('username')" class="p-error">
+            <div v-for="error in errors.get('username')" :key="error">
+              {{ error }}
             </div>
-            <div class="flex justify-content-end">
-                <router-link v-if="$can('read', 'users')" :to="{ name: 'userList' }">
-                    <div>
-                        <Button label="Cancel" class="mt-2 p-button-secondary p-button-text" />
-                    </div>
-                </router-link>
-                <div class="ml-2">
-                    <Button type="submit" label="Save" class="mt-2 p-button-success" />
-                </div>
+          </small>
+          <!-- Server Validation -->
+        </div>
+
+        <!-- Full Name -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="full_name" :class="{ 'p-error': v$.full_name.$invalid && submitted }">{{ $t('Full Name') }}<span class="p-error">*</span></label>
+          <InputText id="full_name" v-model="v$.full_name.$model" :class="{ 'p-invalid': v$.full_name.$invalid && submitted }" />
+
+          <small v-if="(v$.full_name.$invalid && submitted) || v$.full_name.$pending.$response" class="p-error">{{ v$.full_name.required.$message.replace('Value', 'Full Name') }}</small>
+          <!-- Server Validation -->
+          <small v-if="errors.has('full_name')" class="p-error">
+            <div v-for="error in errors.get('full_name')" :key="error">
+              {{ error }}
             </div>
-        </form>
-        <Loading v-if="isLoading" />
-    </div>
+          </small>
+          <!-- Server Validation -->
+        </div>
+
+        <!-- Password -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">{{ $t('Password') }}<span class="p-error">*</span></label>
+          <Password id="password" v-model="v$.password.$model" autocomplete="new-password" placeholder="Password" :class="{ 'p-invalid': v$.password.$invalid && submitted }" :feedback="false" toggleMask />
+
+          <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">
+            <span v-if="v$.password.required.$invalid">
+              {{ v$.password.required.$message.replace('Value', 'User password') }}
+            </span>
+            <span v-if="v$.password.minLength.$invalid">
+              {{ v$.password.minLength.$message.replace('Value', 'User password') }}
+            </span>
+          </small>
+        </div>
+
+        <!-- Email -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="email" :class="{ 'p-error': v$.email.$invalid && submitted }">{{ $t('Email') }}</label>
+          <InputText id="email" v-model="v$.email.$model" :class="{ 'p-invalid': v$.email.$invalid && submitted }" aria-describedby="email-error" />
+
+          <span v-if="v$.email.$error && submitted">
+            <span v-for="(error, index) of v$.email.$errors" id="email-error" :key="index">
+              <small class="p-error">{{ error.$message }}</small>
+            </span>
+          </span>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="mobile_number" :class="{ 'p-error': v$.mobile_number.$invalid && submitted }">{{ $t('Mobile Number') }}</label>
+          <InputText id="mobile_number" v-model="v$.mobile_number.$model" :class="{ 'p-invalid': v$.mobile_number.$invalid && submitted }" />
+
+          <small v-if="(v$.mobile_number.$invalid && submitted) || v$.mobile_number.$pending.$response" class="p-error">{{ v$.mobile_number.required.$message.replace('Value', 'PhoneNumber') }}</small>
+          <!-- Server Validation -->
+          <small v-if="errors.has('phone_number')" class="p-error">
+            <div v-for="error in errors.get('phone_number')" :key="error">
+              {{ error }}
+            </div>
+          </small>
+          <!-- Server Validation -->
+        </div>
+
+        <!-- Role -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="role" :class="{ 'p-error': v$.role_id.$invalid && submitted }">{{ $t('Role') }}<span class="p-error">*</span></label>
+          <Dropdown v-model="v$.role_id.$model" :options="roles" optionLabel="name" optionValue="code" placeholder="Select role" class="w-full" showClear />
+          <small v-if="(v$.role_id.$invalid && submitted) || v$.role_id.$pending.$response" class="p-error">
+            {{ v$.role_id.required.$message.replace('Value', 'User role') }}
+          </small>
+        </div>
+
+        <!-- Status -->
+        <div class="field col-12 md:col-6 lg:col-6">
+          <label for="status" :class="{ 'p-error': v$.status.$invalid && submitted }">{{ $t('Status') }}<span class="p-error">*</span></label>
+          <div class="flex flex-wrap gap-3 mt-2">
+            <div v-for="status in statuses" :key="status.code" class="flex align-items-center">
+              <RadioButton v-model="v$.status.$model" :inputId="status.code" name="status" :value="status.name" />
+              <label :for="status.code" class="ml-2">{{ status.name }}</label>
+            </div>
+          </div>
+          <small v-if="(v$.status.$invalid && submitted) || v$.status.$pending.$response" class="p-error">
+            {{ v$.status.required.$message.replace('Value', 'User status') }}
+          </small>
+        </div>
+      </div>
+
+      <div class="flex justify-content-end">
+        <router-link v-if="$can('index', 'User')" :to="{ name: 'userList' }">
+          <div class="m-2">
+            <Button label="Cancel" severity="secondary" text class="shadow-1" />
+          </div>
+        </router-link>
+        <div class="m-2">
+          <Button type="submit" label="Save" severity="primary" />
+        </div>
+      </div>
+    </form>
+    <Loading v-if="isLoading" />
+  </div>
 </template>
 
 <script setup>
 import Button from 'primevue/button'
+import Dropdown from 'primevue/dropdown'
+import FileUpload from 'primevue/fileupload'
 import InputText from 'primevue/inputtext'
+import Password from 'primevue/password'
+import RadioButton from 'primevue/radiobutton'
 import Loading from '@/components/Loading.vue'
 
 import { useNew } from './useNew'
 
-const { isLoading, v$, handleSubmit, submitted, errors } = useNew()
+const { isLoading, v$, statuses, roles, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted, errors } = useNew()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+}
+</style>

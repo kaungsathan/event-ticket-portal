@@ -5,66 +5,66 @@ import { useVuelidate } from '@vuelidate/core'
 import { useRouter } from 'vue-router'
 
 export const useLogin = () => {
-    const store = useAuthStore()
-    const router = useRouter()
+  const store = useAuthStore()
+  const router = useRouter()
 
-    const checked = ref(false)
-    const submitted = ref(false)
-    const isLoading = ref(false)
+  // const checked = ref(false)
+  const submitted = ref(false)
+  const isLoading = ref(false)
 
-    onBeforeUnmount(() => {
-        store.$dispose()
+  onBeforeUnmount(() => {
+    store.$dispose()
+  })
+
+  const state = reactive({
+    username: '',
+    password: ''
+  })
+
+  const rules = {
+    username: { required },
+    password: { required }
+  }
+
+  const v$ = useVuelidate(rules, state)
+
+  const handleSubmit = (isFormValid) => {
+    submitted.value = true
+
+    if (!isFormValid) {
+      return
+    }
+
+    if (!isLoading.value) {
+      loginUser()
+    }
+  }
+
+  const loginUser = async () => {
+    isLoading.value = true
+
+    await store.login({
+      username: state.username.trim(),
+      password: state.password.trim()
+      // isRemember: checked.value
     })
 
-    const state = reactive({
-        identifier: '',
-        password: ''
-    })
+    const response = store.getLoginResponse
 
-    const rules = {
-        identifier: { required },
-        password: { required }
+    if (response) {
+      isLoading.value = false
+      router.replace({ name: 'dashboard' })
+    } else {
+      isLoading.value = false
     }
+  }
 
-    const v$ = useVuelidate(rules, state)
-
-    const handleSubmit = (isFormValid) => {
-        submitted.value = true
-
-        if (!isFormValid) {
-            return
-        }
-
-        if (!isLoading.value) {
-            loginUser()
-        }
-    }
-
-    const loginUser = async () => {
-        isLoading.value = true
-
-        await store.login({
-            identifier: state.identifier.trim(),
-            password: state.password.trim(),
-            isRemember: checked.value
-        })
-
-        const response = store.getLoginResponse
-
-        if (response) {
-            isLoading.value = false
-            router.replace({ name: 'dashboard' })
-        } else {
-            isLoading.value = false
-        }
-    }
-
-    return {
-        checked,
-        state,
-        v$,
-        handleSubmit,
-        submitted,
-        isLoading
-    }
+  return {
+    // checked,
+    state,
+    v$,
+    handleSubmit,
+    submitted,
+    isLoading
+  }
 }
