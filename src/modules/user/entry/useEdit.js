@@ -1,116 +1,182 @@
 import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
-import { email, required } from '@vuelidate/validators'
+import { required, email, minLength, maxLength, numeric, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { useStore } from '../store'
 import { useRoute, useRouter } from 'vue-router'
 import { Errors } from '@/utils/serverValidation'
+import placeholderImage from '@/assets/images/placeholder.png'
 
 export const useEdit = () => {
-    const store = useStore()
-    const route = useRoute()
-    const router = useRouter()
+  const store = useStore()
+  const route = useRoute()
+  const router = useRouter()
 
-    const isLoading = ref(false)
-    const errors = new Errors()
+  const isLoading = ref(true)
+  const errors = new Errors()
 
-    const state = reactive({
-        name: '',
-        email: '',
-        age: '',
-        phoneNumber: '',
-        gender: '',
-        birthDate: ''
+  const state = reactive({
+    username: '',
+    full_name: '',
+    password: null,
+    email: '',
+    mobile_number: '',
+    avatar: null,
+    role_id: null,
+    status: 'Active'
+  })
+
+  const avatarPreview = ref(placeholderImage)
+  const roles = ref([])
+
+  const statuses = ref([
+    { name: 'Active', code: 'Active' },
+    { name: 'Inactive', code: 'Inactive' },
+    { name: 'Locked', code: 'Locked' }
+  ])
+
+  const rules = {
+    username: { required },
+    full_name: { required },
+    password: {
+      minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6))
+    },
+    email: { email },
+    mobile_number: {
+      numeric,
+      minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6)),
+      maxLength: maxLength(12)
+    },
+    role_id: { required },
+    status: { required }
+  }
+
+  const submitted = ref(false)
+
+  const v$ = useVuelidate(rules, state)
+
+  onMounted(() => {
+    fetchUser()
+    fetchRoles()
+  })
+
+  onBeforeUnmount(() => {
+    store.$dispose()
+  })
+
+  const fetchUser = async () => {
+    isLoading.value = true
+    errors.clear()
+
+    await store.fetchOne({
+      id: route.params.id
     })
 
-    const rules = {
-        name: { required },
-        email: { required, email },
-        age: { required },
-        phoneNumber: { required },
-        gender: { required },
-        birthDate: { required }
+    const response = store.getOneResponse
+    if (response) {
+      state.username = response.data.username
+      state.full_name = response.data.full_name
+      state.email = response.data.email
+      state.mobile_number = response.data.mobile_number
+      state.avatar = response.data.avatar
+      state.role_id = response.data.role_id
+      state.status = response.data.status
+      if (state.avatar != null) {
+        avatarPreview.value = state.avatar
+      }
     }
 
-    const submitted = ref(false)
+    isLoading.value = false
+  }
 
-    const v$ = useVuelidate(rules, state)
+  const fetchRoles = async () => {
+    isLoading.value = true
+    //fetch API
+    await store.fetchAllRole()
+    //get response
+    const response = store.getAllRoleResponse
+    //assign value
+    if (response) {
+      const { options } = response.data
+      for (let i = 0; i < options.length; i += 1) {
+        roles.value.push({ name: options[i].name, code: options[i].id })
+      }
+    }
+    isLoading.value = false
+  }
 
-    onMounted(() => {
-        fetchUser()
-    })
+  const onFileChange = (event) => {
+    const file = event.files[0] // Assuming event.target is the input element
 
-    onBeforeUnmount(() => {
-        store.$dispose()
-    })
+    if (file) {
+      state.avatar = file
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        avatarPreview.value = e.target.result
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
-    const fetchUser = async () => {
-        isLoading.value = true
-        errors.clear()
+  const onFileRemove = () => {
+    state.avatar = placeholderImage
+  }
 
-        await store.fetchOne({
-            id: route.params.id
-        })
+  const handleSubmit = (isFormValid) => {
+    submitted.value = true
 
-        const response = store.getOneResponse
-        if (response) {
-            state.name = response.firstName
-            state.email = response.email
-            state.age = response.age
-            state.phoneNumber = response.phone
-            state.gender = response.gender
-            state.birthDate = response.birthDate
-        }
-
-        isLoading.value = false
+    if (!isFormValid) {
+      return
     }
 
-    const handleSubmit = (isFormValid) => {
-        submitted.value = true
-
-        if (!isFormValid) {
-            return
-        }
-
-        if (!isLoading.value) {
-            updateUser()
-        }
+    if (!isLoading.value) {
+      updateRecord()
     }
-    const updateUser = async () => {
-        isLoading.value = true
+  }
 
-        try {
-            await store.update({
-                id: route.params.id,
-                name: state.name,
-                email: state.email,
-                age: state.age,
-                phoneNumber: state.phoneNumber,
-                gender: state.gender,
-                birthDate: state.birthDate
-            })
+  const updateRecord = async () => {
+    errors.clear()
+    isLoading.value = true
 
-            const response = store.getUpdateResponse
+    try {
+      await store.update({
+        id: route.params.id,
+        full_name: state.full_name,
+        password: state.password,
+        email: state.email,
+        mobile_number: state.mobile_number,
+        avatar: state.avatar,
+        role_id: state.role_id,
+        status: state.status
+      })
 
-            if (response) {
-                router.push({ name: 'userList' })
-            }
+      const response = store.getUpdateResponse
 
-            isLoading.value = false
-        } catch (error) {
-            isLoading.value = false
-            if (error.status === 422) {
-                const err = error.data.data
-                errors.record(err)
-            }
-        }
+      if (response) {
+        router.push({ name: 'userList' })
+      }
+
+      isLoading.value = false
+    } catch (error) {
+      console.log(error)
+      isLoading.value = false
+      if (error.status === 422) {
+        const err = error.data.data
+        errors.record(err)
+      }
     }
+  }
 
-    return {
-        isLoading,
-        state,
-        v$,
-        handleSubmit,
-        submitted,
-        errors
-    }
+  return {
+    isLoading,
+    state,
+    statuses,
+    roles,
+    onFileChange,
+    onFileRemove,
+    avatarPreview,
+    v$,
+    handleSubmit,
+    submitted,
+    errors
+  }
 }
