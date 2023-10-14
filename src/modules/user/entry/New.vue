@@ -109,12 +109,12 @@
 
       <div class="flex justify-content-end">
         <router-link v-if="$can('index', 'User')" :to="{ name: 'userList' }">
-          <div>
-            <Button label="Cancel" class="mt-2 p-button-secondary p-button-text" />
+          <div class="m-2">
+            <Button label="Cancel" severity="secondary" text class="shadow-1" />
           </div>
         </router-link>
-        <div class="ml-2">
-          <Button type="submit" label="Save" class="mt-2 p-button-success" />
+        <div class="m-2">
+          <Button type="submit" label="Save" severity="primary" />
         </div>
       </div>
     </form>

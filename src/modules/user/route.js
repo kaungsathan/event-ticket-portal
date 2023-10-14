@@ -13,8 +13,7 @@ const moduleRoutes = [
           subject: 'User',
           action: 'index',
           auth: true,
-          title: 'User',
-          breadcrumbs: [{ title: 'User List', routeName: 'userList' }]
+          title: 'User'
         }
       },
       {

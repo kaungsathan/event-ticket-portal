@@ -14,7 +14,7 @@
 
         <div class="field col-12 md:col-6 lg:col-3">
           <label class="label-sm"><i class="pi pi-filter"></i>&nbsp;{{ $t('Date') }}</label>
-          <Calendar :placeholder="$t('Date Range')" inputId="selectedDateBetween" v-model="selectedDateBetween" selectionMode="range" :manualInput="false" dateFormat="dd/mm/yy" showIcon :showButtonBar="true" />
+          <Calendar :placeholder="$t('Date Range')" inputId="selectedDateBetween" v-model="selectedDateBetween" selectionMode="range" :manualInput="false" dateFormat="dd/mm/yy" class="w-full" showIcon :showButtonBar="true" />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
                   <InputText v-model="search" placeholder="Keyword Search" class="w-full md:w-auto" />
                 </span>
                 <router-link v-if="$can('create', 'User')" :to="{ name: 'newUser' }">
-                  <Button label="New" class="p-button-success ml-0 md:ml-2 mt-2 md:mt-0" />
+                  <Button label="New" class="ml-0 md:ml-2 mt-2 md:mt-0" severity="success" />
                 </router-link>
 
                 <Menu ref="actionMenu" :model="actionItems" :popup="true" />

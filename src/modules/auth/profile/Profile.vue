@@ -13,7 +13,7 @@
 
         <!-- Username -->
         <div class="field col-12 md:col-6 lg:col-6">
-          <label for="username" :class="{ 'p-error': v$.username.$invalid && submitted }">Username<span class="p-error">*</span></label>
+          <label for="username" :class="{ 'p-error': v$.username.$invalid && submitted }">Username</label>
           <InputText id="username" v-model="v$.username.$model" :class="{ 'p-invalid': v$.username.$invalid && submitted }" readonly="true" />
 
           <small v-if="(v$.username.$invalid && submitted) || v$.username.$pending.$response" class="p-error">{{ v$.username.required.$message.replace('Value', 'Username') }}</small>
@@ -28,7 +28,7 @@
 
         <!-- Full Name -->
         <div class="field col-12 md:col-6 lg:col-6">
-          <label for="full_name" :class="{ 'p-error': v$.full_name.$invalid && submitted }">{{ $t('Full Name') }}<span class="p-error">*</span></label>
+          <label for="full_name" :class="{ 'p-error': v$.full_name.$invalid && submitted }">{{ $t('Full Name') }}</label>
           <InputText id="full_name" v-model="v$.full_name.$model" :class="{ 'p-invalid': v$.full_name.$invalid && submitted }" />
 
           <small v-if="(v$.full_name.$invalid && submitted) || v$.full_name.$pending.$response" class="p-error">{{ v$.full_name.required.$message.replace('Value', 'Full Name') }}</small>
@@ -43,12 +43,12 @@
 
         <!-- Password -->
         <div class="field col-12 md:col-6 lg:col-6">
-          <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">{{ $t('Password') }}<span class="p-error">*</span></label>
+          <label for="password" :class="{ 'p-error': v$.password.$invalid && submitted }">{{ $t('Password') }}</label>
           <Password id="password" v-model="v$.password.$model" autocomplete="new-password" placeholder="Password" :class="{ 'p-invalid': v$.password.$invalid && submitted }" :feedback="false" toggleMask />
 
           <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">
-            <span v-if="v$.password.required.$invalid">
-              {{ v$.password.required.$message.replace('Value', 'User password') }}
+            <span v-if="v$.password.minLength.$invalid">
+              {{ v$.password.minLength.$message.replace('Value', 'User password') }}
             </span>
             <span v-if="v$.password.minLength.$invalid">
               {{ v$.password.minLength.$message.replace('Value', 'User password') }}
@@ -82,37 +82,12 @@
           </small>
           <!-- Server Validation -->
         </div>
-
-        <!-- Role -->
-        <div class="field col-12 md:col-6 lg:col-6">
-          <label for="role" :class="{ 'p-error': v$.role_id.$invalid && submitted }">{{ $t('Role') }}<span class="p-error">*</span></label>
-          <Dropdown v-model="v$.role_id.$model" :options="roles" optionLabel="name" optionValue="code" placeholder="Select role" class="w-full" showClear />
-          <small v-if="(v$.role_id.$invalid && submitted) || v$.role_id.$pending.$response" class="p-error">
-            {{ v$.role_id.required.$message.replace('Value', 'User role') }}
-          </small>
-        </div>
-
-        <!-- Status -->
-        <div class="field col-12 md:col-6 lg:col-6">
-          <label for="status" :class="{ 'p-error': v$.status.$invalid && submitted }">{{ $t('Status') }}<span class="p-error">*</span></label>
-          <div class="flex flex-wrap gap-3 mt-2">
-            <div v-for="status in statuses" :key="status.code" class="flex align-items-center">
-              <RadioButton v-model="v$.status.$model" :inputId="status.code" name="status" :value="status.name" />
-              <label :for="status.code" class="ml-2">{{ status.name }}</label>
-            </div>
-          </div>
-          <small v-if="(v$.status.$invalid && submitted) || v$.status.$pending.$response" class="p-error">
-            {{ v$.status.required.$message.replace('Value', 'User status') }}
-          </small>
-        </div>
       </div>
 
       <div class="flex justify-content-end">
-        <router-link v-if="$can('index', 'User')" :to="{ name: 'userList' }">
-          <div class="m-2">
-            <Button label="Cancel" severity="secondary" text class="shadow-1" />
-          </div>
-        </router-link>
+        <div class="m-2">
+          <Button label="Close" severity="secondary" @click="goBack" text class="shadow-1" />
+        </div>
         <div class="m-2">
           <Button type="submit" label="Save" severity="primary" />
         </div>
@@ -124,16 +99,14 @@
 
 <script setup>
 import Button from 'primevue/button'
-import Dropdown from 'primevue/dropdown'
 import FileUpload from 'primevue/fileupload'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
-import RadioButton from 'primevue/radiobutton'
 import Loading from '@/components/Loading.vue'
 
-import { useEdit } from './useEdit'
+import { useProfile } from './useProfile'
 
-const { isLoading, v$, statuses, roles, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted, errors } = useEdit()
+const { isLoading, v$, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted, errors, goBack } = useProfile()
 </script>
 
 <style lang="scss" scoped>

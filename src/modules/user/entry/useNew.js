@@ -36,7 +36,7 @@ export const useNew = () => {
     full_name: { required },
     password: {
       required,
-      minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6))
+      minLength: helpers.withMessage('Value should be at least 8 characters', minLength(8))
     },
     email: { email },
     mobile_number: {
@@ -90,7 +90,8 @@ export const useNew = () => {
   }
 
   const onFileRemove = () => {
-    state.avatar = placeholderImage
+    state.avatar = null
+    avatarPreview.value = placeholderImage
   }
 
   const handleSubmit = (isFormValid) => {

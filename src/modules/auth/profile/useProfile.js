@@ -1,13 +1,13 @@
 import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
 import { required, email, minLength, maxLength, numeric, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
-import { useStore } from '../store'
+import { useAuthStore } from '../authStore'
 import { useRoute, useRouter } from 'vue-router'
 import { Errors } from '@/utils/serverValidation'
 import placeholderImage from '@/assets/images/placeholder.png'
 
-export const useEdit = () => {
-  const store = useStore()
+export const useProfile = () => {
+  const store = useAuthStore()
   const route = useRoute()
   const router = useRouter()
 
@@ -21,19 +21,11 @@ export const useEdit = () => {
     email: '',
     mobile_number: '',
     avatar: null,
-    role_id: null,
-    status: 'Active',
     avatar_updated: false
   })
 
   const avatarPreview = ref(placeholderImage)
   const roles = ref([])
-
-  const statuses = ref([
-    { name: 'Active', code: 'Active' },
-    { name: 'Inactive', code: 'Inactive' },
-    { name: 'Locked', code: 'Locked' }
-  ])
 
   const rules = {
     username: { required },
@@ -46,9 +38,7 @@ export const useEdit = () => {
       numeric,
       minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6)),
       maxLength: maxLength(12)
-    },
-    role_id: { required },
-    status: { required }
+    }
   }
 
   const submitted = ref(false)
@@ -56,52 +46,32 @@ export const useEdit = () => {
   const v$ = useVuelidate(rules, state)
 
   onMounted(() => {
-    fetchUser()
-    fetchRoles()
+    fetchProfile()
   })
 
   onBeforeUnmount(() => {
     store.$dispose()
   })
 
-  const fetchUser = async () => {
+  const fetchProfile = async () => {
     isLoading.value = true
     errors.clear()
 
-    await store.fetchOne({
-      id: route.params.id
-    })
+    await store.fetchProfile()
 
-    const response = store.getOneResponse
+    const response = store.getUserData
     if (response) {
-      state.username = response.data.username
-      state.full_name = response.data.full_name
-      state.email = response.data.email
-      state.mobile_number = response.data.mobile_number
-      state.avatar = response.data.avatar
-      state.role_id = response.data.role_id
-      state.status = response.data.status
+      state.username = response.username
+      state.full_name = response.full_name
+      state.email = response.email
+      state.mobile_number = response.mobile_number
+      state.avatar = response.avatar
       if (state.avatar != null) {
         avatarPreview.value = state.avatar
       }
     }
 
     isLoading.value = false
-  }
-
-  const fetchRoles = async () => {
-    isLoading.value = true
-    //fetch API
-    await store.fetchAllRole()
-    //get response
-    const response = store.getAllRoleResponse
-    //assign value
-    if (response) {
-      const { options } = response.data
-      for (let i = 0; i < options.length; i += 1) {
-        roles.value.push({ name: options[i].name, code: options[i].id })
-      }
-    }
   }
 
   const onFileChange = (event) => {
@@ -147,15 +117,13 @@ export const useEdit = () => {
         email: state.email,
         mobile_number: state.mobile_number,
         avatar: state.avatar instanceof File ? state.avatar : null,
-        role_id: state.role_id,
-        status: state.status,
         avatar_updated: state.avatar_updated
       })
 
-      const response = store.getUpdateResponse
+      const response = store.userData
 
       if (response) {
-        router.push({ name: 'userList' })
+        // router.back()
       }
 
       isLoading.value = false
@@ -169,10 +137,13 @@ export const useEdit = () => {
     }
   }
 
+  const goBack = () => {
+    router.back()
+  }
+
   return {
     isLoading,
     state,
-    statuses,
     roles,
     onFileChange,
     onFileRemove,
@@ -180,6 +151,7 @@ export const useEdit = () => {
     v$,
     handleSubmit,
     submitted,
-    errors
+    errors,
+    goBack
   }
 }

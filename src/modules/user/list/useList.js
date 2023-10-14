@@ -75,7 +75,6 @@ export const useList = () => {
         roles.value.push({ name: options[i].name, code: options[i].id })
       }
     }
-    isLoading.value = false
   }
 
   const fetchUserList = async () => {
