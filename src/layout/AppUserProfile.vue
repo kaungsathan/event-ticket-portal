@@ -1,12 +1,14 @@
 <template>
   <Menu ref="userMenu" :model="profileMenuItems" :popup="true" />
-  <div class="flex justify-content-center align-items-center cursor-pointer ml-3" @click="togglePanel">
-    <Avatar :image="user != null && user.avatar != null ? user.avatar : 'https://www.gravatar.com/avatar/'" size="large" shape="circle" />
-    <div class="user-menu ml-4 hidden lg:block">
-      <div class="font-bold">{{ user.full_name }}</div>
-      <div class="text-sm mt-1">{{ user != null ? user.role.name : 'Role' }}</div>
+  <div class="flex justify-center items-center cursor-pointer gap-3" @click="togglePanel">
+    <Avatar :image="user?.avatar ? user.avatar : 'https://i.pravatar.cc/300'" size="large" shape="circle" />
+    <div class="user-menu hidden lg:block">
+      <div class="font-semibold">{{ user ? user.full_name : 'John' }}</div>
+      <div class="text-sm">{{ user ? user.role.name : 'Role' }}</div>
     </div>
-    <i class="pi pi-angle-down ml-2 hidden lg:block" style="color: var(--primary-color)"></i>
+    <div class="hidden lg:block">
+      <i class="pi pi-angle-down"></i>
+    </div>
   </div>
 </template>
 <script setup>
@@ -15,8 +17,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/modules/auth/authStore'
 import { useRouter } from 'vue-router'
 
-import Avatar from 'primevue/avatar'
-import Menu from 'primevue/menu'
 import { authService } from '@/modules/auth/authService'
 import { computed } from 'vue'
 

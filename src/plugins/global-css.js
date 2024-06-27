@@ -1,7 +1,7 @@
-import 'primevue/resources/primevue.min.css'
-import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
-// import 'prismjs/themes/prism-coy.css';
-// import '@/assets/styles/layout.scss';
-// import '@/assets/demo/flags/flags.css';
-import '@/assets/styles.scss'
+import '@/assets/css/tailwind.css'
+import '@/assets/css/base.css'
+import '@/assets/css/typography.css'
+import '@/assets/css/main.css'
+import '@/assets/css/custom.css'
+import '@/assets/css/layout/index.scss'

@@ -3,7 +3,7 @@ import dashboardRoutes from '@/modules/dashboard/route'
 import userRoutes from '@/modules/user/route'
 import authRoutes from '@/modules/auth/authRoute'
 import { useAuthStore } from '@/modules/auth/authStore'
-import { canNavigate } from '@/libs/acl/routeProtection'
+import { canNavigate } from '@/libs/casl/routeProtection'
 import EventBus from '@/libs/AppEventBus'
 
 const routes = [

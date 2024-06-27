@@ -5,6 +5,6 @@ import { useLocaleStore } from '@/store/localeStore'
 const localeStore = useLocaleStore()
 
 app.config.globalProperties.$appState = reactive({
-    theme: localeStore.getCurrentTheme,
-    darkTheme: localeStore.getCurrentTheme === 'lara-dark-indigo' ? true : false
+  theme: localeStore.getCurrentTheme,
+  darkTheme: localeStore.getCurrentTheme === 'lara-dark-indigo' ? true : false
 })

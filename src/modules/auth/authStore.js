@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { authService } from './authService'
-import ability from '@/libs/acl/ability'
+import ability from '@/libs/casl/ability'
 
 export const useAuthStore = defineStore({
   id: 'useAuthStore',
@@ -49,12 +49,16 @@ export const useAuthStore = defineStore({
     },
     async fetchProfile() {
       const response = await authService.getProfile()
-      this.userData = JSON.stringify(response.data)
-      localStorage.setItem('userData', this.userData)
+      if (response) {
+        this.userData = JSON.stringify(response.data)
+        localStorage.setItem('userData', this.userData)
+      }
     },
     async update(params) {
       const response = await authService.updateProfile(params)
-      this.userData = JSON.stringify(response.data)
+      if (response) {
+        this.userData = JSON.stringify(response.data)
+      }
     }
   }
 })

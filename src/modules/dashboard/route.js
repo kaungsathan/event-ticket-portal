@@ -11,7 +11,7 @@ const moduleRoutes = [
         component: () => import('@/modules/dashboard/Index.vue'),
         meta: {
           auth: true,
-          subject: 'User',
+          subject: 'Home',
           action: 'read'
         }
       }

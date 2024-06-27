@@ -123,7 +123,7 @@ export const useProfile = () => {
       const response = store.userData
 
       if (response) {
-        // router.back()
+        router.back()
       }
 
       isLoading.value = false
@@ -137,10 +137,6 @@ export const useProfile = () => {
     }
   }
 
-  const goBack = () => {
-    router.back()
-  }
-
   return {
     isLoading,
     state,
@@ -151,7 +147,6 @@ export const useProfile = () => {
     v$,
     handleSubmit,
     submitted,
-    errors,
-    goBack
+    errors
   }
 }

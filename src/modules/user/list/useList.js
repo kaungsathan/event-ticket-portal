@@ -101,7 +101,7 @@ export const useList = () => {
     //assign value
     if (response) {
       records.value = response.data
-      totalRecords.value = response.meta.total
+      totalRecords.value = response?.meta?.total || 0
     }
     isLoading.value = false
   }

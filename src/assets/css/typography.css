@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Pyidaungsu';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('../fonts/Pyidaungsu2_5_Bold.woff2') format('woff2'),
+    url('../fonts/Pyidaungsu2_5_Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pyidaungsu';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('../fonts/Pyidaungsu2_5_Regular.woff2') format('woff2'),
+    url('../fonts/Pyidaungsu2_5_Regular.woff') format('woff');
+}

@@ -4,16 +4,16 @@ const menuList = [
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-home',
-        to: '/'
-        // action: "read",
-        // subject: "dashboard"
+        to: '/',
+        action: 'read',
+        subject: 'Home'
       },
       {
         label: 'User',
         icon: 'pi pi-fw pi-user',
-        to: '/users/list'
-        // action: "read",
-        // subject: "user"
+        to: '/users/list',
+        action: 'read',
+        subject: 'User'
       }
     ]
   }

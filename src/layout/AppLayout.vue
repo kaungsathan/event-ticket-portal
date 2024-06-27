@@ -24,13 +24,11 @@ import AppMenu from './AppMenu.vue'
 import AppMenuHeader from './AppMenuHeader.vue'
 // import AppFooter from './AppFooter.vue'
 import menuList from '@/menu'
-import { useLayout } from '@/layout/composables/layout'
 import { useMenuStore } from '../store/menuStore'
 import { onBeforeUnmount } from 'vue'
 
 import { computed, ref } from 'vue'
 
-const { layoutConfig } = useLayout()
 const menuStore = useMenuStore()
 
 const layoutMode = ref('static')
@@ -52,9 +50,7 @@ const containerClass = computed(() => {
       'layout-static': layoutMode.value === 'static',
       'layout-static-sidebar-inactive': staticMenuInactive.value && layoutMode.value === 'static',
       'layout-overlay-sidebar-active': overlayMenuActive.value && layoutMode.value === 'overlay',
-      'layout-mobile-sidebar-active': mobileMenuActive.value,
-      'p-input-filled': layoutConfig.inputStyle.value === 'filled',
-      'p-ripple-disabled': !layoutConfig.ripple.value
+      'layout-mobile-sidebar-active': mobileMenuActive.value
     }
   ]
 })
