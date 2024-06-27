@@ -13,6 +13,7 @@ Vue3 Modular Architecture Portal Starter Kit
 [CASL](https://casl.js.org/v6/en/) - Isomorphic Authorization JavaScript library<br>
 [Husky](https://typicode.github.io/husky/) - Modern native git hooks made easy<br>
 [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling<br>
+[Unplugin Vue Components](https://github.com/unplugin/unplugin-vue-components) - On-demand components auto importing for Vue.
 
 ## UI
 
@@ -31,7 +32,7 @@ Node >= 16
 ## Learning Resources
 
 [Cheatsheets](https://www.vuemastery.com/vue-cheat-sheet)<br>
-[PrimeFlex](https://www.primefaces.org/primeflex/)<br>
+[Tailwind CSS](https://tailwindcss.com/)<br>
 [VueUse](https://vueuse.org/)<br>
 [Vue Community](https://vue-community.org/)<br>
 [Vue Newsletter](https://vuejsdevelopers.com/newsletter/)<br>
@@ -150,6 +151,17 @@ if (!canNavigate(to)) {
 }
 ```
 
+### Svg Icon
+
+#### -add svg image under src/assets/icons folder
+```html,javascript
+<template>
+  <div>
+    <SvgIcon name="svgname" class="">
+  </div>
+</template>
+```
+
 ### Date Formatter
 
 ```html,javascript
@@ -238,16 +250,4 @@ const countryCode = ref("+95")
 const phoneNumber = ref("092423239")
 
 </script>
-```
-
-## SASS Variables
-
-In case you'd like to customize the layout variables, open **\_variables.scss** file under src/assets/styles folder. The list is pretty short as majority of the variables are derived from the PrimeVue theme being used.
-
-**src/assets/styles/\_variables.scss**
-
-```css
-$fontSize: 1rem;
-$borderRadius: 12px;
-$transitionDuration: 0.2s;
 ```
