@@ -1,18 +1,18 @@
 <template>
   <Menu ref="languageMenu" :model="languageMenuItems" :popup="true">
     <template #item="{ item }">
-      <div @click="changeLocale(item.code)" class="p-2 cursor-pointer">
-        <div class="flex align-items-center gap-3">
+      <div @click="changeLocale(item.code)" class="cursor-pointer p-2">
+        <div class="align-items-center flex gap-3">
           <SvgIcon :name="item.code" class="h-6 w-6"></SvgIcon>
           <span class="text-color">{{ item.label }}</span>
         </div>
       </div>
     </template>
   </Menu>
-  <Button text class="h-full flex gap-3" @click="toggleLanguageMenu">
+  <Button text class="flex h-full gap-3" @click="toggleLanguageMenu">
     <SvgIcon v-if="localeStore.getLocale === 'mm'" name="mm" class="h-6 w-6"></SvgIcon>
     <SvgIcon v-else name="en" class="h-6 w-6"></SvgIcon>
-    <span class="hidden lg:flex text-color">{{ $t(`${localeStore.getLocale}`) }}</span>
+    <span class="hidden text-color lg:flex">{{ $t(`${localeStore.getLocale}`) }}</span>
     <div class="hidden lg:flex">
       <i class="pi pi-angle-down text-color"></i>
     </div>

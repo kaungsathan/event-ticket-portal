@@ -4,10 +4,10 @@
       <router-link :to="{ name: 'dashboard' }" class="w-full">
         <div class="flex content-start items-center gap-4">
           <img class="menu-collapse-logo" alt="Logo" src="@/assets/images/onenex.png" />
-          <span class="menu-collapse-label text-2xl text-semibold text-primary">onenex</span>
+          <span class="menu-collapse-label text-semibold text-2xl text-primary">onenex</span>
         </div>
       </router-link>
-      <button v-if="!mobileMenuActive" class="p-link layout-collapse-menu-button layout-collapse-topbar-button ml-0 menu-toggle" @click="onMenuToggle">
+      <button v-if="!mobileMenuActive" class="p-link layout-collapse-menu-button layout-collapse-topbar-button menu-toggle ml-0" @click="onMenuToggle">
         <i class="pi" :class="menuActive ? 'pi-ellipsis-v' : 'pi-ellipsis-h'" style="font-size: 1.5rem; color: rgb(var(--text-color))" />
       </button>
     </div>

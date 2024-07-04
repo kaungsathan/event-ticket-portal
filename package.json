@@ -1,56 +1,57 @@
 {
-    "name": "onenex",
-    "version": "2.2.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-        "format": "prettier .  --write",
-        "prepare": "husky install"
-    },
-    "dependencies": {
-        "@casl/ability": "^6.7.1",
-        "@casl/vue": "^2.2.2",
-        "@intlify/unplugin-vue-i18n": "^4.0.0",
-        "@primevue/themes": "^4.0.0-rc.2",
-        "@vuelidate/core": "^2.0.3",
-        "@vuelidate/validators": "^2.0.4",
-        "axios": "^1.7.2",
-        "json-parse-bigint": "^1.0.4",
-        "moment": "^2.30.1",
-        "pinia": "^2.1.7",
-        "primeicons": "^7.0.0",
-        "primevue": "^4.0.0-rc.2",
-        "qs": "^6.12.1",
-        "tailwindcss-primeui": "^0.3.1",
-        "vite-svg-loader": "^5.1.0",
-        "vue": "^3.4.30",
-        "vue-i18n": "^9.13.1",
-        "vue-router": "^4.4.0"
-    },
-    "devDependencies": {
-        "@primevue/auto-import-resolver": "^4.0.0-beta.5",
-        "@rushstack/eslint-patch": "^1.10.3",
-        "@vitejs/plugin-vue": "^5.0.5",
-        "@vue/eslint-config-prettier": "^9.0.0",
-        "autoprefixer": "^10.4.19",
-        "eslint": "^8.57.0",
-        "eslint-plugin-vue": "^9.23.0",
-        "husky": "^9.0.11",
-        "postcss": "^8.4.38",
-        "prettier": "^3.3.2",
-        "sass": "^1.77.6",
-        "tailwindcss": "^3.4.4",
-        "unplugin-vue-components": "^0.27.1",
-        "vite": "^5.3.1"
-    },
-    "lint-staged": {
-        "*.{js,vue,jsx,cjs,mjs}": [
-            "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-            "prettier --write --ignore-unknown"
-        ]
-    }
+  "name": "onenex",
+  "version": "2.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier .  --write",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@casl/ability": "^6.7.1",
+    "@casl/vue": "^2.2.2",
+    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@primevue/themes": "^4.0.0-rc.2",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "axios": "^1.7.2",
+    "json-parse-bigint": "^1.0.4",
+    "moment": "^2.30.1",
+    "pinia": "^2.1.7",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.0-rc.2",
+    "qs": "^6.12.1",
+    "tailwindcss-primeui": "^0.3.1",
+    "vite-svg-loader": "^5.1.0",
+    "vue": "^3.4.30",
+    "vue-i18n": "^9.13.1",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@primevue/auto-import-resolver": "^4.0.0-beta.5",
+    "@rushstack/eslint-patch": "^1.10.3",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "husky": "^9.0.11",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "sass": "^1.77.6",
+    "tailwindcss": "^3.4.4",
+    "unplugin-vue-components": "^0.27.1",
+    "vite": "^5.3.1"
+  },
+  "lint-staged": {
+    "*.{js,vue,jsx,cjs,mjs}": [
+      "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+      "prettier --write --ignore-unknown"
+    ]
+  }
 }

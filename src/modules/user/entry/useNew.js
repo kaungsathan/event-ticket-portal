@@ -3,14 +3,12 @@ import { required, email, minLength, maxLength, numeric, helpers } from '@vuelid
 import { useVuelidate } from '@vuelidate/core'
 import { useStore } from '../store'
 import { useRouter } from 'vue-router'
-import { Errors } from '@/utils/serverValidation'
 import placeholderImage from '@/assets/images/placeholder.png'
 
 export const useNew = () => {
   const store = useStore()
   const router = useRouter()
   const isLoading = ref(false)
-  const errors = new Errors()
   const state = reactive({
     username: '',
     full_name: '',
@@ -107,7 +105,6 @@ export const useNew = () => {
   }
 
   const addUser = async () => {
-    errors.clear()
     isLoading.value = true
 
     try {
@@ -131,10 +128,6 @@ export const useNew = () => {
       isLoading.value = false
     } catch (error) {
       isLoading.value = false
-      if (error.status === 422) {
-        const err = error.data.data
-        errors.record(err)
-      }
     }
   }
 
@@ -148,7 +141,6 @@ export const useNew = () => {
     avatarPreview,
     v$,
     handleSubmit,
-    submitted,
-    errors
+    submitted
   }
 }

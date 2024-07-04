@@ -2,6 +2,7 @@ import axios from 'axios'
 import EventBus from '@/libs/AppEventBus'
 import JsonParseBigInt from 'json-parse-bigint'
 import { useAuthStore } from '@/modules/auth/authStore'
+import { useServerValidationStore } from '@/store/serverValidationStore'
 import router from '@/router'
 
 const api = axios.create({
@@ -27,16 +28,18 @@ api.interceptors.response.use(
     res.data = JsonParseBigInt(res.data)
     return res
   },
-  (err) => {
+  async (err) => {
     if (err.response) {
       err.response.data = JSON.parse(err.response.data)
       if (err.response.status === 401) {
         const store = useAuthStore()
         store.logout()
-        router.push({ name: 'login' })
+        await router.push({ name: 'login' })
       } else if (err.response.status === 403) {
-        router.push({ name: 'not-authorized' })
+        await router.push({ name: 'not-authorized' })
       } else if (err.response.status === 422) {
+        const serverValidationStore = useServerValidationStore()
+        serverValidationStore.setErrors(err.response.data.data)
         return Promise.reject(err.response)
       }
       showToast(err.message)

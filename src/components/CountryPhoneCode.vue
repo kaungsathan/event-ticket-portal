@@ -1,7 +1,7 @@
 <template>
   <Select v-model="countryPhoneCode" :options="optionsCountryPhoneCode" optionLabel="name" :filter="true" placeholder="Select Country Code" class="w-full">
     <template #value="slotProps">
-      <div class="country-item flex relative" v-if="slotProps.value">
+      <div class="country-item relative flex" v-if="slotProps.value">
         <img :class="'flag flag-' + slotProps.value.iso2" />
         <div>({{ slotProps.value.code }})</div>
       </div>
@@ -10,7 +10,7 @@
       </span>
     </template>
     <template #option="slotProps">
-      <div class="country-item flex relative">
+      <div class="country-item relative flex">
         <img :class="'flag flag-' + slotProps.option.iso2" />
         <div>{{ slotProps.option.name }}</div>
       </div>

@@ -3,7 +3,6 @@ import { required, email, minLength, maxLength, numeric, helpers } from '@vuelid
 import { useVuelidate } from '@vuelidate/core'
 import { useStore } from '../store'
 import { useRoute, useRouter } from 'vue-router'
-import { Errors } from '@/utils/serverValidation'
 import placeholderImage from '@/assets/images/placeholder.png'
 
 export const useEdit = () => {
@@ -12,7 +11,6 @@ export const useEdit = () => {
   const router = useRouter()
 
   const isLoading = ref(true)
-  const errors = new Errors()
 
   const state = reactive({
     username: '',
@@ -66,14 +64,13 @@ export const useEdit = () => {
 
   const fetchUser = async () => {
     isLoading.value = true
-    errors.clear()
 
     await store.fetchOne({
       id: route.params.id
     })
 
     const response = store.getOneResponse
-    if (response) {
+    if (response & response.data) {
       state.username = response.data.username
       state.full_name = response.data.full_name
       state.email = response.data.email
@@ -136,7 +133,6 @@ export const useEdit = () => {
   }
 
   const updateRecord = async () => {
-    errors.clear()
     isLoading.value = true
 
     try {
@@ -162,10 +158,6 @@ export const useEdit = () => {
     } catch (error) {
       console.log(error)
       isLoading.value = false
-      if (error.status === 422) {
-        const err = error.data.data
-        errors.record(err)
-      }
     }
   }
 
@@ -179,7 +171,6 @@ export const useEdit = () => {
     avatarPreview,
     v$,
     handleSubmit,
-    submitted,
-    errors
+    submitted
   }
 }
