@@ -8,7 +8,6 @@ export const useLogin = () => {
   const store = useAuthStore()
   const router = useRouter()
 
-  // const checked = ref(false)
   const submitted = ref(false)
   const isLoading = ref(false)
 
@@ -17,18 +16,18 @@ export const useLogin = () => {
   })
 
   const state = reactive({
-    username: '',
+    identifier: '',
     password: ''
   })
 
   const rules = {
-    username: { required },
+    identifier: { required },
     password: { required }
   }
 
   const v$ = useVuelidate(rules, state)
 
-  const handleSubmit = (isFormValid) => {
+  const handleSubmit = async (isFormValid) => {
     submitted.value = true
 
     if (!isFormValid) {
@@ -36,7 +35,7 @@ export const useLogin = () => {
     }
 
     if (!isLoading.value) {
-      loginUser()
+      await loginUser()
     }
   }
 
@@ -44,23 +43,21 @@ export const useLogin = () => {
     isLoading.value = true
 
     await store.login({
-      username: state.username.trim(),
+      email: state.identifier.trim(),
       password: state.password.trim()
-      // isRemember: checked.value
     })
 
     const response = store.getLoginResponse
 
     if (response) {
       isLoading.value = false
-      router.replace({ name: 'dashboard' })
+      await router.replace({ name: 'dashboard' })
     } else {
       isLoading.value = false
     }
   }
 
   return {
-    // checked,
     state,
     v$,
     handleSubmit,

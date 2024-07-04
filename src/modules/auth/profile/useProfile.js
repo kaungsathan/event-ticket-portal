@@ -3,7 +3,6 @@ import { required, email, minLength, maxLength, numeric, helpers } from '@vuelid
 import { useVuelidate } from '@vuelidate/core'
 import { useAuthStore } from '../authStore'
 import { useRoute, useRouter } from 'vue-router'
-import { Errors } from '@/utils/serverValidation'
 import placeholderImage from '@/assets/images/placeholder.png'
 
 export const useProfile = () => {
@@ -12,7 +11,6 @@ export const useProfile = () => {
   const router = useRouter()
 
   const isLoading = ref(true)
-  const errors = new Errors()
 
   const state = reactive({
     username: '',
@@ -55,7 +53,6 @@ export const useProfile = () => {
 
   const fetchProfile = async () => {
     isLoading.value = true
-    errors.clear()
 
     await store.fetchProfile()
 
@@ -106,7 +103,6 @@ export const useProfile = () => {
   }
 
   const updateRecord = async () => {
-    errors.clear()
     isLoading.value = true
 
     try {
@@ -130,10 +126,6 @@ export const useProfile = () => {
     } catch (error) {
       console.log(error)
       isLoading.value = false
-      if (error.status === 422) {
-        const err = error.data.data
-        errors.record(err)
-      }
     }
   }
 
@@ -146,7 +138,6 @@ export const useProfile = () => {
     avatarPreview,
     v$,
     handleSubmit,
-    submitted,
-    errors
+    submitted
   }
 }

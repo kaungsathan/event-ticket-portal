@@ -13,7 +13,8 @@ Vue3 Modular Architecture Portal Starter Kit
 [CASL](https://casl.js.org/v6/en/) - Isomorphic Authorization JavaScript library<br>
 [Husky](https://typicode.github.io/husky/) - Modern native git hooks made easy<br>
 [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling<br>
-[Unplugin Vue Components](https://github.com/unplugin/unplugin-vue-components) - On-demand components auto importing for Vue.
+[Unplugin Vue Components](https://github.com/unplugin/unplugin-vue-components) - On-demand components auto importing for
+Vue.
 
 ## UI
 
@@ -89,41 +90,77 @@ See [Configuration Reference](https://vitejs.dev/guide/).
 
 <br>
 
+### FieldLabel And Validation Component
+
+```vue
+
+<template>
+  <div class="flex flex-col gap-1">
+    <FieldLabel for-field="email" :invalid="v$.email.$invalid && submitted" required />
+    <InputText id="email" v-model="v$.email.$model" :invalid="v$.email.$invalid && submitted"
+               aria-describedby="email-error" />
+    <div>
+      <ClientValidation field="email" :model="v$.email" :submitted="submitted" />
+      <ServerValidation field="email" />
+
+      <!-- Adding Icon using slot-->
+      <ServerValidation field="email">
+        <template #icon>
+          <SvgIcon name="svgname" class="">
+        </template>
+      </ServerValidation>
+      <!-- Both Client and Server Validation component support icon slot.-->
+    </div>
+  </div>
+</template>
+<script setup>
+  import FieldLabel from '@/components/FieldLabel.vue'
+  import ClientValidation from '@/components/ClientValidation.vue'
+  import ServerValidation from '@/components/ServerValidation.vue'
+  import SvgIcon from '@/components/SvgIcon.vue'
+</script>
+```
+
 ### CASL
 
 #### CASL Format
 
 ```javascript
-[
-    {
-        action: 'read',
-        subject: 'user'
-    },
-    {
-        action: 'edit',
-        subject: 'user'
-    },
-    {
-        action: 'create',
-        subject: 'user'
-    },
-    {
-        action: 'delete',
-        subject: 'user'
-    }
+;[
+  {
+    action: 'read',
+    subject: 'user'
+  },
+  {
+    action: 'edit',
+    subject: 'user'
+  },
+  {
+    action: 'create',
+    subject: 'user'
+  },
+  {
+    action: 'delete',
+    subject: 'user'
+  }
 ]
 ```
 
 #### How to use CASL in Vue Template
 
 ```html
+
 <template>
   <div>
-    <div v-if="$can('read', 'user')">Can Read User<div>
-    <div v-if="$can('edit', 'user')">Can Edit User<div>
-    <div v-if="$can('create', 'user')">Can Create User<div>
-    <div v-if="$can('delete', 'user')">Can Delete User<div>
-  </div>
+    <div v-if="$can('read', 'user')">Can Read User
+      <div>
+        <div v-if="$can('edit', 'user')">Can Edit User
+          <div>
+            <div v-if="$can('create', 'user')">Can Create User
+              <div>
+                <div v-if="$can('delete', 'user')">Can Delete User
+                  <div>
+                  </div>
 </template>
 ```
 
@@ -131,30 +168,32 @@ See [Configuration Reference](https://vitejs.dev/guide/).
 
 ```javascript
 {
-  path: "/user/list",
-  name: "user",
-  component: () => import("@/modules/user/list/User.vue"),
-  meta: {
-    subject: "user",
-    action: "read",
-  }
+    path: "/user/list",
+    name: "user",
+    component: () => import("@/modules/user/list/User.vue"),
+    meta:
+    {
+      subject: "user",
+      action:"read",
+    }
 },
 ```
 
 ```javascript
 if (!canNavigate(to)) {
-    // Redirect to login if not logged in
-    if (!isLoggedIn) return next({ name: 'login' })
+  // Redirect to login if not logged in
+  if (!isLoggedIn) return next({ name: 'login' })
 
-    // If logged in => not authorized
-    return next({ name: 'not-authorized' })
+  // If logged in => not authorized
+  return next({ name: 'not-authorized' })
 }
 ```
 
 ### Svg Icon
 
 #### -add svg image under src/assets/icons folder
-```html,javascript
+
+```vue
 <template>
   <div>
     <SvgIcon name="svgname" class="">
@@ -164,90 +203,79 @@ if (!canNavigate(to)) {
 
 ### Date Formatter
 
-```html,javascript
+```vue
 <template>
   <div>
-    <h5>{{ $moment().format("MMMM Do YYYY, h:mm:ss a") }}</h5>
+    <h5>{{ $moment().format('MMMM Do YYYY, h:mm:ss a') }}</h5>
     <h5>{{ currentLong }}</h5>
     <h5>{{ currentShort }}</h5>
   </div>
 </template>
 <script setup>
-import { dateLong, dateShort } from "@/utils/formatter"
+import { dateLong, dateShort } from '@/utils/formatter'
 
 const currentLong = dateLong(new Date())
 const currentShort = dateShort(new Date())
-
 </script>
 ```
 
 ### Blood Type Picker
 
-```html,javascript
+```vue
 <template>
   <div>
     <BloodType v-model="bloodType" />
   </div>
 </template>
 <script setup>
-import BloodType from "@/components/BloodType"
+import BloodType from '@/components/BloodType'
 
-const bloodType = ref("")
-
+const bloodType = ref('')
 </script>
-
 ```
 
 ### Gender Picker
 
-```html,javascript
+```vue
 <template>
   <div>
     <Gender v-model="gender" />
   </div>
 </template>
 <script setup>
-import Gender from "@/components/Gender"
+import Gender from '@/components/Gender'
 
-const gender = ref("")
-
+const gender = ref('')
 </script>
 ```
 
 ### NRC Picker
 
-```html,javascript
+```vue
 <template>
   <div>
     <NRC v-model="nrc" />
   </div>
 </template>
 <script setup>
-import NRC from "@/components/NRC"
+import NRC from '@/components/NRC'
 
-const nrc = ref("6/HTAWANA(N)000000")
-
+const nrc = ref('6/HTAWANA(N)000000')
 </script>
 ```
 
 ### Phone Number
 
-```html,javascript
+```vue
 <template>
   <div>
-    <PhoneNumber
-      id="nrc"
-      v-model:countryCode="countryCode"
-      v-model:phoneNumber="phoneNumber"
-    >
-    </PhoneNumber>
+    <PhoneNumber id="nrc" v-model:countryCode="countryCode" v-model:phoneNumber="phoneNumber"> </PhoneNumber>
   </div>
 </template>
 <script setup>
-import PhoneNumber from "@/components/PhoneNumber.vue"
+import PhoneNumber from '@/components/PhoneNumber.vue'
 
-const countryCode = ref("+95")
-const phoneNumber = ref("092423239")
-
+const countryCode = ref('+95')
+const phoneNumber = ref('092423239')
 </script>
 ```

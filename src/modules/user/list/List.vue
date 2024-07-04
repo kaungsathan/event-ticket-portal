@@ -1,24 +1,24 @@
 <template>
   <div>
-    <div class="p-4 rounded-xl shadow mb-6">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="mb-6 rounded-xl p-4 shadow">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div>
-          <label class="text-sm mb-2 flex items-center"><i class="pi pi-filter"></i>&nbsp; {{ $t('Role') }} </label>
+          <label class="mb-2 flex items-center text-sm"><i class="pi pi-filter"></i>&nbsp; {{ $t('Role') }} </label>
           <Select v-model="selectedRole" :options="roles" optionLabel="name" optionValue="code" placeholder="Select role" class="w-full" showClear />
         </div>
 
         <div>
-          <label class="text-sm mb-2 flex items-center"><i class="pi pi-filter"></i>&nbsp;{{ $t('Status') }} </label>
+          <label class="mb-2 flex items-center text-sm"><i class="pi pi-filter"></i>&nbsp;{{ $t('Status') }} </label>
           <Select v-model="selectedStatus" :options="statuses" optionLabel="name" optionValue="code" placeholder="Select status" class="w-full" showClear />
         </div>
 
         <div>
-          <label class="text-sm mb-2 flex items-center"><i class="pi pi-filter"></i>&nbsp;{{ $t('Date') }}</label>
+          <label class="mb-2 flex items-center text-sm"><i class="pi pi-filter"></i>&nbsp;{{ $t('Date') }}</label>
           <DatePicker :placeholder="$t('Date Range')" inputId="selectedDateBetween" v-model="selectedDateBetween" selectionMode="range" :manualInput="false" dateFormat="dd/mm/yy" class="w-full" showIcon :showButtonBar="true" />
         </div>
       </div>
     </div>
-    <div class="rounded-xl shadow overflow-hidden">
+    <div class="overflow-hidden rounded-xl shadow">
       <DataTable
         ref="dt"
         dataKey="id"
@@ -55,7 +55,7 @@
             <Button icon="pi pi-cog" @click="toggleActionMenu" severity="info" />
 
             <Popover ref="columnMenu" appendTo="body" id="columnPanel" style="width: 250px">
-              <div v-for="column in columns" :key="column.field" class="flex gap-4 my-1">
+              <div v-for="column in columns" :key="column.field" class="my-1 flex gap-4">
                 <Checkbox :inputId="column.field" name="column" :modelValue="column.selected" :binary="true" @change="column.selected = !column.selected" :disabled="column.frozen" />
                 <label :for="column.field">{{ column.header }}</label>
               </div>
@@ -82,7 +82,7 @@
   <Menu ref="actionMenu" :model="actionItems" :popup="true" />
   <ConfirmDialog>
     <template #message="slotProps">
-      <div class="text-center w-full">
+      <div class="w-full text-center">
         <i :class="slotProps.message.icon" class="mt-2 text-red-500" style="font-size: 3rem"></i>
         <div class="mt-2">{{ slotProps.message.message }}</div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <Menu ref="userMenu" :model="profileMenuItems" :popup="true" />
-  <div class="flex justify-center items-center cursor-pointer gap-3" @click="togglePanel">
+  <div class="flex cursor-pointer items-center justify-center gap-3" @click="togglePanel">
     <Avatar :image="user?.avatar ? user.avatar : 'https://i.pravatar.cc/300'" size="large" shape="circle" />
     <div class="user-menu hidden lg:block">
       <div class="font-semibold">{{ user ? user.full_name : 'John' }}</div>

@@ -32,7 +32,7 @@ export const useAuthStore = defineStore({
       if (response) {
         this.userData = JSON.stringify(response.data.user_data)
         this.token = response.data.token
-        //update abality after successfully login
+        //update ability after successfully login
         ability.update(response.data.abilities)
 
         localStorage.setItem('userToken', response.data.token)

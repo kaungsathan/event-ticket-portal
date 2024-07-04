@@ -13,7 +13,7 @@
         role="none"
       >
         <template v-if="root">
-          <div v-if="item.label" class="layout-menuitem-root-text white-space-nowrap overflow-hidden text-overflow-ellipsis" :aria-label="item.label">
+          <div v-if="item.label" class="layout-menuitem-root-text white-space-nowrap text-overflow-ellipsis overflow-hidden" :aria-label="item.label">
             {{ $t(`${item.label}`) }}
           </div>
           <AppSubMenu :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)" />
@@ -32,7 +32,7 @@
             @click="onMenuItemClick($event, item, i)"
           >
             <i :class="item.icon" />
-            <span class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ $t(`${item.label}`) }}</span>
+            <span class="white-space-nowrap text-overflow-ellipsis overflow-hidden">{{ $t(`${item.label}`) }}</span>
             <i v-if="item.items" :class="activeIndex === i ? 'pi pi-chevron-up menuitem-toggle-icon' : 'pi pi-chevron-down menuitem-toggle-icon'" />
             <Badge v-if="item.badge" :value="item.badge" />
           </router-link>
@@ -48,7 +48,7 @@
             @click="onMenuItemClick($event, item, i)"
           >
             <i :class="item.icon" />
-            <span class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ $t(`${item.label}`) }}</span>
+            <span class="white-space-nowrap text-overflow-ellipsis overflow-hidden">{{ $t(`${item.label}`) }}</span>
             <i v-if="item.items" :class="activeIndex === i ? 'pi pi-chevron-up menuitem-toggle-icon' : 'pi pi-chevron-down menuitem-toggle-icon'" />
             <Badge v-if="item.badge" :value="item.badge" />
           </a>
