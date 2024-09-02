@@ -125,42 +125,37 @@ See [Configuration Reference](https://vitejs.dev/guide/).
 
 #### CASL Format
 
-```javascript
-;[
+```json
+[
   {
-    action: 'read',
-    subject: 'user'
+    "action": "read",
+    "subject": "user"
   },
   {
-    action: 'edit',
-    subject: 'user'
+    "action": "edit",
+    "subject": "user"
   },
   {
-    action: 'create',
-    subject: 'user'
+    "action": "create",
+    "subject": "user"
   },
   {
-    action: 'delete',
-    subject: 'user'
+    "action": "delete",
+    "subject": "user"
   }
 ]
 ```
 
 #### How to use CASL in Vue Template
 
-```html
-
+```vue
 <template>
   <div>
-    <div v-if="$can('read', 'user')">Can Read User
-      <div>
-        <div v-if="$can('edit', 'user')">Can Edit User
-          <div>
-            <div v-if="$can('create', 'user')">Can Create User
-              <div>
-                <div v-if="$can('delete', 'user')">Can Delete User
-                  <div>
-                  </div>
+    <div v-if="$can('read', 'user')">Can Read User</div>
+    <div v-if="$can('edit', 'user')">Can Edit User</div>
+    <div v-if="$can('create', 'user')">Can Create User</div>
+    <div v-if="$can('delete', 'user')">Can Delete User</div>
+  </div>
 </template>
 ```
 
@@ -191,7 +186,7 @@ if (!canNavigate(to)) {
 
 ### Svg Icon
 
-#### -add svg image under src/assets/icons folder
+#### Add svg image under src/assets/icons folder
 
 ```vue
 <template>
@@ -228,8 +223,6 @@ const currentShort = dateShort(new Date())
   </div>
 </template>
 <script setup>
-import BloodType from '@/components/BloodType'
-
 const bloodType = ref('')
 </script>
 ```
@@ -243,8 +236,6 @@ const bloodType = ref('')
   </div>
 </template>
 <script setup>
-import Gender from '@/components/Gender'
-
 const gender = ref('')
 </script>
 ```
@@ -258,8 +249,6 @@ const gender = ref('')
   </div>
 </template>
 <script setup>
-import NRC from '@/components/NRC'
-
 const nrc = ref('6/HTAWANA(N)000000')
 </script>
 ```
@@ -269,12 +258,10 @@ const nrc = ref('6/HTAWANA(N)000000')
 ```vue
 <template>
   <div>
-    <PhoneNumber id="nrc" v-model:countryCode="countryCode" v-model:phoneNumber="phoneNumber"> </PhoneNumber>
+    <PhoneNumber id="phone-number" v-model:countryCode="countryCode" v-model:phoneNumber="phoneNumber"> </PhoneNumber>
   </div>
 </template>
 <script setup>
-import PhoneNumber from '@/components/PhoneNumber.vue'
-
 const countryCode = ref('+95')
 const phoneNumber = ref('092423239')
 </script>

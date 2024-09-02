@@ -80,9 +80,6 @@
 
 <script setup>
 import { useProfile } from './useProfile'
-import Loading from '@/components/Loading.vue'
-import ClientValidation from '@/components/ClientValidation.vue'
-import ServerValidation from '@/components/ServerValidation.vue'
 
 const { isLoading, v$, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted } = useProfile()
 </script>

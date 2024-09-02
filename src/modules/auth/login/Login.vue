@@ -32,10 +32,6 @@
 
 <script setup>
 import { useLogin } from './useLogin'
-import ClientValidation from '@/components/ClientValidation.vue'
-import ServerValidation from '@/components/ServerValidation.vue'
-import Loading from '@/components/Loading.vue'
-import FieldLabel from '@/components/FieldLabel.vue'
 
 const { v$, handleSubmit, submitted, isLoading } = useLogin()
 </script>

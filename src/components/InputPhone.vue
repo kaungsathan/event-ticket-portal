@@ -6,24 +6,13 @@
     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
     maxlength="12"
     placeholder="912345678"
-    :class="['p-inputtext border-0', { 'p-filled': filled }]"
-    :value="modelValue"
-    @input="onInput"
+    v-model="model"
+    class="border-0 shadow-none outline-none"
   />
 </template>
 
 <script setup>
-import { computed } from 'vue'
-
-const emit = defineEmits(['update:modelValue'])
-
-const props = defineProps({
-  modelValue: null
-})
-
-const onInput = (event) => {
-  emit('update:modelValue', event.target.value)
-}
+const model = defineModel()
 
 const isNumber = (evt) => {
   let keyCode = evt.keyCode ? evt.keyCode : evt.which
@@ -33,8 +22,4 @@ const isNumber = (evt) => {
     evt.preventDefault()
   }
 }
-
-const filled = computed(() => {
-  return props.modelValue != null && props.modelValue.toString().length > 0
-})
 </script>

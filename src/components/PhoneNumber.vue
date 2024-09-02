@@ -1,23 +1,22 @@
 <template>
-  <div class="p-inputgroup nrc-group grid grid-cols-2">
+  <div class="phone-number grid grid-cols-2">
     <Select
       :options="optionsCountryPhoneCode"
       optionValue="code"
       optionLabel="name"
       :filter="true"
       placeholder="Select Country Code"
-      class="country-code"
-      :modelValue="countryCode"
-      @change="$emit('update:countryCode', $event.value)"
+      class="w-full"
+      v-model="countryCode"
       :pt="{
         root: {
-          class: 'border-0'
+          class: 'border-0 shadow-none'
         }
       }"
     >
       <template #value="slotProps">
-        <div class="country-item relative flex" v-if="slotProps.value">
-          <img :class="'flag flag-' + flag" />
+        <div class="relative flex items-center" v-if="slotProps.value">
+          <img :class="'flag flag-' + flag" class="mr-2" />
           <div>({{ slotProps.value }})</div>
         </div>
         <span v-else>
@@ -25,68 +24,65 @@
         </span>
       </template>
       <template #option="slotProps">
-        <div class="country-item relative flex">
-          <img :class="'flag flag-' + slotProps.option.iso2" />
+        <div class="relative flex items-center">
+          <img :class="'flag flag-' + slotProps.option.iso2" class="mr-2" />
           <div>{{ slotProps.option.name }} {{ slotProps.option.code }}</div>
         </div>
       </template>
     </Select>
 
-    <InputPhone mask="9999999999" placeholder="" slotChar="" class="w-full" :value="phoneNumber" @input="$emit('update:phoneNumber', $event.target.value)" />
+    <InputPhone
+      mask="9999999999"
+      placeholder=""
+      slotChar=""
+      class="w-full"
+      v-model="phoneNumber"
+      :pt="{
+        root: {
+          class: 'border-0 shadow-none'
+        }
+      }"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
-import optionsCountryCode from '@/assets/data/contryPhoneCode'
+import { ref, onMounted, computed } from 'vue'
+import optionsCountryCode from '@/assets/data/countryPhoneCode'
 
-const props = defineProps({
-  phoneNumber: {
-    type: String,
-    default: '',
-    required: true
-  },
-  countryCode: {
-    type: String,
-    default: '',
-    required: true
-  }
-})
+const phoneNumber = defineModel('phoneNumber')
+const countryCode = defineModel('countryCode')
 
-const flag = ref()
 const optionsCountryPhoneCode = ref([])
 
 onMounted(() => {
   optionsCountryPhoneCode.value = optionsCountryCode
-  getFlag()
 })
 
-const getFlag = () => {
-  optionsCountryPhoneCode.value.forEach((country) => {
-    if (country.code === props.countryCode) {
-      flag.value = country.iso2
-    }
-  })
-}
-
-watch(
-  () => props.countryCode,
-  () => {
-    getFlag()
+const flag = computed(() => {
+  const country = optionsCountryPhoneCode.value.find((country) => country.code === countryCode.value)
+  if (country) {
+    return country.iso2
   }
-)
+  return ''
+})
 </script>
-<style lang="scss" scoped>
-.country-code .p-dropdown-trigger {
-  /* display: none; */
-  width: auto !important;
-}
-.country-code .p-dropdown-panel .p-dropdown-items {
-  max-height: 200px !important;
-}
-.country-item {
-  img {
-    margin-right: 0.5rem;
-  }
+<style lang="css" scoped>
+.phone-number {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  background: var(--p-select-background);
+  border: 1px solid var(--p-select-border-color);
+  transition:
+    background var(--p-select-transition-duration),
+    color var(--p-select-transition-duration),
+    border-color var(--p-select-transition-duration),
+    outline-color var(--p-select-transition-duration),
+    box-shadow var(--p-select-transition-duration);
+  border-radius: var(--p-select-border-radius);
+  outline-color: transparent;
+  box-shadow: var(--p-select-shadow);
+  overflow: hidden;
 }
 </style>

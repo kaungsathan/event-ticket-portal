@@ -1,17 +1,11 @@
 <template>
-  <Select inputId="gender" :modelValue="modelValue" :options="optionsGenderType" @change="$emit('update:modelValue', $event.value)" class="w-full" />
+  <Select inputId="gender" v-model="model" :options="optionsGenderType" class="w-full" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-defineProps({
-  modelValue: {
-    type: String,
-    default: '',
-    required: true
-  }
-})
+const model = defineModel()
 
 const optionsGenderType = ref(['MALE', 'FEMALE', 'PREFER NOT TO SAY'])
 </script>

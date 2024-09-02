@@ -104,10 +104,6 @@
 
 <script setup>
 import { useEdit } from './useEdit'
-import ClientValidation from '@/components/ClientValidation.vue'
-import ServerValidation from '@/components/ServerValidation.vue'
-import Loading from '@/components/Loading.vue'
-import FieldLabel from '@/components/FieldLabel.vue'
 
 const { isLoading, v$, statuses, roles, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted } = useEdit()
 </script>

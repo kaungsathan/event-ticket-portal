@@ -1,69 +1,41 @@
 <template>
-  <Select v-model="countryPhoneCode" :options="optionsCountryPhoneCode" optionLabel="name" :filter="true" placeholder="Select Country Code" class="w-full">
+  <Select :options="optionsCountryPhoneCode" optionValue="code" optionLabel="name" :filter="true" placeholder="Select Country Code" class="w-full" v-model="model">
     <template #value="slotProps">
-      <div class="country-item relative flex" v-if="slotProps.value">
-        <img :class="'flag flag-' + slotProps.value.iso2" />
-        <div>({{ slotProps.value.code }})</div>
+      <div class="relative flex items-center" v-if="slotProps.value">
+        <img :class="'flag flag-' + flag" class="mr-2" />
+        <div>({{ slotProps.value }})</div>
       </div>
       <span v-else>
         {{ slotProps.placeholder }}
       </span>
     </template>
     <template #option="slotProps">
-      <div class="country-item relative flex">
-        <img :class="'flag flag-' + slotProps.option.iso2" />
-        <div>{{ slotProps.option.name }}</div>
+      <div class="relative flex items-center">
+        <img :class="'flag flag-' + slotProps.option.iso2" class="mr-2" />
+        <div>{{ slotProps.option.name }} {{ slotProps.option.code }}</div>
       </div>
     </template>
   </Select>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
-import countryCode from '@/assets/data/contryPhoneCode'
+import { ref, onMounted, computed } from 'vue'
+import optionsCountryCode from '@/assets/data/countryPhoneCode'
 
-const emit = defineEmits(['update:modelValue'])
+const model = defineModel()
 
-const props = defineProps({
-  defaultCountryCode: String
-})
-
-const countryPhoneCode = ref({})
 const optionsCountryPhoneCode = ref([])
 
 onMounted(() => {
-  optionsCountryPhoneCode.value = countryCode
-  fetchDefaultCountryCode()
+  optionsCountryPhoneCode.value = optionsCountryCode
 })
 
-const fetchDefaultCountryCode = () => {
-  if (props.defaultCountryCode) {
-    optionsCountryPhoneCode.value.forEach((country) => {
-      if (country.code === props.defaultCountryCode) {
-        countryPhoneCode.value = country
-      }
-    })
+const flag = computed(() => {
+  const country = optionsCountryPhoneCode.value.find((country) => country.code === model.value)
+  if (country) {
+    return country.iso2
   }
-}
-
-watch([countryPhoneCode], () => {
-  emit('update:modelValue', countryPhoneCode.value)
+  return ''
 })
-
-watch(
-  () => props.defaultCountryCode,
-  () => {
-    fetchDefaultCountryCode()
-  }
-)
 </script>
-<style lang="scss" scoped>
-.p-dropdown-panel .p-dropdown-items {
-  max-height: 200px !important;
-}
-.country-item {
-  img {
-    margin-right: 0.5rem;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

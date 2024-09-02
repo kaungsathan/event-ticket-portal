@@ -5,9 +5,12 @@ span.flag {
 }
 img.flag {
   width: 30px;
+  height: 20px;
+  overflow: hidden;
+  display: block;
 }
 .flag {
-  background: url(./flags_responsive.png) no-repeat;
+  background: url(../images/flags_responsive.png) no-repeat;
   background-size: 100%;
   vertical-align: middle;
 }
