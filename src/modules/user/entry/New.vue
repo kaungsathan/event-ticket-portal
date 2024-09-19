@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl p-4 shadow">
+  <div class="rounded-xl border border-surface-200 p-4">
     <div class="block pb-4 text-2xl font-bold lg:hidden">{{ $route.meta.title }}</div>
     <form @submit.prevent="handleSubmit(!v$.$invalid)">
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-6 rounded-xl p-4 shadow">
+    <div class="mb-6 rounded-xl border border-surface-200 p-4">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div>
           <label class="mb-2 flex items-center text-sm"><i class="pi pi-filter"></i>&nbsp; {{ $t('Role') }} </label>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="overflow-hidden rounded-xl shadow">
+    <div class="overflow-hidden rounded-xl border border-surface-200">
       <DataTable
         ref="dt"
         dataKey="id"

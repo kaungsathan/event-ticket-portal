@@ -8,6 +8,9 @@
 
     <ul class="layout-collapse-topbar-menu flex items-center gap-3">
       <li>
+        <AppThemeToggle />
+      </li>
+      <li>
         <AppLocale />
       </li>
       <li>
@@ -21,6 +24,7 @@
 import AppLocale from './AppLocale.vue'
 import AppUserProfile from './AppUserProfile.vue'
 import AppBreadcrumb from './AppBreadcrumb.vue'
+import AppThemeToggle from './AppThemeToggle.vue'
 
 const emit = defineEmits(['menu-toggle'])
 

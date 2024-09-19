@@ -38,13 +38,9 @@
   user-select: none;
   top: 0rem;
   left: 0rem;
-  // transition: transform $transitionDuration, left 0.2s;
-  background-color: rgb(var(--surface-0));
   padding: 0;
-  box-shadow:
-    0px 3px 5px rgba(0, 0, 0, 0.02),
-    0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 4px rgba(0, 0, 0, 0.08);
+  background-color: rgb(var(--surface-0));
+  box-shadow: 1px 1px 1px rgb(var(--surface-100));
   transition:
     width 0.25s,
     opacity 0.25s,
@@ -406,13 +402,10 @@
   // width: 100%;
   padding: 0 1.5rem;
   background-color: rgb(var(--surface-0));
+  box-shadow: 1px 1px 1px rgb(var(--surface-100));
   transition: left 0.2s;
   display: flex;
   align-items: center;
-  box-shadow:
-    0px 3px 5px rgba(0, 0, 0, 0.02),
-    0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 4px rgba(0, 0, 0, 0.08);
 
   .layout-collapse-topbar-logo {
     height: 5rem;
@@ -493,10 +486,7 @@
   .layout-collapse-topbar {
     justify-content: space-between;
     background-color: rgb(var(--surface-0));
-    box-shadow:
-      0px 3px 5px rgba(0, 0, 0, 0.02),
-      0px 0px 2px rgba(0, 0, 0, 0.05),
-      0px 1px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 1px 1px rgb(var(--surface-100));
 
     .layout-collapse-topbar-logo {
       height: 5rem;

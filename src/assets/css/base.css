@@ -26,3 +26,20 @@
 
   --text-color: 0 0 0;
 }
+
+:root[class*='dark'] {
+  --surface-0: 8 8 8;
+  --surface-50: 17 24 39;
+  --surface-100: 31 41 55;
+  --surface-200: 55 65 81;
+  --surface-300: 75 85 99;
+  --surface-400: 107 114 128;
+  --surface-500: 156 163 175;
+  --surface-600: 209 213 219;
+  --surface-700: 229 231 235;
+  --surface-800: 243 244 246;
+  --surface-900: 249 250 251;
+  --surface-950: 255 255 255;
+
+  --text-color: 255 255 255;
+}

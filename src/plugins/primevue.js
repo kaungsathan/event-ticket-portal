@@ -39,8 +39,8 @@ const MyPreset = definePreset(Aura, {
     highlight: {
       background: 'rgb(var(--primary-500))',
       focusBackground: 'rgb(var(--primary-200))',
-      color: '#ffffff',
-      focusColor: '#ffffff'
+      color: 'rgb(var(--text-color))',
+      focusColor: 'rgb(var(--text-color))'
     }
   }
 })
@@ -53,7 +53,7 @@ app.use(PrimeVue, {
         name: 'primevue',
         order: 'tailwind-base, primevue, tailwind-utilities'
       },
-      darkModeSelector: 'class'
+      darkModeSelector: '.dark'
     }
   }
 })
