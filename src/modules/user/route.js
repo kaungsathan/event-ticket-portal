@@ -43,8 +43,8 @@ const moduleRoutes = [
         name: 'showUser',
         component: () => import('@/modules/user/entry/Edit.vue'),
         meta: {
-          subject: 'User',
-          action: 'read',
+          subject: 'users',
+          action: 'edit',
           auth: true,
           title: 'Edit User'
         }

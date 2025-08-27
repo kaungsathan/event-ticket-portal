@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import dashboardRoutes from '@/modules/dashboard/route'
 import userRoutes from '@/modules/user/route'
+import organizerRoutes from '@/modules/organizer/route'
 import authRoutes from '@/modules/auth/authRoute'
 import { useAuthStore } from '@/modules/auth/authStore'
 import { canNavigate } from '@/libs/casl/routeProtection'
@@ -10,6 +11,7 @@ const routes = [
   ...authRoutes,
   ...dashboardRoutes,
   ...userRoutes,
+  ...organizerRoutes,
   {
     path: '/notfound',
     name: 'notfound',
