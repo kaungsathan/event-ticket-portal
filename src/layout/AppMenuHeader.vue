@@ -3,8 +3,8 @@
     <div class="flex items-center justify-between">
       <router-link :to="{ name: 'dashboard' }" class="w-full">
         <div class="flex content-start items-center gap-4">
-          <img class="menu-collapse-logo" alt="Logo" src="@/assets/images/onenex.png" />
-          <span class="menu-collapse-label text-semibold text-2xl text-primary">onenex</span>
+          <!-- <img class="menu-collapse-logo" alt="Logo" src="@/assets/images/onenex.png" /> -->
+          <span class="menu-collapse-label text-semibold text-2xl text-primary">Event Manager</span>
         </div>
       </router-link>
       <button v-if="!mobileMenuActive" class="p-link layout-collapse-menu-button layout-collapse-topbar-button menu-toggle ml-0" @click="onMenuToggle">

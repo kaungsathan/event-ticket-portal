@@ -1,8 +1,8 @@
 import api from '@/libs/axios'
 
 const endpoints = {
-  users: '/users',
-  option_data: '/options'
+  users: 'api/users',
+  option_data: 'api/options'
 }
 
 const service = {

@@ -4,7 +4,7 @@
     <Avatar :image="user?.avatar ? user.avatar : 'https://i.pravatar.cc/300'" size="large" shape="circle" />
     <div class="user-menu hidden lg:block">
       <div class="font-semibold">{{ user ? user.full_name : 'John' }}</div>
-      <div class="text-sm">{{ user ? user.role.name : 'Role' }}</div>
+      <div v-for="role in user.roles" :key="role" class="text-sm">{{ role }}</div>
     </div>
     <div class="hidden lg:block">
       <i class="pi pi-angle-down"></i>

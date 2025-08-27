@@ -30,14 +30,14 @@ export const useAuthStore = defineStore({
       const response = await authService.login(params)
       this.loginResponse = response
       if (response) {
-        this.userData = JSON.stringify(response.data.user_data)
+        this.userData = JSON.stringify(response.data.user)
         this.token = response.data.token
         //update ability after successfully login
-        ability.update(response.data.abilities)
+        ability.update(response.data.user.permissions)
 
         localStorage.setItem('userToken', response.data.token)
-        localStorage.setItem('userData', JSON.stringify(response.data.user_data))
-        localStorage.setItem('userAbility', JSON.stringify(response.data.abilities))
+        localStorage.setItem('userData', JSON.stringify(response.data.user))
+        localStorage.setItem('userAbility', JSON.stringify(response.data.user.permissions))
       }
     },
     logout() {

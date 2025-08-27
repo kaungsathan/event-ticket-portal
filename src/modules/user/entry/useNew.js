@@ -14,9 +14,9 @@ export const useNew = () => {
     full_name: '',
     password: '',
     email: '',
-    mobile_number: '',
+    phone: '',
     avatar: null,
-    role_id: null,
+    role: null,
     status: 'Active'
   })
   const avatarPreview = ref(placeholderImage)
@@ -24,9 +24,9 @@ export const useNew = () => {
   const roles = ref([])
 
   const statuses = ref([
-    { name: 'Active', code: 'Active' },
-    { name: 'Inactive', code: 'Inactive' },
-    { name: 'Locked', code: 'Locked' }
+    { name: 'Active', code: 'active' },
+    { name: 'Inactive', code: 'inactive' },
+    { name: 'Locked', code: 'locked' }
   ])
 
   const rules = {
@@ -37,12 +37,12 @@ export const useNew = () => {
       minLength: helpers.withMessage('Value should be at least 8 characters', minLength(8))
     },
     email: { email },
-    mobile_number: {
+    phone: {
       numeric,
       minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6)),
       maxLength: maxLength(12)
     },
-    role_id: { required },
+    role: { required },
     status: { required }
   }
 
@@ -64,9 +64,10 @@ export const useNew = () => {
     await store.fetchAllRole()
     //get response
     const response = store.getAllRoleResponse
+
     //assign value
     if (response) {
-      const { options } = response.data
+      const options = response.data
       for (let i = 0; i < options.length; i += 1) {
         roles.value.push({ name: options[i].name, code: options[i].id })
       }
@@ -113,9 +114,9 @@ export const useNew = () => {
         full_name: state.full_name,
         password: state.password,
         email: state.email,
-        mobile_number: state.mobile_number,
+        phone: state.phone,
         avatar: state.avatar,
-        role_id: state.role_id,
+        role: state.role,
         status: state.status
       })
 

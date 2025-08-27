@@ -6,12 +6,12 @@ const moduleRoutes = [
     component: AppLayout,
     children: [
       {
-        path: 'list',
+        path: '',
         name: 'userList',
         component: () => import('@/modules/user/list/List.vue'),
         meta: {
-          subject: 'User',
-          action: 'index',
+          subject: 'users',
+          action: 'view',
           auth: true,
           title: 'User'
         }
@@ -21,7 +21,7 @@ const moduleRoutes = [
         name: 'newUser',
         component: () => import('@/modules/user/entry/New.vue'),
         meta: {
-          subject: 'User',
+          subject: 'users',
           action: 'create',
           auth: true,
           title: 'New User'
@@ -32,8 +32,8 @@ const moduleRoutes = [
         name: 'editUser',
         component: () => import('@/modules/user/entry/Edit.vue'),
         meta: {
-          subject: 'User',
-          action: 'update',
+          subject: 'users',
+          action: 'edit',
           auth: true,
           title: 'Edit User'
         }

@@ -5,15 +5,15 @@ const menuList = [
         label: 'Dashboard',
         icon: 'pi pi-fw pi-home',
         to: '/',
-        action: 'read',
-        subject: 'Home'
+        action: 'view',
+        subject: 'users'
       },
       {
         label: 'User',
         icon: 'pi pi-fw pi-user',
-        to: '/users/list',
-        action: 'read',
-        subject: 'User'
+        to: '/users',
+        action: 'view',
+        subject: 'users'
       }
     ]
   }

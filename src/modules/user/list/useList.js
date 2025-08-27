@@ -26,11 +26,11 @@ export const useList = () => {
   ])
 
   const columns = ref([
-    { field: 'id', header: 'ID', sortable: true, selected: true, style: 'min-width: 5rem', frozen: true },
-    { field: 'username', header: 'Username', sortable: true, selected: false, style: 'min-width: 5rem' },
-    { field: 'full_name', header: 'Full Name', sortable: true, selected: true, style: 'min-width: 15rem' },
-    { field: 'mobile_number', header: 'Phone Number', sortable: true, selected: true, style: 'min-width: 15rem' },
-    { field: 'email', header: 'Email', sortable: false, selected: false, style: 'min-width: 15rem' },
+    { field: 'id', header: 'ID', sortable: false, selected: true, style: 'min-width: 5rem', frozen: true },
+    { field: 'username', header: 'Username', sortable: false, selected: true, style: 'min-width: 5rem' },
+    { field: 'full_name', header: 'Full Name', sortable: false, selected: true, style: 'min-width: 5rem' },
+    { field: 'email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'phone', header: 'Phone Number', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
   ])
 
@@ -68,9 +68,11 @@ export const useList = () => {
     await store.fetchAllRole()
     //get response
     const response = store.getAllRoleResponse
+
     //assign value
     if (response) {
-      const { options } = response.data
+      const options = response.data
+
       for (let i = 0; i < options.length; i += 1) {
         roles.value.push({ name: options[i].name, code: options[i].id })
       }
@@ -89,8 +91,9 @@ export const useList = () => {
       page: (lazyParams.value.page += 1), //default page is 0
       per_page: lazyParams.value.rows,
       order: multisortConvert(lazyParams.value.multiSortMeta),
+      order_by: 'desc',
       search: search.value,
-      role_id: selectedRole.value,
+      role: selectedRole.value,
       status: selectedStatus.value,
       date_between: selectedDateBetween.value
     })
@@ -100,8 +103,8 @@ export const useList = () => {
 
     //assign value
     if (response) {
-      records.value = response.data
-      totalRecords.value = response?.meta?.total || 0
+      records.value = response.data.data
+      totalRecords.value = response?.data?.total || 0
     }
     isLoading.value = false
   }
@@ -170,10 +173,6 @@ export const useList = () => {
     isLoading.value = false
   }
 
-  const toggleActionMenu = (event) => {
-    actionMenu.value.toggle(event)
-  }
-
   const toggleColumnMenu = (event) => {
     columnMenu.value.toggle(event)
   }
@@ -209,7 +208,6 @@ export const useList = () => {
     selectedStatus,
     selectedDateBetween,
     actionMenu,
-    toggleActionMenu,
     showConfirmDialog,
     onPage,
     onSort,

@@ -17,10 +17,10 @@ export const useEdit = () => {
     full_name: '',
     password: null,
     email: '',
-    mobile_number: '',
+    phone: '',
     avatar: null,
-    role_id: null,
-    status: 'Active',
+    role: null,
+    status: 'active',
     avatar_updated: false
   })
 
@@ -28,9 +28,9 @@ export const useEdit = () => {
   const roles = ref([])
 
   const statuses = ref([
-    { name: 'Active', code: 'Active' },
-    { name: 'Inactive', code: 'Inactive' },
-    { name: 'Locked', code: 'Locked' }
+    { name: 'Active', code: 'active' },
+    { name: 'Inactive', code: 'inactive' },
+    { name: 'Locked', code: 'locked' }
   ])
 
   const rules = {
@@ -40,12 +40,12 @@ export const useEdit = () => {
       minLength: helpers.withMessage('Value should be at least 8 characters', minLength(8))
     },
     email: { email },
-    mobile_number: {
+    phone: {
       numeric,
       minLength: helpers.withMessage('Value should be at least 6 characters', minLength(6)),
       maxLength: maxLength(12)
     },
-    role_id: { required },
+    role: { required },
     status: { required }
   }
 
@@ -70,13 +70,14 @@ export const useEdit = () => {
     })
 
     const response = store.getOneResponse
-    if (response & response.data) {
+
+    if (response && response.data) {
       state.username = response.data.username
       state.full_name = response.data.full_name
       state.email = response.data.email
-      state.mobile_number = response.data.mobile_number
+      state.phone = response.data.phone
       state.avatar = response.data.avatar
-      state.role_id = response.data.role_id
+      state.role = response.data.role
       state.status = response.data.status
       if (state.avatar != null) {
         avatarPreview.value = state.avatar
@@ -92,9 +93,10 @@ export const useEdit = () => {
     await store.fetchAllRole()
     //get response
     const response = store.getAllRoleResponse
+
     //assign value
     if (response) {
-      const { options } = response.data
+      const options = response.data
       for (let i = 0; i < options.length; i += 1) {
         roles.value.push({ name: options[i].name, code: options[i].id })
       }
@@ -138,14 +140,13 @@ export const useEdit = () => {
     try {
       await store.update({
         id: route.params.id,
+        username: state.username,
         full_name: state.full_name,
         password: state.password,
         email: state.email,
-        mobile_number: state.mobile_number,
-        avatar: state.avatar instanceof File ? state.avatar : null,
-        role_id: state.role_id,
-        status: state.status,
-        avatar_updated: state.avatar_updated
+        phone: state.phone,
+        role: state.role,
+        status: state.status
       })
 
       const response = store.getUpdateResponse

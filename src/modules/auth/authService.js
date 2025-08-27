@@ -1,8 +1,8 @@
 import api from '@/libs/axios'
 
 const endpoints = {
-  login: 'auth/login',
-  logout: 'auth/logout',
+  login: 'api/auth/login',
+  logout: 'api/auth/logout',
   profile: 'auth/profile'
 }
 

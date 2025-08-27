@@ -38,6 +38,15 @@ api.interceptors.response.use(
       } else if (err.response.status === 403) {
         await router.push({ name: 'not-authorized' })
       } else if (err.response.status === 422) {
+        if (err.response.data.message) {
+          EventBus.emit('show-toast', {
+            severity: 'error',
+            summary: '',
+            detail: err.response.data.message,
+            life: 3000
+          })
+        }
+
         const serverValidationStore = useServerValidationStore()
         serverValidationStore.setErrors(err.response.data.data)
         return Promise.reject(err.response)

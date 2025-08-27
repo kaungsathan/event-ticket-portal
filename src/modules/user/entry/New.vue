@@ -4,17 +4,17 @@
     <form @submit.prevent="handleSubmit(!v$.$invalid)">
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- User Profile -->
-        <div class="flex items-center md:col-span-2 lg:col-span-3">
+        <!-- <div class="flex items-center md:col-span-2 lg:col-span-3">
           <div class="flex items-center gap-2">
             <img :src="avatarPreview" class="block h-[100px] w-[100px] rounded-2xl object-contain" />
             <FileUpload mode="basic" :customUpload="true" name="avatar" accept="image/*" chooseLabel="Browse" @clear="onFileRemove" @select="onFileChange"></FileUpload>
           </div>
-        </div>
+        </div> -->
 
         <!-- Username -->
         <div class="flex flex-col gap-1">
           <FieldLabel for-field="username" :invalid="v$.username.$invalid && submitted" required />
-          <InputText id="username" v-model="v$.username.$model" :invalid="v$.username.$invalid && submitted" readonly="true" />
+          <InputText id="username" v-model="v$.username.$model" :invalid="v$.username.$invalid && submitted" />
           <div>
             <ClientValidation field="username" :model="v$.username" :submitted="submitted" />
             <ServerValidation field="username" />
@@ -53,21 +53,21 @@
 
         <!-- Mobile Number -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="mobile_number" :invalid="v$.mobile_number.$invalid && submitted" />
-          <InputText id="mobile_number" v-model="v$.mobile_number.$model" :invalid="v$.mobile_number.$invalid && submitted" />
+          <FieldLabel for-field="phone" :invalid="v$.phone.$invalid && submitted" />
+          <InputText id="phone" v-model="v$.phone.$model" :invalid="v$.phone.$invalid && submitted" />
           <div>
-            <ClientValidation field="mobile_number" :model="v$.mobile_number" :submitted="submitted" />
-            <ServerValidation field="mobile_number" />
+            <ClientValidation field="phone" :model="v$.phone" :submitted="submitted" />
+            <ServerValidation field="phone" />
           </div>
         </div>
 
         <!-- Role -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="role" :invalid="v$.role_id.$invalid && submitted" required />
-          <Select v-model="v$.role_id.$model" :options="roles" optionLabel="name" optionValue="code" placeholder="Select role" class="w-full" :invalid="v$.role_id.$invalid && submitted" showClear />
+          <FieldLabel for-field="role" :invalid="v$.role.$invalid && submitted" required />
+          <Select v-model="v$.role.$model" :options="roles" optionLabel="name" optionValue="name" placeholder="Select role" class="w-full" :invalid="v$.role.$invalid && submitted" showClear />
           <div>
-            <ClientValidation field="role_id" :model="v$.role_id" :submitted="submitted" />
-            <ServerValidation field="role_id" />
+            <ClientValidation field="role" :model="v$.role" :submitted="submitted" />
+            <ServerValidation field="role" />
           </div>
         </div>
 
@@ -76,7 +76,7 @@
           <FieldLabel for-field="status" :invalid="v$.status.$invalid && submitted" required />
           <div class="flex flex-wrap gap-3">
             <div v-for="status in statuses" :key="status.code" class="align-items-center flex">
-              <RadioButton v-model="v$.status.$model" :inputId="status.code" name="status" :value="status.name" />
+              <RadioButton v-model="v$.status.$model" :inputId="status.code" name="status" :value="status.code" />
               <label :for="status.code" class="ml-2">{{ status.name }}</label>
             </div>
           </div>
@@ -101,7 +101,7 @@
 <script setup>
 import { useNew } from './useNew'
 
-const { isLoading, v$, statuses, roles, onFileChange, onFileRemove, avatarPreview, handleSubmit, submitted } = useNew()
+const { isLoading, v$, statuses, roles, handleSubmit, submitted } = useNew()
 </script>
 
 <style lang="scss" scoped>
