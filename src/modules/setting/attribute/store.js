@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { service } from './service'
 
 export const useStore = defineStore({
-  id: 'useUserStore',
+  id: 'useAttributeStore',
   state: () => ({
     listResponse: null,
     oneResponse: null,

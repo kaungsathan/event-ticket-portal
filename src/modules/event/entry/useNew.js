@@ -3,59 +3,46 @@ import { required, minValue } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { useStore } from '../store'
 import { useStore as useOrganizerStore } from '@/modules/organizer/store'
+import { useStore as useAttributeStore } from '@/modules/setting/attribute/store'
 import { useRouter } from 'vue-router'
+import placeholderImage from '@/assets/images/placeholder.png'
 
 export const useNew = () => {
   const store = useStore()
   const organizerStore = useOrganizerStore()
+  const attributeStore = useAttributeStore()
   const router = useRouter()
   const isLoading = ref(false)
+  const imagePreview = ref(placeholderImage)
   const state = reactive({
     title: '',
-    type: null,
-    category: null,
+    type_id: null,
     organizer_id: null,
+    tag_id: null,
+    category_id: null,
     description: '',
     start_date: null,
     end_date: null,
     location: '',
     price: null,
-    max_attendees: null
+    max_attendees: null,
+    image: null
   })
 
-  const eventTypes = ref([
-    { name: 'Conference', code: 'conference' },
-    { name: 'Workshop', code: 'workshop' },
-    { name: 'Seminar', code: 'seminar' },
-    { name: 'Concert', code: 'concert' },
-    { name: 'Sports', code: 'sports' },
-    { name: 'Exhibition', code: 'exhibition' },
-    { name: 'Festival', code: 'festival' },
-    { name: 'Webinar', code: 'webinar' }
-  ])
+  const eventTypes = ref([])
 
-  const categories = ref([
-    { name: 'Technology', code: 'technology' },
-    { name: 'Business', code: 'business' },
-    { name: 'Education', code: 'education' },
-    { name: 'Health & Wellness', code: 'health_wellness' },
-    { name: 'Entertainment', code: 'entertainment' },
-    { name: 'Sports & Fitness', code: 'sports_fitness' },
-    { name: 'Arts & Culture', code: 'arts_culture' },
-    { name: 'Food & Drink', code: 'food_drink' },
-    { name: 'Travel & Tourism', code: 'travel_tourism' },
-    { name: 'Music', code: 'music' },
-    { name: 'Charity & Causes', code: 'charity_causes' },
-    { name: 'Community', code: 'community' }
-  ])
+  const categories = ref([])
+
+  const tags = ref([])
 
   const organizers = ref([])
 
   const rules = {
     title: { required },
-    type: { required },
-    category: { required },
+    type_id: { required },
     organizer_id: { required },
+    tag_id: { required },
+    category_id: { required },
     description: {},
     start_date: { required },
     end_date: { required },
@@ -67,7 +54,8 @@ export const useNew = () => {
     max_attendees: {
       required,
       minValue: minValue(1)
-    }
+    },
+    image: {}
   }
 
   const submitted = ref(false)
@@ -76,12 +64,73 @@ export const useNew = () => {
 
   onMounted(() => {
     fetchOrganizers()
+    fetchCategories()
+    fetchTypes()
+    fetchTags()
   })
 
   onBeforeUnmount(() => {
     store.$dispose()
     organizerStore.$dispose()
+    attributeStore.$dispose()
   })
+
+  const fetchCategories = async () => {
+    isLoading.value = true
+    await attributeStore.fetchAll({
+      page: 1,
+      per_page: 1000,
+      status: 'active',
+      type: 'category'
+    })
+
+    const response = attributeStore.getAllResponse
+    if (response) {
+      categories.value = response.data.data.map((category) => ({
+        code: category.id,
+        name: category.name
+      }))
+    }
+    isLoading.value = false
+  }
+
+  const fetchTypes = async () => {
+    isLoading.value = true
+    await attributeStore.fetchAll({
+      page: 1,
+      per_page: 1000,
+      status: 'active',
+      type: 'type'
+    })
+
+    const response = attributeStore.getAllResponse
+    if (response) {
+      eventTypes.value = response.data.data.map((type) => ({
+        code: type.id,
+        name: type.name
+      }))
+    }
+    isLoading.value = false
+  }
+
+  const fetchTags = async () => {
+    isLoading.value = true
+    await attributeStore.fetchAll({
+      page: 1,
+      per_page: 1000,
+      status: 'active',
+      type: 'tag'
+    })
+
+    const response = attributeStore.getAllResponse
+    if (response) {
+      tags.value = response.data.data.map((tag) => ({
+        code: tag.id,
+        name: tag.name
+      }))
+    }
+    isLoading.value = false
+  }
 
   const fetchOrganizers = async () => {
     try {
@@ -129,15 +178,17 @@ export const useNew = () => {
 
       await store.add({
         title: state.title,
-        type: state.type,
-        category: state.category,
+        type_id: state.type_id,
         organizer_id: state.organizer_id,
+        tag_id: state.tag_id,
+        category_id: state.category_id,
         description: state.description,
         start_date: formatDateTime(state.start_date),
         end_date: formatDateTime(state.end_date),
         location: state.location,
         price: state.price,
-        max_attendees: state.max_attendees
+        max_attendees: state.max_attendees,
+        image: state.image
       })
 
       const response = store.getAddResponse
@@ -153,14 +204,36 @@ export const useNew = () => {
     }
   }
 
+  const onFileChange = (event) => {
+    const file = event.files[0] // Assuming event.target is the input element
+
+    if (file) {
+      state.image = file
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        imagePreview.value = e.target.result
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const onFileRemove = () => {
+    state.image = null
+    imagePreview.value = placeholderImage
+  }
+
   return {
     isLoading,
     state,
     eventTypes,
     categories,
     organizers,
+    tags,
     v$,
     handleSubmit,
-    submitted
+    submitted,
+    onFileChange,
+    onFileRemove,
+    imagePreview
   }
 }

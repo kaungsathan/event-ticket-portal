@@ -1,7 +1,7 @@
 <template>
   <Menu ref="userMenu" :model="profileMenuItems" :popup="true" />
   <div class="flex cursor-pointer items-center justify-center gap-3" @click="togglePanel">
-    <Avatar :image="user?.avatar ? user.avatar : 'https://i.pravatar.cc/300'" size="large" shape="circle" />
+    <Avatar :image="avater" size="large" shape="circle" />
     <div class="user-menu hidden lg:block">
       <div class="font-semibold">{{ user ? user.full_name : 'John' }}</div>
       <div v-for="role in user.roles" :key="role" class="text-sm">{{ role }}</div>
@@ -19,19 +19,13 @@ import { useRouter } from 'vue-router'
 
 import { authService } from '@/modules/auth/authService'
 import { computed } from 'vue'
+import avaterImage from '@/assets/images/avater.png'
 
 const authStore = useAuthStore()
 const router = useRouter()
 const userMenu = ref()
 
 const profileMenuItems = ref([
-  {
-    label: 'Profile',
-    icon: 'pi pi-user-edit',
-    command: () => {
-      linkTo('profile')
-    }
-  },
   {
     separator: true
   },
@@ -46,6 +40,10 @@ const profileMenuItems = ref([
 
 // const user = authStore.getUserData
 const user = computed(() => authStore.getUserData)
+
+const avater = computed(() => {
+  return user.value?.avatar ? user.value.avatar : avaterImage
+})
 
 const togglePanel = (event) => {
   userMenu.value.toggle(event)
@@ -70,10 +68,6 @@ const userLogout = () => {
   authService.logout(token)
   authStore.logout()
   router.push({ name: 'login' })
-}
-
-const linkTo = (routeName) => {
-  router.push({ name: routeName })
 }
 </script>
 <style lang="scss" scoped>
