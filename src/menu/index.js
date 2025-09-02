@@ -1,13 +1,13 @@
 const menuList = [
   {
     items: [
-      {
-        label: 'Dashboard',
-        icon: 'pi pi-fw pi-home',
-        to: '/',
-        action: 'view',
-        subject: 'users'
-      },
+      // {
+      //   label: 'Dashboard',
+      //   icon: 'pi pi-fw pi-home',
+      //   to: '/',
+      //   action: 'view',
+      //   subject: 'users'
+      // },
       {
         label: 'User',
         icon: 'pi pi-fw pi-user',
@@ -21,6 +21,34 @@ const menuList = [
         to: '/organizers',
         action: 'view',
         subject: 'organizers'
+      },
+      {
+        label: 'Event',
+        icon: 'pi pi-fw pi-calendar',
+        to: '/events',
+        action: 'view',
+        subject: 'events'
+      },
+
+      {
+        label: 'Setting',
+        icon: 'pi pi-fw pi-cog',
+        items: [
+          {
+            label: 'Payments',
+            icon: 'pi pi-fw pi-money-bill',
+            to: '/payments',
+            action: 'manage',
+            subject: 'settings'
+          },
+          {
+            label: 'Attributes',
+            icon: 'pi pi-fw pi-list',
+            to: '/attributes',
+            action: 'manage',
+            subject: 'settings'
+          }
+        ]
       }
     ]
   }

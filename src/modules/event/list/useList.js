@@ -25,12 +25,9 @@ export const useList = () => {
 
   const columns = ref([
     { field: 'id', header: 'ID', sortable: false, selected: true, style: 'min-width: 5rem', frozen: true },
-    { field: 'company_name', header: 'Company Name', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'company_phone', header: 'Company Phone', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'website', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'description', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'address', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
+    { field: 'title', header: 'Title', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'organizer.company_name', header: 'Organizer', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'location', header: 'Location', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
   ])
@@ -52,14 +49,14 @@ export const useList = () => {
 
   onMounted(() => {
     resetPagination()
-    fetchOrganizerList()
+    fetchEventList()
   })
 
   onBeforeUnmount(() => {
     store.$dispose()
   })
 
-  const fetchOrganizerList = async () => {
+  const fetchEventList = async () => {
     isLoading.value = true
     //fetch API
     await store.fetchAll({
@@ -96,7 +93,7 @@ export const useList = () => {
   const onPage = (event) => {
     lazyParams.value = event
     lazyParams.value.multiSortMeta = []
-    fetchOrganizerList()
+    fetchEventList()
   }
 
   //Sorting
@@ -104,7 +101,7 @@ export const useList = () => {
     lazyParams.value = event
     lazyParams.value.page = 0 // when sorting, page doesn't exist
     lazyParams.value.first = 0
-    fetchOrganizerList()
+    fetchEventList()
   }
 
   const showConfirmDialog = (id) => {
@@ -117,7 +114,7 @@ export const useList = () => {
       acceptClass: 'p-button-danger',
       rejectClass: 'p-button-secondary p-button-text',
       accept: () => {
-        deleteUser(id)
+        deleteEvent(id)
       },
       reject: () => {
         //callback to execute when user rejects the action
@@ -128,7 +125,7 @@ export const useList = () => {
     })
   }
 
-  const deleteUser = async (id) => {
+  const deleteEvent = async (id) => {
     isLoading.value = true
 
     await store.delete({ id: id })
@@ -141,7 +138,7 @@ export const useList = () => {
         detail: 'Delete Successfully'
       })
       resetPagination()
-      fetchOrganizerList()
+      fetchEventList()
     }
 
     isLoading.value = false
@@ -159,13 +156,13 @@ export const useList = () => {
     [search],
     useDebounceFn(() => {
       resetPagination()
-      fetchOrganizerList()
+      fetchEventList()
     }, 500)
   )
 
   watch([selectedStatus], () => {
     resetPagination()
-    fetchOrganizerList()
+    fetchEventList()
   })
 
   return {

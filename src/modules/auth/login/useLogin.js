@@ -51,7 +51,7 @@ export const useLogin = () => {
 
     if (response) {
       isLoading.value = false
-      await router.replace({ name: 'dashboard' })
+      await router.replace({ name: 'userList' })
     } else {
       isLoading.value = false
     }

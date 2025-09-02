@@ -11,7 +11,7 @@
         <AppThemeToggle />
       </li>
       <li>
-        <AppLocale />
+        <!-- <AppLocale /> -->
       </li>
       <li>
         <AppUserProfile />
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import AppLocale from './AppLocale.vue'
+// import AppLocale from './AppLocale.vue'
 import AppUserProfile from './AppUserProfile.vue'
 import AppBreadcrumb from './AppBreadcrumb.vue'
 import AppThemeToggle from './AppThemeToggle.vue'

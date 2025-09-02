@@ -25,12 +25,8 @@ export const useList = () => {
 
   const columns = ref([
     { field: 'id', header: 'ID', sortable: false, selected: true, style: 'min-width: 5rem', frozen: true },
-    { field: 'company_name', header: 'Company Name', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'company_phone', header: 'Company Phone', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'website', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'description', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'address', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
+    { field: 'name', header: 'Payment Method', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'code', header: 'Payment Code', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
   ])

@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import dashboardRoutes from '@/modules/dashboard/route'
 import userRoutes from '@/modules/user/route'
 import organizerRoutes from '@/modules/organizer/route'
+import eventRoutes from '@/modules/event/route'
+import attributeRoutes from '@/modules/setting/attribute/route'
+import paymentRoutes from '@/modules/setting/payment/route'
 import authRoutes from '@/modules/auth/authRoute'
 import { useAuthStore } from '@/modules/auth/authStore'
 import { canNavigate } from '@/libs/casl/routeProtection'
@@ -12,6 +15,9 @@ const routes = [
   ...dashboardRoutes,
   ...userRoutes,
   ...organizerRoutes,
+  ...eventRoutes,
+  ...paymentRoutes,
+  ...attributeRoutes,
   {
     path: '/notfound',
     name: 'notfound',
