@@ -63,12 +63,12 @@ export const useEdit = () => {
 
   const v$ = useVuelidate(rules, state)
 
-  onMounted(() => {
-    fetchEvent()
-    fetchOrganizers()
-    fetchCategories()
-    fetchTypes()
-    fetchTags()
+  onMounted(async () => {
+    await fetchEvent()
+    await fetchOrganizers()
+    await fetchCategories()
+    await fetchTypes()
+    await fetchTags()
   })
 
   onBeforeUnmount(() => {

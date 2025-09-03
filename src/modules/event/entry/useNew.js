@@ -62,11 +62,11 @@ export const useNew = () => {
 
   const v$ = useVuelidate(rules, state)
 
-  onMounted(() => {
-    fetchOrganizers()
-    fetchCategories()
-    fetchTypes()
-    fetchTags()
+  onMounted(async () => {
+    await fetchOrganizers()
+    await fetchCategories()
+    await fetchTypes()
+    await fetchTags()
   })
 
   onBeforeUnmount(() => {
