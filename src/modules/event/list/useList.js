@@ -26,7 +26,10 @@ export const useList = () => {
   const columns = ref([
     { field: 'id', header: 'ID', sortable: false, selected: true, style: 'min-width: 5rem', frozen: true },
     { field: 'title', header: 'Title', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'organizer.company_name', header: 'Organizer', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'organizer_name', header: 'Organizer', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'category_name', header: 'Category', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'type_name', header: 'Type', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'tag_name', header: 'Tag', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'location', header: 'Location', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
