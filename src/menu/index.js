@@ -31,6 +31,14 @@ const menuList = [
       },
 
       {
+        label: 'Order',
+        icon: 'pi pi-fw pi-cart-plus',
+        to: '/orders',
+        action: 'view',
+        subject: 'orders'
+      },
+
+      {
         label: 'Setting',
         icon: 'pi pi-fw pi-cog',
         items: [

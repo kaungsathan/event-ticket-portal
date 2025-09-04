@@ -43,9 +43,9 @@
               <InputIcon class="pi pi-search" />
               <InputText v-model="search" placeholder="Keyword Search" class="w-full md:w-auto" />
             </IconField>
-            <router-link v-if="$can('create', 'organizers')" :to="{ name: 'newOrganizer' }">
+            <!-- <router-link v-if="$can('create', 'orders')" :to="{ name: 'newOrder' }">
               <Button label="New" severity="success" />
-            </router-link>
+            </router-link> -->
 
             <Popover ref="columnMenu" appendTo="body" id="columnPanel" style="width: 250px">
               <div v-for="column in columns" :key="column.field" class="my-1 flex gap-4">
@@ -56,12 +56,8 @@
             <Button icon="pi pi-sliders-h" @click="toggleColumnMenu" outlined severity="secondary" />
           </div>
         </template>
-        <template #empty>
-          <div class="text-center">No records found.</div>
-        </template>
-        <template #loading>
-          <div class="text-center">Loading records data. Please wait.</div>
-        </template>
+        <template #empty> No records found. </template>
+        <template #loading> Loading records data. Please wait. </template>
 
         <Column v-for="column in selectedColumns" :key="column.field" :field="column.field" :header="column.header" :sortable="column.sortable" :frozen="!isMobile && column.frozen" :alignFrozen="column.alignFrozen" :style="column.style">
           <template v-if="column.field === 'actions'" #body="{ data }">

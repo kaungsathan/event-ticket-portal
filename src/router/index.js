@@ -3,6 +3,7 @@ import dashboardRoutes from '@/modules/dashboard/route'
 import userRoutes from '@/modules/user/route'
 import organizerRoutes from '@/modules/organizer/route'
 import eventRoutes from '@/modules/event/route'
+import orderRoutes from '@/modules/order/route'
 import attributeRoutes from '@/modules/setting/attribute/route'
 import paymentRoutes from '@/modules/setting/payment/route'
 import authRoutes from '@/modules/auth/authRoute'
@@ -16,6 +17,7 @@ const routes = [
   ...userRoutes,
   ...organizerRoutes,
   ...eventRoutes,
+  ...orderRoutes,
   ...paymentRoutes,
   ...attributeRoutes,
   {

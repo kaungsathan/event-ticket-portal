@@ -56,8 +56,12 @@
             <Button icon="pi pi-sliders-h" @click="toggleColumnMenu" outlined severity="secondary" />
           </div>
         </template>
-        <template #empty> No records found. </template>
-        <template #loading> Loading records data. Please wait. </template>
+        <template #empty>
+          <div class="text-center">No records found.</div>
+        </template>
+        <template #loading>
+          <div class="text-center">Loading records data. Please wait.</div>
+        </template>
 
         <Column v-for="column in selectedColumns" :key="column.field" :field="column.field" :header="column.header" :sortable="column.sortable" :frozen="!isMobile && column.frozen" :alignFrozen="column.alignFrozen" :style="column.style">
           <template v-if="column.field === 'actions'" #body="{ data }">
