@@ -3,71 +3,98 @@
     <div class="block pb-4 text-2xl font-bold lg:hidden">{{ $route.meta.title }}</div>
     <form @submit.prevent="handleSubmit(!v$.$invalid)">
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Logo Upload -->
-        <!-- <div class="flex items-center md:col-span-2 lg:col-span-3">
-          <div class="flex items-center gap-2">
-            <img :src="logoPreview" class="block h-[100px] w-[100px] rounded-2xl border object-contain" />
-            <FileUpload mode="basic" :customUpload="true" name="logo" accept="image/*" chooseLabel="Browse Logo" @clear="onLogoRemove" @select="onLogoChange"></FileUpload>
-          </div>
-        </div> -->
-
-        <!-- Company Name -->
+        <!-- Event -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="company_name" :invalid="v$.company_name.$invalid && submitted" required />
-          <InputText id="company_name" v-model="v$.company_name.$model" :invalid="v$.company_name.$invalid && submitted" />
+          <FieldLabel for-field="event_id" :invalid="v$.event_id.$invalid && submitted" required />
+          <Select v-model="v$.event_id.$model" :options="events" optionLabel="name" optionValue="id" placeholder="Select event" class="w-full" :invalid="v$.event_id.$invalid && submitted" showClear />
           <div>
-            <ClientValidation field="company_name" :model="v$.company_name" :submitted="submitted" />
-            <ServerValidation field="company_name" />
+            <ClientValidation field="event_id" :model="v$.event_id" :submitted="submitted" />
+            <ServerValidation field="event_id" />
           </div>
         </div>
 
-        <!-- Email -->
+        <!-- Customer Name -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="email" :invalid="v$.email.$invalid && submitted" required />
-          <InputText id="email" v-model="v$.email.$model" :invalid="v$.email.$invalid && submitted" />
+          <FieldLabel for-field="customer_name" :invalid="v$.customer_name.$invalid && submitted" required />
+          <InputText id="customer_name" v-model="v$.customer_name.$model" :invalid="v$.customer_name.$invalid && submitted" />
           <div>
-            <ClientValidation field="email" :model="v$.email" :submitted="submitted" />
-            <ServerValidation field="email" />
+            <ClientValidation field="customer_name" :model="v$.customer_name" :submitted="submitted" />
+            <ServerValidation field="customer_name" />
           </div>
         </div>
 
-        <!-- Company Phone -->
+        <!-- Customer Email -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="company_phone" :invalid="v$.company_phone.$invalid && submitted" required />
-          <InputText id="company_phone" v-model="v$.company_phone.$model" :invalid="v$.company_phone.$invalid && submitted" />
+          <FieldLabel for-field="customer_email" :invalid="v$.customer_email.$invalid && submitted" required />
+          <InputText id="customer_email" v-model="v$.customer_email.$model" :invalid="v$.customer_email.$invalid && submitted" type="email" />
           <div>
-            <ClientValidation field="company_phone" :model="v$.company_phone" :submitted="submitted" />
-            <ServerValidation field="company_phone" />
+            <ClientValidation field="customer_email" :model="v$.customer_email" :submitted="submitted" />
+            <ServerValidation field="customer_email" />
           </div>
         </div>
 
-        <!-- Website -->
+        <!-- Customer Phone -->
         <div class="flex flex-col gap-1">
-          <FieldLabel for-field="website" :invalid="v$.website.$invalid && submitted" />
-          <InputText id="website" v-model="v$.website.$model" :invalid="v$.website.$invalid && submitted" placeholder="https://example.com" />
+          <FieldLabel for-field="customer_phone" :invalid="v$.customer_phone.$invalid && submitted" required />
+          <InputText id="customer_phone" v-model="v$.customer_phone.$model" :invalid="v$.customer_phone.$invalid && submitted" />
           <div>
-            <ClientValidation field="website" :model="v$.website" :submitted="submitted" />
-            <ServerValidation field="website" />
+            <ClientValidation field="customer_phone" :model="v$.customer_phone" :submitted="submitted" />
+            <ServerValidation field="customer_phone" />
           </div>
         </div>
 
-        <!-- Description -->
+        <!-- Customer Address -->
         <div class="flex flex-col gap-1 md:col-span-2">
-          <FieldLabel for-field="description" :invalid="v$.description.$invalid && submitted" />
-          <Textarea id="description" v-model="v$.description.$model" :invalid="v$.description.$invalid && submitted" rows="3" />
+          <FieldLabel for-field="customer_address" :invalid="v$.customer_address.$invalid && submitted" required />
+          <Textarea id="customer_address" v-model="v$.customer_address.$model" :invalid="v$.customer_address.$invalid && submitted" rows="2" />
           <div>
-            <ClientValidation field="description" :model="v$.description" :submitted="submitted" />
-            <ServerValidation field="description" />
+            <ClientValidation field="customer_address" :model="v$.customer_address" :submitted="submitted" />
+            <ServerValidation field="customer_address" />
           </div>
         </div>
 
-        <!-- Address -->
-        <div class="flex flex-col gap-1 md:col-span-2 lg:col-span-3">
-          <FieldLabel for-field="address" :invalid="v$.address.$invalid && submitted" />
-          <Textarea id="address" v-model="v$.address.$model" :invalid="v$.address.$invalid && submitted" rows="2" />
+        <!-- Quantity -->
+        <div class="flex flex-col gap-1">
+          <FieldLabel for-field="quantity" :invalid="v$.quantity.$invalid && submitted" required />
+          <InputNumber id="quantity" v-model="v$.quantity.$model" :invalid="v$.quantity.$invalid && submitted" :min="1" class="w-full" />
           <div>
-            <ClientValidation field="address" :model="v$.address" :submitted="submitted" />
-            <ServerValidation field="address" />
+            <ClientValidation field="quantity" :model="v$.quantity" :submitted="submitted" />
+            <ServerValidation field="quantity" />
+          </div>
+        </div>
+
+        <!-- Total Amount -->
+        <div class="flex flex-col gap-1">
+          <FieldLabel for-field="total_amount" :invalid="v$.total_amount.$invalid && submitted" required />
+          <InputNumber id="total_amount" v-model="v$.total_amount.$model" :invalid="v$.total_amount.$invalid && submitted" mode="currency" currency="USD" :min="0" class="w-full" />
+          <div>
+            <ClientValidation field="total_amount" :model="v$.total_amount" :submitted="submitted" />
+            <ServerValidation field="total_amount" />
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="flex flex-col gap-1">
+          <FieldLabel for-field="payment_method" :invalid="v$.payment_method.$invalid && submitted" required />
+          <Select v-model="v$.payment_method.$model" :options="paymentMethods" optionLabel="name" optionValue="id" placeholder="Select payment method" class="w-full" :invalid="v$.payment_method.$invalid && submitted" showClear />
+          <div>
+            <ClientValidation field="payment_method" :model="v$.payment_method" :submitted="submitted" />
+            <ServerValidation field="payment_method" />
+          </div>
+        </div>
+
+        <!-- Payment Status -->
+        <div class="flex flex-col gap-1">
+          <FieldLabel for-field="payment_status" :invalid="v$.payment_status.$invalid && submitted" required />
+          <div class="flex flex-wrap gap-3">
+            <div v-for="paymentStatus in paymentStatuses" :key="paymentStatus.code" class="align-items-center flex">
+              <RadioButton v-model="v$.payment_status.$model" :inputId="paymentStatus.code" name="payment_status" :value="paymentStatus.code" />
+              <label :for="paymentStatus.code" class="ml-2">{{ paymentStatus.name }}</label>
+            </div>
+          </div>
+          <div>
+            <ClientValidation field="payment_status" :model="v$.payment_status" :submitted="submitted" />
+            <ServerValidation field="payment_status" />
           </div>
         </div>
 
@@ -88,7 +115,7 @@
       </div>
 
       <div class="mt-4 flex justify-end gap-4">
-        <router-link v-if="$can('index', 'Organizer')" :to="{ name: 'organizerList' }">
+        <router-link v-if="$can('index', 'Order')" :to="{ name: 'orderList' }">
           <Button label="Cancel" severity="secondary" text />
         </router-link>
         <Button type="submit" label="Save" />
@@ -101,8 +128,7 @@
 <script setup>
 import { useNew } from './useNew'
 
-// const { isLoading, v$, statuses, handleSubmit, submitted, logoPreview, onLogoChange, onLogoRemove } = useNew()
-const { isLoading, v$, statuses, handleSubmit, submitted } = useNew()
+const { isLoading, v$, statuses, paymentStatuses, events, paymentMethods, handleSubmit, submitted } = useNew()
 </script>
 
 <style lang="scss" scoped>

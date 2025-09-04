@@ -25,12 +25,12 @@ export const useList = () => {
 
   const columns = ref([
     { field: 'id', header: 'ID', sortable: false, selected: true, style: 'min-width: 5rem', frozen: true },
-    { field: 'company_name', header: 'Company Name', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'company_phone', header: 'Company Phone', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'website', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'description', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'address', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
+    { field: 'customer_name', header: 'Customer Name', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'customer_email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'customer_phone', header: 'Phone', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'customer_address', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'quantity', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'total_amount', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
     { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
   ])

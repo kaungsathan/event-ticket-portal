@@ -57,10 +57,10 @@
           </div>
         </template>
         <template #empty>
-          <div class="text-center">No records found.</div>
+          <div style="margin-left: 500px">No records found.</div>
         </template>
         <template #loading>
-          <div class="text-center">Loading records data. Please wait.</div>
+          <div style="margin-left: 500px">Loading records data. Please wait.</div>
         </template>
 
         <Column v-for="column in selectedColumns" :key="column.field" :field="column.field" :header="column.header" :sortable="column.sortable" :frozen="!isMobile && column.frozen" :alignFrozen="column.alignFrozen" :style="column.style">
