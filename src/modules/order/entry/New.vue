@@ -66,7 +66,7 @@
         <!-- Total Amount -->
         <div class="flex flex-col gap-1">
           <FieldLabel for-field="total_amount" :invalid="v$.total_amount.$invalid && submitted" required />
-          <InputNumber id="total_amount" v-model="v$.total_amount.$model" :invalid="v$.total_amount.$invalid && submitted" mode="currency" currency="USD" :min="0" class="w-full" />
+          <InputNumber id="total_amount" v-model="v$.total_amount.$model" :invalid="v$.total_amount.$invalid && submitted" class="w-full" />
           <div>
             <ClientValidation field="total_amount" :model="v$.total_amount" :submitted="submitted" />
             <ServerValidation field="total_amount" />

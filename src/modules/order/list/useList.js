@@ -31,8 +31,7 @@ export const useList = () => {
     { field: 'customer_address', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'quantity', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'total_amount', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
-    { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'actions', header: 'Actions', sortable: false, selected: true, style: 'min-width: 10rem', frozen: true, alignFrozen: 'right' }
+    { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' }
   ])
 
   const selectedStatus = ref(null)

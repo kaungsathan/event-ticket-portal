@@ -94,7 +94,7 @@
         <!-- Price -->
         <div class="flex flex-col gap-1">
           <FieldLabel for-field="price" :invalid="v$.price.$invalid && submitted" required />
-          <InputNumber id="price" v-model="v$.price.$model" :invalid="v$.price.$invalid && submitted" mode="currency" currency="USD" locale="en-US" class="w-full" />
+          <InputNumber id="price" v-model="v$.price.$model" :invalid="v$.price.$invalid && submitted" class="w-full" />
           <div>
             <ClientValidation field="price" :model="v$.price" :submitted="submitted" />
             <ServerValidation field="price" />
