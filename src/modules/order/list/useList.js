@@ -28,10 +28,10 @@ export const useList = () => {
     { field: 'customer_name', header: 'Customer Name', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'customer_email', header: 'Email', sortable: false, selected: true, style: 'min-width: 15rem' },
     { field: 'customer_phone', header: 'Phone', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'customer_address', header: 'Website', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'quantity', header: 'Description', sortable: false, selected: true, style: 'min-width: 15rem' },
-    { field: 'total_amount', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem', frozen: true },
-    { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' }
+    { field: 'quantity', header: 'Quantity', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'total_amount', header: 'Total Amount', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'status', header: 'Status', sortable: false, selected: true, style: 'min-width: 15rem' },
+    { field: 'customer_address', header: 'Address', sortable: false, selected: true, style: 'min-width: 15rem' }
   ])
 
   const selectedStatus = ref(null)
