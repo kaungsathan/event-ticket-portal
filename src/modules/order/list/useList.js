@@ -19,8 +19,8 @@ export const useList = () => {
   const search = ref('')
 
   const statuses = ref([
-    { name: 'Active', code: 'active' },
-    { name: 'Inactive', code: 'inactive' }
+    { name: 'Completed', code: 'completed' },
+    { name: 'Failed', code: 'failed' }
   ])
 
   const columns = ref([
